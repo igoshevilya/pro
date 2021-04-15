@@ -27,7 +27,7 @@ class CreateOrdersTable extends Migration
             $table->string('status')->nullable();
             $table->integer('response')->nullable();
 
-
+         
             $table->timestamps();
         });
     }

@@ -17,3 +17,8 @@ Route::get('/logout', 'Auth\LoginController@logout')->name('get-logout');
 Route::get('user/{user}', 'ProfileController@getProfile')->name('profile.index');
 Route::get('profile/edit', 'ProfileController@getEdit')->name('profile.edit');
 Route::post('profile/edit', 'ProfileController@postEdit')->name('profile.edit');
+
+
+Route::resource('/order', 'OrderController');
+
+Route::resource('/category', 'CategoryController');

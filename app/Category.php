@@ -8,5 +8,8 @@ class Category extends Model
 {
     protected $fillable = ['title']; 
 
-    
+    public function order()
+    {
+        return $this->hasOne('App\Order');
+    }
 }
