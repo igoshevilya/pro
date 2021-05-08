@@ -20,5 +20,6 @@ Route::post('profile/edit', 'ProfileController@postEdit')->name('profile.edit');
 
 
 Route::resource('/order', 'OrderController');
+Route::post('order/create', 'OrderController@store')->name('order.store');
 
 Route::resource('/category', 'CategoryController');
