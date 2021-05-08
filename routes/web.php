@@ -18,8 +18,10 @@ Route::get('user/{user}', 'ProfileController@getProfile')->name('profile.index')
 Route::get('profile/edit', 'ProfileController@getEdit')->name('profile.edit');
 Route::post('profile/edit', 'ProfileController@postEdit')->name('profile.edit');
 
-
-Route::resource('/order', 'OrderController');
+Route::group(['middleware' => ['role:admin']], function () {
+    Route::resource('/order', 'OrderController');
+});
 Route::post('order/create', 'OrderController@store')->name('order.store');
 
 Route::resource('/category', 'CategoryController');
+
