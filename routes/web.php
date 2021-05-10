@@ -13,15 +13,19 @@
 Auth::routes();
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/logout', 'Auth\LoginController@logout')->name('get-logout');
-
+Route::group(['middleware' => ['role:admin']], function () {});
 Route::get('user/{user}', 'ProfileController@getProfile')->name('profile.index');
 Route::get('profile/edit', 'ProfileController@getEdit')->name('profile.edit');
 Route::post('profile/edit', 'ProfileController@postEdit')->name('profile.edit');
 
-Route::group(['middleware' => ['role:admin']], function () {
-    Route::resource('/order', 'OrderController');
-});
+
+Route::resource('/order', 'OrderController');
+
+Route::resource('/response', 'ResponseController');
+
 Route::post('order/create', 'OrderController@store')->name('order.store');
+//Route::post('order/{orderId}/response', 'OrderController@addResponse')->name('order.addresponse');
+
 
 Route::resource('/category', 'CategoryController');
 

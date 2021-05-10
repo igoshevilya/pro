@@ -12,11 +12,11 @@
 
         <div class="mb-1 col-md-3">
             <label for="category_id" class="form-label">Вид съёмки</label>
-            <select class="form-select" name="category_id" id="country" required="" ">
+            <select class="form-select" name="category_id" id="country" required="">
                 <option value="{{ old('category_id') }}">Выберите категорию</option>
-                @foreach ($orders as $order)
-                 <option value="{{ $order->category['id'] }}">{{ $order->getCategoryOrder() }}</option>
-                 @endforeach
+                @foreach ($categories as $category)
+                <option value="{{$category->id}}">{{$category->title}}</option>
+                @endforeach
             </select>
         </div>
 

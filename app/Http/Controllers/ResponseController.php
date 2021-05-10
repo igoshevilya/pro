@@ -1,15 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
 use Auth;
-use Carbon\Carbon;
-use App\User;
 use App\Order;
 use App\Category;
 use App\Response;
-use Illuminate\Http\Request;
-
-class OrderController extends Controller
+class ResponseController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,11 +16,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
-        $orders = Order::paginate(3);
-        $responses = Response::all();
-        return view('order.index', compact('categories','orders','responses')
-    );
+        //
     }
 
     /**
@@ -32,10 +26,7 @@ class OrderController extends Controller
      */
     public function create()
     {
-        $categories = Category::all();
-        $orders = Order::all();
-
-        return view('order.add',compact('categories','orders'));
+        //
     }
 
     /**
@@ -46,23 +37,12 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        $order = new Order;
-        $order->user_id = Auth::id();
-        $order->title = $request->input('title');
-        $order->category_id = $request->input('category_id');
-        $order->description = $request->input('description');
-        $order->location = $request->input('location');
-        $order->price = $request->input('price');
-        $order->date = $request->input('date');
-       /**  $order->status = $request->input('status');
-          */
-
-
-
-
-        $order->save();
-
-        return redirect('/order')->with('info', 'Задание успешно добавлено!');
+        $response = new Response;
+        $response->user_id = Auth::id();
+        $response->description = $request->input('description');
+        $response->order_id = $request->get('order_id');
+        $response->save();
+        return redirect()->back()->with('info', 'Спасибо за отклик!');
     }
 
     /**
@@ -73,15 +53,7 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        $user = User::all();
-              $categories = Category::all();
-        $order = Order::find($id);
-       
-        $responses =  $order->responses()->orderBy('id', 'desc')->get();
-        $responses = Response::paginate(3);
-        return view('order.show', compact('categories','order','responses','user'));
-       
-       
+        //
     }
 
     /**
@@ -89,10 +61,12 @@ class OrderController extends Controller
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
-     */
+    */
     public function edit($id)
-    {
-        //
+    { 
+        /**
+        return view('responses.edit',['response'=>$response,]);
+         */
     }
 
     /**
@@ -117,5 +91,4 @@ class OrderController extends Controller
     {
         //
     }
-
 }

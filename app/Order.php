@@ -12,7 +12,7 @@ class Order extends Model
 
     public function category()
     {
-        return $this->belongsTo('App\Category');
+        return $this->belongsTo(Category::class);
     }
     public function getCategoryOrder()
     {
@@ -21,11 +21,19 @@ class Order extends Model
    
     public function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo(User::class);
     }
     public function getUserOrder()
     {
         return $this->user->getName();
     }
+    
 
+    public function responses()
+    {
+        return $this->hasMany(Response::class);
+        
+    }
+   
+   
 }
