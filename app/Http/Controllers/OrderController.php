@@ -7,6 +7,7 @@ use App\User;
 use App\Order;
 use App\Category;
 use App\Response;
+use App\OrderCabinet;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -19,8 +20,10 @@ class OrderController extends Controller
     public function index()
     {
         $categories = Category::all();
-        $orders = Order::paginate(3);
+        $orders = Order::orderBy('id', 'desc')->paginate('3');
+ 
         $responses = Response::all();
+       
         return view('order.index', compact('categories','orders','responses')
     );
     }
@@ -74,11 +77,10 @@ class OrderController extends Controller
     public function show($id)
     {
         $user = User::all();
-              $categories = Category::all();
+        $categories = Category::all();
         $order = Order::find($id);
-       
-        $responses =  $order->responses()->orderBy('id', 'desc')->get();
-        $responses = Response::paginate(3);
+        $responses = $order->responses()->orderBy('id', 'desc')->paginate(3);
+        
         return view('order.show', compact('categories','order','responses','user'));
        
        
@@ -117,5 +119,48 @@ class OrderController extends Controller
     {
         //
     }
+
+    public function assigned($orderId, $responseId)
+    {
+        $order = Order::find($orderId);
+        $order->status = 1;
+        $order->save();
+        $response = Response::find($responseId);
+        $response->status = 1;
+        $response->save();
+
+        $ordercabinet = new OrderCabinet;
+        $ordercabinet->order_id = $orderId;
+        $ordercabinet->client_id =  $order->user_id;
+        $ordercabinet->photograph_id = $response->user_id;
+        $ordercabinet->status = 1;
+        $ordercabinet->save();
+    
+        return redirect()->route('order.cabinet', ['id' => $ordercabinet->id])->with('info', 'Исполнитель выбран!');
+    }
+
+    public function cabinet($id)
+    {
+     
+        $ordercabinet = OrderCabinet::find($id);
+        $user = $ordercabinet-> photograph->getName();
+        $client = $ordercabinet-> client->getName();
+        
+        
+        return view('order.cabinet', compact('user','client','ordercabinet'));
+      
+    }
+
+    public function taskcompleted($id)
+    {
+     
+        $ordercabinet = OrderCabinet::find($id);
+        $ordercabinet->status = 2;
+        $ordercabinet->save();
+        
+        return back()->with('info', 'Задание подтверждено!');
+      
+    }
+    
 
 }

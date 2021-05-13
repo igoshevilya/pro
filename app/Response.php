@@ -15,6 +15,10 @@ class Response extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function OrderCabinet()
+    {
+        return $this->hasOne(OrderCabinet::class);
+    }
     public function getUserResponse()
     {
         return $this->user->getName();

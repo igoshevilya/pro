@@ -24,6 +24,10 @@ Route::resource('/order', 'OrderController');
 Route::resource('/response', 'ResponseController');
 
 Route::post('order/create', 'OrderController@store')->name('order.store');
+Route::get('order/assigned/{orderId}={responseId}', 'OrderController@assigned')->name('order.assigned');
+
+Route::get('order/cabinet/{id}', 'OrderController@cabinet')->name('order.cabinet');
+Route::get('order/cabinet/done/{id}', 'OrderController@taskcompleted')->name('order.done');
 //Route::post('order/{orderId}/response', 'OrderController@addResponse')->name('order.addresponse');
 
 

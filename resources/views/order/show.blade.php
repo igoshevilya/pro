@@ -5,7 +5,7 @@
 
     <div class="card my-1">
         <div class="card-header">
-          <a  href="{{route('order.show', $order->id )}}" >{{ $order->title }}</a>
+         
             <h5 class="modal-title">{{ $order->title }}</h5>
             <h6 class="card-subtitle mb-2 text-muted">{{ $order->getCategoryOrder() }}</h6>
            
@@ -16,7 +16,7 @@
           <p class="card-text">{{ $order->getUserOrder() }}</p>
           <p class="card-text">{{ $order->location }}</p>
        
-          <p class="card-text">{{ $order->date }}</p>
+          <p class="card-text">{{ $order->date}}</p>
           <p class="card-text">{{ $order->status }}</p>
           <p class="card-text">{{ $order->response }}</p>
           <hr>
@@ -41,7 +41,7 @@
               <div class="form-group">
                   <div class="col-md-6 col-md-offset-4 my-3">
                       <button type="submit" class="btn btn-primary">
-                          Откликнуться
+                          Предложить услугу
                       </button>
           
                   </div>
@@ -49,7 +49,7 @@
           </form>
         </div>
       </div>
-      <h5 class="modal-title">Отклики:</h5>
+      <h5 class="modal-title">Предложения:</h5>
       @foreach ($responses as $response)   
       <div class="card p-3 my-2">
             <div class="d-flex justify-content-between align-items-center">
@@ -57,14 +57,14 @@
                   <img src="https://i.imgur.com/hczKIze.jpg" width="30" class="user-img rounded-circle mr-2"> 
                   <span><small class="font-weight-bold text-primary mx-3">{{ $response->getUserResponse() }}</small><br>
                     </span> 
-                    </div> <small>2 days ago</small>
+                    </div> <small>{{$response->created_at->diffForHumans()}}</small>
             </div>
             <div class="action d-flex justify-content-between mt-2 align-items-center">
                 <p>{{ $response->description }}</p>
             </div>
             <div class="action d-flex justify-content-between mt-2 align-items-center">
                <div> <small>Редактировать</small>  <small>Удалить</small> </div>
-                
+               <a class="btn btn-primary" href="{{route('order.assigned', ['orderId'=>$order->id,'responseId'=>$response->id])}}" role="button">Принять предложение</a>
                 
             </div>
         </div>
