@@ -28,6 +28,8 @@ Route::get('order/assigned/{orderId}={responseId}', 'OrderController@assigned')-
 
 Route::get('order/cabinet/{id}', 'OrderController@cabinet')->name('order.cabinet');
 Route::get('order/cabinet/done/{id}', 'OrderController@taskcompleted')->name('order.done');
+Route::resource('/reviews', 'ReviewController');
+Route::resource('cabinet.reviews', 'ReviewController');
 //Route::post('order/{orderId}/response', 'OrderController@addResponse')->name('order.addresponse');
 
 

@@ -28,7 +28,7 @@
         
           
           <h5 class="card-text">{{ $order->price }} ₽</h5>
-          <a  href="{{route('order.show', $order->id )}}" >Подробнее</a>
+          <a href="{{route('order.show', $order->id )}}" >Подробнее</a>
         </div>
       </div>
 
