@@ -11,6 +11,16 @@
 |
 */
 Auth::routes();
+
+
+Route::get('ph/myorder', 'cabinetPhController@index')->name('myorder.ph');
+Route::get('ph/myorder/show', 'cabinetPhController@show')->name('myorder.show');
+Route::get('ph/order', 'cabinetPhController@order')->name('order.order');
+Route::get('ph/order/show', 'cabinetPhController@showorder')->name('order.show');
+Route::get('ph/myprofile', 'cabinetPhController@myprofile')->name('myprofile');
+
+
+
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/logout', 'Auth\LoginController@logout')->name('get-logout');
 Route::group(['middleware' => ['role:admin']], function () {});
