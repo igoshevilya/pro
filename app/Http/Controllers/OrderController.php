@@ -24,7 +24,7 @@ class OrderController extends Controller
  
         $responses = Response::all();
        
-        return view('order.index', compact('categories','orders','responses')
+        return view('client.order.index', compact('categories','orders','responses')
     );
     }
 
@@ -38,7 +38,7 @@ class OrderController extends Controller
         $categories = Category::all();
         $orders = Order::all();
 
-        return view('order.add',compact('categories','orders'));
+        return view('client.order.add',compact('categories','orders'));
     }
 
     /**
@@ -65,7 +65,7 @@ class OrderController extends Controller
 
         $order->save();
 
-        return redirect('/order')->with('info', 'Задание успешно добавлено!');
+        return redirect('client.order')->with('info', 'Задание успешно добавлено!');
     }
 
     /**
@@ -81,7 +81,7 @@ class OrderController extends Controller
         $order = Order::find($id);
         $responses = $order->responses()->orderBy('id', 'desc')->paginate(3);
         
-        return view('order.show', compact('categories','order','responses','user'));
+        return view('client.order.show', compact('categories','order','responses','user'));
        
        
     }
@@ -136,7 +136,7 @@ class OrderController extends Controller
         $ordercabinet->status = 1;
         $ordercabinet->save();
     
-        return redirect()->route('order.cabinet', ['id' => $ordercabinet->id])->with('info', 'Исполнитель выбран!');
+        return redirect()->route('client.order.cabinet', ['id' => $ordercabinet->id])->with('info', 'Исполнитель выбран!');
     }
 
     public function cabinet($id)
@@ -147,7 +147,7 @@ class OrderController extends Controller
         $client = $ordercabinet-> client->getName();
         
         
-        return view('order.cabinet', compact('user','client','ordercabinet'));
+        return view('client.order.cabinet', compact('user','client','ordercabinet'));
       
     }
 

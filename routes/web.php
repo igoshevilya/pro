@@ -18,6 +18,15 @@ Route::get('ph/myorder/show', 'cabinetPhController@show')->name('myorder.show');
 Route::get('ph/order', 'cabinetPhController@order')->name('order.order');
 Route::get('ph/order/show', 'cabinetPhController@showorder')->name('order.show');
 Route::get('ph/myprofile', 'cabinetPhController@myprofile')->name('myprofile');
+Route::get('ph/myprofile/portfolio', 'cabinetPhController@portfolio')->name('portfolio');
+
+
+Route::resource('/order', 'OrderController');
+Route::post('order/create', 'OrderController@store')->name('order.store');
+Route::get('order/assigned/{orderId}={responseId}', 'OrderController@assigned')->name('order.assigned');
+Route::get('order/cabinet/{id}', 'OrderController@cabinet')->name('order.cabinet');
+Route::get('order/cabinet/done/{id}', 'OrderController@taskcompleted')->name('order.done');
+
 
 
 
@@ -29,15 +38,10 @@ Route::get('profile/edit', 'ProfileController@getEdit')->name('profile.edit');
 Route::post('profile/edit', 'ProfileController@postEdit')->name('profile.edit');
 
 
-Route::resource('/order', 'OrderController');
+
 
 Route::resource('/response', 'ResponseController');
 
-Route::post('order/create', 'OrderController@store')->name('order.store');
-Route::get('order/assigned/{orderId}={responseId}', 'OrderController@assigned')->name('order.assigned');
-
-Route::get('order/cabinet/{id}', 'OrderController@cabinet')->name('order.cabinet');
-Route::get('order/cabinet/done/{id}', 'OrderController@taskcompleted')->name('order.done');
 Route::resource('/reviews', 'ReviewController');
 Route::resource('cabinet.reviews', 'ReviewController');
 //Route::post('order/{orderId}/response', 'OrderController@addResponse')->name('order.addresponse');

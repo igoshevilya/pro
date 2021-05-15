@@ -25,4 +25,8 @@ public function myprofile()
 {
 return view('photographer.cabinet.myprofile.index');
 }
+public function portfolio()
+{
+return view('photographer.cabinet.myprofile.portfolio');
+}
 }
