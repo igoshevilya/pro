@@ -1,18 +1,34 @@
 @extends('templates.default')
+@include('client.partials.nav')
 @section('content')
-    <h3>Добавление задания</h3>
+<div class="max-w-7xl mx-auto my-4 sm:px-6 lg:px-8">
+<p class="mt-2 mb-6 text-3xl leading-8 font-bold tracking-tight text-gray-900 sm:text-4xl">
+    Добавление задания
+  </p>
+  <div class="bg-white px-4 py-5 shadow sm:rounded-lg sm:px-6">
+
 
     <form class="form-horizontal" method="POST" action="{{ route('order.store') }}">
         {{ csrf_field() }}
-        <div class="row g-2">
+
+
+
+
+
+
+
+
+
+        
+        <div class="">
         <div class="mb-1 col-md-9">
-            <label for="title" class="form-label">Название задания</label>
-            <input type="text" name="title" class="form-control" id="title"  value="{{ old('title') }}" placeholder="Короткое название задания" required>
+            <label for="title" class="block text-sm font-medium text-gray-700">Название задания</label>
+            <input type="text" name="title" class="border  py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md focus:outline-none" id="title"  value="{{ old('title') }}" placeholder="Короткое название задания" required>
         </div>
 
         <div class="mb-1 col-md-3">
-            <label for="category_id" class="form-label">Вид съёмки</label>
-            <select class="form-select" name="category_id" id="country" required="">
+            <label for="category_id" class="block text-sm font-medium text-gray-700">Вид съёмки</label>
+            <select class="border  py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md focus:outline-none" name="category_id" id="country" required="">
                 <option value="{{ old('category_id') }}">Выберите категорию</option>
                 @foreach ($categories as $category)
                 <option value="{{$category->id}}">{{$category->title}}</option>
@@ -21,60 +37,41 @@
         </div>
 
         <div class="mb-1 ">
-            <label for="description" class="form-label">Подробное описание задания</label>
-            <textarea name="description" class="form-control" id="description" rows="3" value="{{ old('description') }}"
+            <label for="description" class="block text-sm font-medium text-gray-700">Подробное описание задания</label>
+            <textarea name="description" class="border  py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md focus:outline-none" id="description"  value="{{ old('description') }}"
                 placeholder="Подробное описание задания" required></textarea>
         </div>
 
 
         <div class="mb-1 col-md-4">
-            <label for="location" class="form-label">Локация</label>
-            <input name="location" type="text" class="form-control" id="location" value="{{ old('location') }}" placeholder="Введите место съёмки" required>
+            <label for="location" class="block text-sm font-medium text-gray-700">Локация</label>
+            <input name="location" type="text" class="border  py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md focus:outline-none" id="location" value="{{ old('location') }}" placeholder="Введите место съёмки" required>
         </div>
 
         <div class="mb-1 col-md-4">
-            <label for="date" class="form-label">Дата съёмки</label>
-            <input name="date" type="date" class="form-control" id="date" value="{{ old('date') }}" required>
+            <label for="date" class="block text-sm font-medium text-gray-700">Дата съёмки</label>
+            <input name="date" type="date" class="border  py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md focus:outline-none" id="date" value="{{ old('date') }}" required>
         </div>
 
         <div class="mb-1 col-md-4">
-            <label for="price" class="form-label">Бюджет</label>
-            <input name="price" type="text" class="form-control" id="price" value="{{ old('price') }}" placeholder="Ваш бюджет">
+            <label for="price" class="block text-sm font-medium text-gray-700">Бюджет</label>
+            <input name="price" type="text" class="border  py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md focus:outline-none" id="price" value="{{ old('price') }}" placeholder="Ваш бюджет">
         </div>
     </div>
        
 
         <div class="form-group">
             <div class="col-md-6 col-md-offset-4 my-3">
-                <button type="submit" class="btn btn-primary">
+                <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                     Создать задание
-                </button>
+                  </button>
+             
 
             </div>
         </div>
     </form>
-    @foreach ($orders as $order)
-
-
-
-        <div class="card my-1">
-            <div class="modal-header">
-                <h5 class="modal-title">{{ $order->title }}</h5>
-            </div>
-            <div class="card-body">
-                <h6 class="card-subtitle mb-2 text-muted">{{ $order->getCategoryOrder() }}</h6>
-                <p class="card-text">{{ $order->description }}</p>
-                <p class="card-text">{{ $order->getUserOrder() }}</p>
-                <p class="card-text">{{ $order->location }}</p>
-                <p class="card-text">{{ $order->price }}</p>
-                <p class="card-text">{{ $order->date }}</p>
-                <p class="card-text">{{ $order->status }}</p>
-                <p class="card-text">{{ $order->response }}</p>
-                <a href="#" class="card-link">Card link</a>
-                <a href="#" class="card-link">Another link</a>
-            </div>
-        </div>
-    @endforeach
-
+   
+  </div>
+</div>
 
 @endsection

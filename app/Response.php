@@ -8,7 +8,7 @@ class Response extends Model
 {
     public function order()
     {
-        return $this->belongsTo('App\Order');
+        return $this->belongsTo(Order::class);
       
     }
     public function user()
@@ -23,4 +23,7 @@ class Response extends Model
     {
         return $this->user->getName();
     }
+   
+
+
 }

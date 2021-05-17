@@ -31,9 +31,15 @@ class Order extends Model
 
     public function responses()
     {
-        return $this->hasMany(Response::class);
+        return $this->hasOne(Response::class);
         
     }
-   
+
+    public function reviews()
+    {
+        return $this->hasOne(Review::class);
+        
+    }
+  
    
 }

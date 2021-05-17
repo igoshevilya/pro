@@ -46,7 +46,7 @@
         <ul class="divide-y divide-gray-200">
           @foreach ($orders as $order)
             <li>
-              <a href="#" class="block hover:bg-gray-50">
+              <a href="{{route('order.show', $order->id )}}" class="block hover:bg-gray-50">
                 <div class="px-4 py-4 sm:px-6">
                   <div class="flex items-center justify-between">
                     <p class="text-sm font-medium text-indigo-600 truncate">
@@ -68,7 +68,7 @@
                                          
                                             Дата съёмки:
                                             <!-- space -->
-                                            <time>&nbsp{{ $order->date }}</time>
+                                            <time>&nbsp{{ $order->getCategoryOrder() }}</time>
                                           </p>
                                        
                       <p class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 sm:ml-6">
@@ -98,48 +98,17 @@
            
           
         </ul>
-        {{ $orders->links() }}
+      
       </div>
-    
-        </div>
-
-
-
-
-
-    <p>This is my body content2.</p>
-    <a class="btn btn-primary" href="{{route('order.store')}}" role="button">Создать задание</a>
-
-    
-    @foreach ($orders as $order)
-  
-
-    
-    <div class="card my-1">
-        <div class="card-header">
-          
-            <h5 class="modal-title">{{ $order->title }}</h5>
-            <h6 class="card-subtitle mb-2 text-muted">{{ $order->getCategoryOrder() }}</h6>
-           
-      </div>
-        <div class="card-body">
-         
-          <p class="card-text">{{ $order->description }}</p>
-          <p class="card-text">{{ $order->getUserOrder() }}</p>
-          <p class="card-text">{{ $order->location }}</p>
-       
-          <strong><p class="card-text">{{ $order->created_at->diffForHumans()}}</p></strong>
-          <p class="card-text">{{ $order->status }}</p>
-          <p class="card-text">{{ $order->response }}</p>
-          <hr>
-        
-          
-          <h5 class="card-text">{{ $order->price }} ₽</h5>
-          <a href="{{route('order.show', $order->id )}}" >Подробнее</a>
-        </div>
-      </div>
-
-      @endforeach
+     <div class="py-4"> 
       {{ $orders->links() }}
+    </div>
+        </div>
+
+        <a class="btn btn-primary" href="{{route('order.store')}}" role="button">Создать задание</a>
+
+
+
+   
     
 @endsection

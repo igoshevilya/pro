@@ -11,11 +11,11 @@
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
     <div class=" px-4 my-1 sm:px-6 lg:px-8 py-4 bg-white shadow sm:rounded-md">
         <div class="max-w-7xl mx-auto">
-          
+          <a href="{{back()->getTargetUrl()}}">
             <div class="inline-block mr-2 mt-2">
-              <button type="button" class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm">Назад</button>
+              <button class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm">Назад</button>
              </div>
-    
+          </a>
         </div>
       </div>
     </div>
@@ -30,10 +30,10 @@
     <div class="bg-white shadow overflow-hidden sm:rounded-lg">
       <div class="px-4 py-5 sm:px-6">
         <h3 class="text-lg leading-6 font-medium text-gray-900">
-          Название проекта
+          {{ $order->title }}
         </h3>
         <p class="mt-1 max-w-2xl text-sm text-gray-500">
-          Категория
+          {{ $order->getCategoryOrder() }}
         </p>
       </div>
       <div class="border-t border-gray-200 px-4 py-5 sm:px-6">
@@ -46,7 +46,7 @@
                       </div>
                       <div class="ml-3">
                         <p class="text-sm font-medium text-gray-700 group-hover:text-gray-900">
-                          Tom Cook
+                          {{$order->user->getName()}}
                         </p>
                         
                       </div>
@@ -58,7 +58,7 @@
               Дата съёмки
             </dt>
             <dd class="mt-1 text-sm text-gray-900">
-              14 мая 2021
+              {{ $order->date }}
             </dd>
           </div>
           <div class="sm:col-span-1">
@@ -66,7 +66,7 @@
               Локация
             </dt>
             <dd class="mt-1 text-sm text-gray-900">
-              Симферополь
+              {{ $order->location }}
             </dd>
           </div>
           <div class="sm:col-span-1">
@@ -74,7 +74,7 @@
               Стоимость съёмки
             </dt>
             <dd class="mt-1 text-sm text-gray-900">
-              1000 Р
+              {{ $order->price }} ₽
             </dd>
           </div>
           <div class="sm:col-span-4">
@@ -82,30 +82,61 @@
               Описание
             </dt>
             <dd class="mt-1 text-sm text-gray-900">
-              Fugiat ipsum ipsum deserunt culpa aute sint do nostrud anim incididunt cillum culpa consequat. Excepteur qui ipsum aliquip consequat sint. Sit id mollit nulla mollit nostrud in ea officia proident. Irure nostrud pariatur mollit ad adipisicing reprehenderit deserunt qui eu.
-            </dd>
+              {{ $order->description }} </dd>
           </div>
          
         </dl>
       </div>
+@if($order->responses->status==2)
+@if($order->reviews->text)
       <div class="px-4 py-5 sm:p-6">
         <h3 class="text-lg leading-6 font-medium text-gray-900">
           Отзыв клиента
         </h3>
-        <div class="mt-2 max-w-xl text-sm text-gray-500">
+        <div class="mt-2 max-w-xl text-sm text-gray-700">
           <p>
-            Once you delete your account, you will lose all data associated with it.
+            {{ $order->reviews->text}}
+        
           </p>
         </div>
-        <div class="mt-5">
-            <button type="button" class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm">
-                Добавить отзыв
-              </button>
+        
+        @endif
+        <div class="mt-4">
+          <h3 class="text-lg leading-6 font-medium text-gray-900">
+            Оставить отзыв о клиенте 
+          </h3>
+          
+            <div class="mt-2">
+              <form class="form-horizontal" method="POST" action="{{ route('order.storeresponse', $order->id) }}">
+                {{ csrf_field() }}            
+          
+             <textarea id="description" name="description" value="{{ old('description') }}" class="w-full px-3 py-2 text-gray-700 border border-indigo-300 focus:border-indigo-500 rounded-lg focus:outline-none" ></textarea>
+          <div class="mt-2 flex justify-end">
+              <button type="submit" class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm">
+                  Отправить
+                </button>
+          </div>
+        </form>
+        
         </div>
       </div>
+
+
+
+
+      @endif
+
     </div>
   
-
+    <div class="px-4 sm:p-6 border sm:rounded-lg bg-white">
+      <h3 class="text-lg leading-6 font-medium text-gray-900">
+       
+        Ваше приедложение
+      </h3>
+      {{ $order->responses->description }}
+     
+     
+    </div>
 
 
 
@@ -116,10 +147,11 @@
 
 
         </div>
+        
+
+
       </div>
-
-
-
+      
 
 
 

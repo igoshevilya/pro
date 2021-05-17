@@ -35,14 +35,14 @@ class ResponseController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
         $response = new Response;
         $response->user_id = Auth::id();
         $response->description = $request->input('description');
-        $response->order_id = $request->get('order_id');
+        $response->order_id = $id;
         $response->save();
-        return redirect()->back()->with('info', 'Спасибо за отклик!');
+        return redirect()->back()->with('success', 'Спасибо за отклик!');
     }
 
     /**
@@ -53,7 +53,7 @@ class ResponseController extends Controller
      */
     public function show($id)
     {
-        //
+       
     }
 
     /**
@@ -89,6 +89,7 @@ class ResponseController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Response::find($id)->delete();
+        return redirect()->back()->with('success', 'Отклик удален!');
     }
 }
