@@ -88,6 +88,7 @@
         </dl>
       </div>
 @if($order->responses->status==2)
+   
 @if($order->reviews->text)
       <div class="px-4 py-5 sm:p-6">
         <h3 class="text-lg leading-6 font-medium text-gray-900">
@@ -96,39 +97,48 @@
         <div class="mt-2 max-w-xl text-sm text-gray-700">
           <p>
             {{ $order->reviews->text}}
-        
           </p>
         </div>
-        
-        @endif
+    @endif
+
+
+    @if($order->clientreviews->text) 
+    <div class="mt-4">
+          <h3 class="text-lg leading-6 font-medium text-gray-900">
+            Ваш отзыв
+          </h3>
+          <div class="mt-2 max-w-xl text-sm text-gray-700">
+            <p>
+              {{ $order->clientreviews->text}}
+          
+            </p>
+          </div>
+       @else
         <div class="mt-4">
           <h3 class="text-lg leading-6 font-medium text-gray-900">
             Оставить отзыв о клиенте 
           </h3>
           
             <div class="mt-2">
-              <form class="form-horizontal" method="POST" action="{{ route('order.storeresponse', $order->id) }}">
+              <form class="form-horizontal" method="POST" action="{{ route('clientreview', $order->id) }}">
                 {{ csrf_field() }}            
           
-             <textarea id="description" name="description" value="{{ old('description') }}" class="w-full px-3 py-2 text-gray-700 border border-indigo-300 focus:border-indigo-500 rounded-lg focus:outline-none" ></textarea>
+             <textarea id="text" name="text" value="{{ old('text') }}" class="w-full px-3 py-2 text-gray-700 border border-indigo-300 focus:border-indigo-500 rounded-lg focus:outline-none" ></textarea>
           <div class="mt-2 flex justify-end">
               <button type="submit" class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm">
                   Отправить
                 </button>
           </div>
         </form>
-        
-        </div>
+       </div>
       </div>
+      @endif 
+ @endif
 
-
-
-
-      @endif
 
     </div>
   
-    <div class="px-4 sm:p-6 border sm:rounded-lg bg-white">
+    <div class="px-4 mt-3 sm:p-6 border sm:rounded-lg bg-white">
       <h3 class="text-lg leading-6 font-medium text-gray-900">
        
         Ваше приедложение

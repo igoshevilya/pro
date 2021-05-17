@@ -22,10 +22,11 @@ Route::get('ph/order/response/del/{id}', 'ResponseController@destroy')->name('re
 Route::get('ph/myorder/myresponses', 'PhotographController@myresponses')->name('myresponses.ph');
 Route::get('ph/myorder/execution', 'PhotographController@execution')->name('execution.ph');
 Route::get('ph/myorder/history', 'PhotographController@history')->name('history.ph');
+Route::post('ph/myorder/review/{id}', 'ReviewController@storeclient')->name('clientreview');
 
 Route::get('ph/myprofile', 'PhotographController@myprofile')->name('myprofile');
-Route::get('ph/myprofile/portfolio', 'PhotographController@portfolio')->name('portfolio');
-
+Route::get('ph/myprofile/portfolio', 'PhProfileController@show')->name('portfolio');
+Route::post('ph/myprofile/portfolio/upload', 'PhProfileController@upload')->name('upload');
 
 //Route::resource('/order', 'OrderController');
 Route::get('myorder', 'OrderController@index')->name('myorder.client');

@@ -1,8 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Auth;
 use App\Review;
+use App\Order;
+use App\Response;
+use App\ClientReview;
 use App\OrderCabinet;
 use Illuminate\Http\Request;
 
@@ -54,6 +57,25 @@ $client = $review-> client->getName();
         $review->save();
         $ordercabinet->status = 3;
         $ordercabinet->save();
+        return redirect()->back()->with('success', 'Отзыв оставлен!');
+
+        //dd($review);
+                
+    }
+
+    public function storeclient(Request $request, $id)
+    {
+        $order = Order::find($id);
+        $review = new ClientReview;
+        $review -> order_id = $order-> id;
+        $review -> photograph_id = Auth::id();
+        $review -> client_id = $order-> user_id;
+        $review -> text = $request->input('text');
+        //  $review -> star = $request->input('rating');
+        $review->save();
+
+       // $ordercabinet->status = 3;
+       // $ordercabinet->save();
         return redirect()->back()->with('info', 'Отзыв оставлен!');
 
         //dd($review);
