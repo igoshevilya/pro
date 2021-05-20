@@ -25,8 +25,12 @@ Route::get('ph/myorder/history', 'PhotographController@history')->name('history.
 Route::post('ph/myorder/review/{id}', 'ReviewController@storeclient')->name('clientreview');
 
 Route::get('ph/myprofile', 'PhotographController@myprofile')->name('myprofile');
-Route::get('ph/myprofile/portfolio', 'PhProfileController@show')->name('portfolio');
-Route::post('ph/myprofile/portfolio/upload', 'PhProfileController@upload')->name('upload');
+Route::get('ph/myprofile/portfolio', 'UpsController@index')->name('portfolio');
+Route::post('ph/myprofile/portfolio/upload', 'UpsController@store');
+
+Route::resource('userprofile', 'UserprofileController');
+
+Route::resource('up','UpsController');
 
 //Route::resource('/order', 'OrderController');
 Route::get('myorder', 'OrderController@index')->name('myorder.client');
