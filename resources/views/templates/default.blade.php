@@ -5,8 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="csrf-token" content="{{ csrf_token() }}" />
-        <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>
-        
+   
+    <link href="{{ asset('css/vue-image-lightbox.min.css') }}" rel="stylesheet"/>      
  <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     <!-- Bootstrap CSS -->
@@ -26,5 +26,7 @@
  -->
     </div>
  <script src="{{asset('js/app.js') }}"  > </script>
+ <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+ <script src="{{ asset('js/vue-image-lightbox.min.js') }}"></script>
 </body>
 </html>

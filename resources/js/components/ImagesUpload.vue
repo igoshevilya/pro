@@ -21,7 +21,7 @@
                 </div>
            
             <p class="text-xs text-gray-500">
-                      PNG, JPG, GIF up to 10MB
+                      PNG, JPG до 10Mb
                     </p>
         </div>
 
@@ -29,12 +29,14 @@
             <div class="flex grid gap-8 row-gap-5 mb-8 sm:grid-cols-2 lg:grid-cols-4 sm:mx-auto">
             <div class="" v-for="(image, index) in images" :key="index">
                <div> <img class="object-cover w-full h-44 rounded shadow-sm" :src="image" :alt ="`Image Uploader ${image}`">
-                 <span class="name" v-text="files[index].name"></span>
+                <button @click="removeImage(index)">Удалить</button>
+                  
                </div>
                 
             </div>
         </div>
          </div>
+         
     </div>
 </template>
 <script>
@@ -73,7 +75,7 @@ export default {
         },
         addImages(file){
             if (!file.type.match('image.*')) {
-                this.$toastr.e(`${file.name} is not an image`);
+                this.$toastr.e(`${file.name} не изображение!`);
                 return;
             }
             this.files.push(file);
@@ -83,6 +85,12 @@ export default {
             reader.onload = (e) => this.images.push(e.target.result);
             reader.readAsDataURL(file);
         },
+
+  removeImage(index) {
+      this.images.splice(index, 1);
+      this.files.splice(index, 1);
+    },
+        
        
         upload(){
             const formData = new FormData();
@@ -93,8 +101,10 @@ export default {
                 .then(response => {
                      this.images = [];
                     this.files = [];    
+                    this.$toastr.s("Фотографии загружены");
                 })
         }
+        
     }
 }
 </script>
@@ -172,4 +182,5 @@ export default {
             
         }
     }
+    @import '~vue-toastr/src/vue-toastr.scss';
 </style>

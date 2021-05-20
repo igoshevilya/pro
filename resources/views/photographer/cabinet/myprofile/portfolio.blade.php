@@ -56,9 +56,9 @@
             </div>
 
               </div>
-
+          {{--     <lightbox></lightbox> --}}
           <div class="max-w-7xl mx-auto">
-            
+           
             <div class="grid gap-8 row-gap-5 mb-8 sm:grid-cols-2 lg:grid-cols-4 sm:mx-auto">
                 <img class="object-cover w-full h-44 rounded shadow-lg" src="{{ asset('/') . Auth::user()->userprofile->thumbnail }}" alt="" />
                 <img class="object-cover w-full h-44 rounded shadow-lg" src="https://images.pexels.com/photos/3182746/pexels-photo-3182746.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260" alt="" />

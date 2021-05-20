@@ -18,11 +18,14 @@ window.Vue = require('vue');
 
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
-
+import Toastr from "vue-toastr";
+Vue.use(Toastr);
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
 Vue.component('image-upload', require('./components/ImagesUpload.vue').default);
 Vue.component('ava-upload', require('./components/AvatarUpload.vue').default);
+Vue.component('lightbox', require('./components/Lightbox.vue').default);
+
 /**I:\OpenServer\domains\pro\resources\js\components\ImageUpload.vue
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
