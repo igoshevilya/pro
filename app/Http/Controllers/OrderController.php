@@ -24,8 +24,7 @@ class OrderController extends Controller
  
         $responses = Response::all();
        
-        return view('client.order.index', compact('categories','orders','responses')
-    );
+        return view('client.order.index', compact('categories','orders','responses'));
     }
 
     /**

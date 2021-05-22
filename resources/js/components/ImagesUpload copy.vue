@@ -36,72 +36,40 @@
             </div>
         </div>
          </div>
-            
+   
     </div>
-     <table class="table table-hover">
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>Item Name</th>
-               
-            
-            </tr>
-            </thead>
-            <tbody>
-                <tr v-for="photo in photos" :key="photo.id">
-                    <td>{{ photo.id }}</td>
-                    <td>{{ photo.file_name }}</td>
-                  </tr>
-            </tbody>
-                 </table>
-    <div class="mt-3 grid gap-8 row-gap-5 mb-8 sm:grid-cols-2 lg:grid-cols-4 sm:mx-auto">
-        <div class="object-cover w-full h-44 rounded">
-                <img class="object-cover w-full h-44 rounded " src="" alt="" />
-              
-              </div></div>
-           
+          <table>
+             <thead>
+               <tr>
+                 <th>1</th>
+                 <th>2</th>
+               </tr>
+             </thead>
+             <tbody>
+               <tr v-for="url in urldata">
+   <td>{{url.title}}</td>
+                            <td>{{url.url}}</td>
+
+
+               </tr>
+             </tbody>
+           </table>
     </div>
 </template>
 <script>
 export default {
-   //props:['photo'],
+    props:[
+     'urldata'
+     ],
     data: () => ({
-       
-        album:{},
-        photos: [],
         isDragging: false,
         dragCount: 0,
         files: [],
-        images: [],
-        albumid : window.location.href.split("/").slice(-1)[0]
-    
-    }),
-        mounted(){
-             console.log(this.photo)
-             this.update()
-             this.fetchGallery()
-        },
-
- 
-    methods:{
-
-         fetchGallery(){
-                axios.get('/ph/myprofile/album/' + window.location.href.split("/").slice(-1)[0], {
-                })
-                    .then(response => {
-                        this.ulbum = response.data;
-                        this.photos = this.ulbum.photos;
-                         console.log(response);
-                    })
-                    .catch(response => {
-                        console.log(response);
-                    });
-            },
-         
-        update:function(){
-            console.log(this.photo)
-        },
+        images: []
+     
         
+    }),
+    methods:{
         OnDragEnter(e){
             e.preventDefault();
             this.dragCount++;
@@ -127,8 +95,7 @@ export default {
             const files = e.dataTransfer.files;
             Array.from(files).forEach(file => this.addImages(file));
         },
-       
-       addImages(file){
+        addImages(file){
             if (!file.type.match('image.*')) {
                 this.$toastr.e(`${file.name} не изображение!`);
                 return;
@@ -145,24 +112,19 @@ export default {
             this.images.splice(index, 1);
              this.files.splice(index, 1);
         },
-    
+        refresh(){
+             console.log('Component mounted2.')
+        },
        
         upload(){
-            
-         
-         const albumid = window.location.href.split("/").slice(-1)[0];
             const formData = new FormData();
             this.files.forEach(file => {
-                formData.append('images[]', file, file.name);
-              formData.append('albumid', this.albumid);
-          
+                formData.append('images[]', file, file.name)
             });
-            axios.post('/ph/myprofile/portfolio/upload', formData, albumid)
+            axios.post('/ph/myprofile/photo', formData)
                 .then(response => {
-                     console.log(albumid);
                      this.images = [];
-                     this.files = [];   
-                    this.albumid;  
+                    this.files = [];    
                     this.$toastr.s("Фотографии загружены");
                 })
         }

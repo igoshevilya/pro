@@ -12,7 +12,14 @@
 */
 Auth::routes();
 
+Route::resource('/ph/myprofile/album', 'AlbumController')->only([
+    'index', 'show', 'store'
+]);
 
+Route::get('photo/download/{id}', 'PhotoController@download');
+//Route::post('/ph/myprofile/album/photo', 'PhotoController@store');
+Route::post('ph/myprofile/portfolio/upload', 'PhotoController@store');
+Route::get('ph/myprofile/portfolio/upload', 'PhotoController@store');
 //Route::get('ph/myorder', 'PhotographController@index')->name('myorder.ph');
 Route::get('ph/myorder/show/{id}', 'PhotographController@show')->name('myorder.show');
 Route::get('ph/order', 'PhotographController@order')->name('order.order');
@@ -26,7 +33,7 @@ Route::post('ph/myorder/review/{id}', 'ReviewController@storeclient')->name('cli
 
 Route::get('ph/myprofile', 'PhotographController@myprofile')->name('myprofile');
 Route::get('ph/myprofile/portfolio', 'UpsController@index')->name('portfolio');
-Route::post('ph/myprofile/portfolio/upload', 'UpsController@store');
+//Route::post('ph/myprofile/portfolio/upload', 'UpsController@store');
 
 Route::resource('userprofile', 'UserprofileController');
 

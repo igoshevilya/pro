@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Up;
 use Auth;
-
+use Illuminate\Http\Response;
 use Image;
 use File;
 use App\User;
@@ -20,7 +20,22 @@ class UpsController extends Controller
      */
     public function index()
     {
-        return view('photographer.cabinet.myprofile.portfolio');
+        $url_data = [
+            array(
+            'title' => 'DKA-DEVELOP', 
+            'url'  => 'https://dka-develop.ru'
+            ),
+            array(
+            'title' => 'YouTube', 
+            'url' => 'http://youtube.com'
+            )  ];
+           // $url_data = Up::all()->jsonSerialize();
+            //$image = $images ->id;
+//dd($url_data);
+            //dd(json_encode($url_data));
+        return view('photographer.cabinet.myprofile.portfolio', [
+            'url_data' => $url_data
+            ]);
     }
 
     /**

@@ -25,7 +25,8 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 Vue.component('image-upload', require('./components/ImagesUpload.vue').default);
 Vue.component('ava-upload', require('./components/AvatarUpload.vue').default);
 Vue.component('lightbox', require('./components/Lightbox.vue').default);
-
+Vue.component('create-album', require('./components/AlbumCreate.vue').default);
+Vue.component('album-index', require('./components/AlbumIndex.vue').default);
 /**I:\OpenServer\domains\pro\resources\js\components\ImageUpload.vue
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

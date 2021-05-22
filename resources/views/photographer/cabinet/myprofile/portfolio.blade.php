@@ -46,17 +46,18 @@
               <label for="cover_photo" class="mb-2 block text-sm font-medium text-gray-700">
                 Загрузите фотографии
               </label>
-<image-upload>
+{{-- <image-upload :urldata="{{json_encode($url_data)}}">
  
-</image-upload>
+</image-upload> --}}
 
-
-
+<create-album></create-album>
+<hr>
+<album-index></album-index>
 
             </div>
 
               </div>
-          {{--     <lightbox></lightbox> --}}
+       {{--  <lightbox></lightbox>   --}}
           <div class="max-w-7xl mx-auto">
            
             <div class="grid gap-8 row-gap-5 mb-8 sm:grid-cols-2 lg:grid-cols-4 sm:mx-auto">
