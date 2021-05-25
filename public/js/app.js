@@ -2447,11 +2447,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -39858,127 +39853,80 @@ var render = function() {
                 "mx-auto group w-full shadow-sm  rounded-b-2xl transform duration-500 hover:-translate-y-1 "
             },
             [
-              _c(
-                "section",
-                {
-                  staticClass: "content bg-cover bg-center h-64 rounded-2xl",
-                  style: {
-                    backgroundImage:
-                      "url(/thumbnail/thumbnail_" + photo.file_name + ")"
-                  }
+              _c("section", {
+                staticClass:
+                  "cursor-pointer content bg-cover bg-center h-64 rounded-2xl",
+                style: {
+                  backgroundImage:
+                    "url(/thumbnail/thumbnail_" + photo.file_name + ")"
                 },
-                [
-                  _c(
-                    "div",
-                    {
-                      staticClass:
-                        "flex items-end w-full h-full bg-black bg-opacity-20 text-white text-sm font-bold  p-4 rounded-2xl"
-                    },
-                    [
-                      _c("div", { staticClass: "w-5/6 flex items-center" }, [
-                        _c("p", { staticClass: "text-sm font-normal italic" }, [
-                          _vm._v(
-                            _vm._s(photo.width) +
-                              " x " +
-                              _vm._s(photo.height) +
-                              " px  "
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("p", { staticClass: "text-sm font-medium" }, [
-                          _vm._v(_vm._s(parseInt(photo.size / 1024)) + " KB")
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        {
-                          staticClass:
-                            "w-1/6 flex items-center flex-row-reverse"
-                        },
-                        [
-                          _c(
-                            "button",
-                            {
-                              staticClass:
-                                "self-end bg-green-dark hover:bg-green text-white font-bold py-1 px-1 mx-1 rounded",
-                              attrs: { type: "button" },
-                              on: {
-                                click: function($event) {
-                                  return _vm.showPhotoFull(photo)
-                                }
+                on: {
+                  click: function($event) {
+                    return _vm.showPhotoFull(photo)
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("div", { staticClass: " flex p-2" }, [
+                _c("div", { staticClass: "w-5/6 flex items-center" }, [
+                  _c("p", { staticClass: "text-sm font-normal italic" }, [
+                    _vm._v(
+                      _vm._s(photo.width) +
+                        " x " +
+                        _vm._s(photo.height) +
+                        " px  "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "text-sm font-medium" }, [
+                    _vm._v(_vm._s(parseInt(photo.size / 1024)) + " KB")
+                  ])
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "w-1/6 flex items-center flex-row-reverse" },
+                  [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "hover:text-red-600",
+                        attrs: { type: "button" },
+                        on: {
+                          click: function($event) {
+                            return _vm.deletePhoto(photo)
+                          }
+                        }
+                      },
+                      [
+                        _c(
+                          "svg",
+                          {
+                            staticClass: "h-6 w-6",
+                            attrs: {
+                              xmlns: "http://www.w3.org/2000/svg",
+                              fill: "none",
+                              viewBox: "0 0 24 24",
+                              stroke: "currentColor"
+                            }
+                          },
+                          [
+                            _c("path", {
+                              attrs: {
+                                "stroke-linecap": "round",
+                                "stroke-linejoin": "round",
+                                "stroke-width": "2",
+                                d:
+                                  "M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
                               }
-                            },
-                            [
-                              _c(
-                                "svg",
-                                {
-                                  staticClass: "h-6 w-6",
-                                  attrs: {
-                                    xmlns: "http://www.w3.org/2000/svg",
-                                    fill: "none",
-                                    viewBox: "0 0 24 24",
-                                    stroke: "currentColor"
-                                  }
-                                },
-                                [
-                                  _c("path", {
-                                    attrs: {
-                                      "stroke-linecap": "round",
-                                      "stroke-linejoin": "round",
-                                      "stroke-width": "2",
-                                      d:
-                                        "M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                                    }
-                                  })
-                                ]
-                              )
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "button",
-                            {
-                              staticClass: "hover:text-red-600",
-                              attrs: { type: "button" },
-                              on: {
-                                click: function($event) {
-                                  return _vm.deletePhoto(photo)
-                                }
-                              }
-                            },
-                            [
-                              _c(
-                                "svg",
-                                {
-                                  staticClass: "h-6 w-6",
-                                  attrs: {
-                                    xmlns: "http://www.w3.org/2000/svg",
-                                    fill: "none",
-                                    viewBox: "0 0 24 24",
-                                    stroke: "currentColor"
-                                  }
-                                },
-                                [
-                                  _c("path", {
-                                    attrs: {
-                                      "stroke-linecap": "round",
-                                      "stroke-linejoin": "round",
-                                      "stroke-width": "2",
-                                      d:
-                                        "M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                                    }
-                                  })
-                                ]
-                              )
-                            ]
-                          )
-                        ]
-                      )
-                    ]
-                  )
-                ]
-              )
+                            })
+                          ]
+                        )
+                      ]
+                    )
+                  ]
+                )
+              ])
             ]
           )
         }),
