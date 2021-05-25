@@ -6,7 +6,7 @@
         <div class="full-photo-overlay-content" @click.stop="closePhotoFull">
             <div class="full-photo-overlay-embed">
                 <div class="full-photo-overlay-container">
-                    <img width="auto" height="auto" :src="photo.url">
+                    <img width="auto" height="auto" :src="'/images/'+photo.file_name">
                 </div>
                 <p class="full-photo-overlay-description" v-if="photo.title">{{ photo.title }}</p>
             </div>

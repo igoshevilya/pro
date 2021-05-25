@@ -50,6 +50,11 @@
                         </div>
 
                         <div class="w-1/6 flex items-center flex-row-reverse">
+                         <button @click="showPhotoFull(photo)" class="self-end bg-green-dark hover:bg-green text-white font-bold py-1 px-1 mx-1 rounded" type="button">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+</svg>
+                                                    </button>
                             <button @click="deletePhoto(photo)" type="button" class="hover:text-red-600">
                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
@@ -62,13 +67,18 @@
                 
                </article>
         </section>
-    
+      <photo-full ref="photoFull" :photo="selectedPhoto" :photos="photos" :photoFullVisible="photoFullVisible"></photo-full>
            
     </div>
 </template>
 <script>
+  import photoFull from './components/photo-full.vue'
 export default {
-   //props:['photo'],
+      components: {
+           
+            photoFull,
+           
+        },
     data: () => ({
        
         album:{},
@@ -77,7 +87,8 @@ export default {
         dragCount: 0,
         files: [],
         images: [],
-       
+          selectedPhoto: {},
+       photoFullVisible:false,
     
     }),
         mounted(){
@@ -86,6 +97,25 @@ export default {
 
  
     methods:{
+
+         //Select photo
+            selectPhoto(photo){
+                if(_.findIndex(this.photos, (item) => { return photo.id == item.id; }) >= 0){
+                    this.selectedPhoto = photo;
+                    this.editedPhoto = photo;
+                    this.$refs.photoFull.startEventListeners();
+                }
+
+            },
+ showPhotoFull(photo){
+                this.photoFullVisible = true;
+                this.selectedPhoto = photo;
+            },
+
+
+
+
+
         fetchGallery(){
                 axios.get('getphoto/' + window.location.href.split("/").slice(-1)[0], {
                 })
