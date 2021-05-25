@@ -12,6 +12,48 @@
 */
 Auth::routes();
 
+
+
+//Галерея
+Route::group(['prefix' => 'ph'], function() {
+    Route::group(['prefix' => 'gallery'], function() {
+        Route::get('/', 'GalleryController@index')->name('gallery.index');
+        Route::get('/getgallery', 'GalleryController@getgallery');
+        Route::post('/', 'GalleryController@store');
+        Route::get('{id}', 'GalleryController@show');
+        Route::get('/getphoto/{id}', 'GalleryController@getphoto');
+        Route::put('{id}', 'GalleryController@update');
+        Route::put('/status/{id}', 'GalleryController@status');
+        Route::delete('{id}', 'GalleryController@destroy');
+
+        //Фото
+        Route::group(['prefix' => 'photo'], function() {
+            Route::post('/upload', 'PhotoController@uploadPhotos');
+            Route::put('/update', 'PhotoController@update');
+            Route::put('/update-attr', 'PhotoController@updateAttr');
+            Route::put('/order', 'PhotoController@order');
+            Route::put('/status/{id}', 'PhotoController@status');
+            Route::delete('{id}', 'PhotoController@destroy');
+        });
+    });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Route::resource('/ph/myprofile/album', 'AlbumController')->only([
     'index', 'show', 'store'
 ]);
