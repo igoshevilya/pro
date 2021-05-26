@@ -37,12 +37,6 @@ class GalleryController extends Controller
 
     public function store(Request $request)
     {
-      /*   $gallery = Gallery::create([
-            'title' => $request->gallery['title'],
-            'description' => $request->gallery['description'],
-            'user_id' => Auth::id(),
-        ]); */
-
         $gallery = new Gallery;
         $gallery->user_id = Auth::id();
         $gallery->title = $request->gallery['title'];
@@ -61,7 +55,6 @@ class GalleryController extends Controller
     public function getphoto($id)
     {
         $gallery = Gallery::with('photos')->find($id);
-      
 
         return $gallery;
     }
@@ -76,14 +69,6 @@ class GalleryController extends Controller
         return $gallery;
     }
 
-    public function status(Request $request, $id)
-    {
-        $gallery = Gallery::find($id);
-        $gallery->active = !$gallery->active;
-        $gallery->save();
-
-        return $gallery;
-    }
 
     public function destroy($id)
     {

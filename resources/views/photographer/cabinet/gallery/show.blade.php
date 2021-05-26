@@ -52,8 +52,10 @@
                            
 
               </div>
-              <galleryshow/>
-        </div></div>
+              <gallery-show></gallery-show>
+              
+        </div>
+      </div>
             
 
 

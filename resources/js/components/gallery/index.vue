@@ -25,13 +25,13 @@
                   <div class="my-4 px-4 flex items-end rounded-2xl">
 
 
-                      <div class="w-1/2  ">
-                    <h2 class="mt-4 text-base font-medium text-indigo-700">{{ gallery.title }}</h2>
-                    <p class="mt-2 text-sm text-gray-700"> {{ gallery.description }} </p>
+                      <div class="w-3/4">
+                    <h2 class="mt-4 overflow-ellipsis overflow-hidden w-auto text-base font-medium text-indigo-700">{{ gallery.title }}</h2>
+                    <p class="mt-2 overflow-ellipsis overflow-hidden text-sm text-gray-700"> {{ gallery.description }} </p>
                       </div>
 
 
-                    <div class="w-1/2 flex justify-end ">
+                    <div class="w-1/4 flex justify-end ">
                         
                             <button @click="editGallery(gallery)"  type="button" class="hover:text-yellow-500">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -60,14 +60,14 @@
                         <label class="block text-sm font-medium text-gray-700" for="title">
                             Название
                         </label>
-                        <input type="text" class="border  py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md focus:outline-none" id="title" v-model="newGallery.title" placeholder="Название альбома">
+                        <input type="text" class="border  py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md focus:outline-none" id="title" v-model="newGallery.title" placeholder="Название альбома" required>
                     </div>
 
                     <div class="mb-4">
                         <label class="block text-sm font-medium text-gray-700" for="description">
                             Описание
                         </label>
-                        <textarea rows="5" class="border  py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md focus:outline-none" id="description" v-model="newGallery.description" placeholder="Описание альбома">
+                        <textarea rows="5" class="border  py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md focus:outline-none" id="description" v-model="newGallery.description" placeholder="Описание альбома" required>
                             </textarea>
                     </div>
 

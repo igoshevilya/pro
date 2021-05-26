@@ -22,6 +22,7 @@ Route::group(['prefix' => 'ph'], function() {
         Route::post('/', 'GalleryController@store');
         Route::get('{id}', 'GalleryController@show');
         Route::get('/getphoto/{id}', 'GalleryController@getphoto');
+        //Route::get('/getphoto', 'GalleryController@getphoto');
         Route::put('{id}', 'GalleryController@update');
         Route::put('/status/{id}', 'GalleryController@status');
         Route::delete('{id}', 'GalleryController@destroy');

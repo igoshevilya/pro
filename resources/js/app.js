@@ -20,6 +20,10 @@ window.Vue = require('vue');
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 import Toastr from "vue-toastr";
 Vue.use(Toastr);
+
+
+
+//Vue.component('infinite', 	require('vue-infinite-loading'));
 //Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
 //Vue.component('image-upload', require('./components/ImagesUpload.vue').default);
@@ -35,9 +39,8 @@ Vue.component('ava-upload', require('./components/AvatarUpload.vue').default);
 
 
  Vue.component('gallery', require('./components/gallery/index.vue').default);
- Vue.component('galleryshow', require('./components/gallery/show.vue').default);
-
-
+ Vue.component('gallery-show', require('./components/gallery/show.vue').default);
+ //Vue.component('infinite', 	require('vue-infinite-loading'));
 
 
 

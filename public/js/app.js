@@ -39289,22 +39289,27 @@ var render = function() {
                 "div",
                 { staticClass: "my-4 px-4 flex items-end rounded-2xl" },
                 [
-                  _c("div", { staticClass: "w-1/2  " }, [
+                  _c("div", { staticClass: "w-3/4" }, [
                     _c(
                       "h2",
                       {
                         staticClass:
-                          "mt-4 text-base font-medium text-indigo-700"
+                          "mt-4 overflow-ellipsis overflow-hidden w-auto text-base font-medium text-indigo-700"
                       },
                       [_vm._v(_vm._s(gallery.title))]
                     ),
                     _vm._v(" "),
-                    _c("p", { staticClass: "mt-2 text-sm text-gray-700" }, [
-                      _vm._v(" " + _vm._s(gallery.description) + " ")
-                    ])
+                    _c(
+                      "p",
+                      {
+                        staticClass:
+                          "mt-2 overflow-ellipsis overflow-hidden text-sm text-gray-700"
+                      },
+                      [_vm._v(" " + _vm._s(gallery.description) + " ")]
+                    )
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "w-1/2 flex justify-end " }, [
+                  _c("div", { staticClass: "w-1/4 flex justify-end " }, [
                     _c(
                       "button",
                       {
@@ -39465,7 +39470,8 @@ var render = function() {
                         attrs: {
                           type: "text",
                           id: "title",
-                          placeholder: "Название альбома"
+                          placeholder: "Название альбома",
+                          required: ""
                         },
                         domProps: { value: _vm.newGallery.title },
                         on: {
@@ -39512,7 +39518,8 @@ var render = function() {
                         attrs: {
                           rows: "5",
                           id: "description",
-                          placeholder: "Описание альбома"
+                          placeholder: "Описание альбома",
+                          required: ""
                         },
                         domProps: { value: _vm.newGallery.description },
                         on: {
@@ -52971,7 +52978,8 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 
-Vue.use(vue_toastr__WEBPACK_IMPORTED_MODULE_0__["default"]); //Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.use(vue_toastr__WEBPACK_IMPORTED_MODULE_0__["default"]); //Vue.component('infinite', 	require('vue-infinite-loading'));
+//Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 //Vue.component('image-upload', require('./components/ImagesUpload.vue').default);
 
 Vue.component('ava-upload', __webpack_require__(/*! ./components/AvatarUpload.vue */ "./resources/js/components/AvatarUpload.vue")["default"]); //Vue.component('lightbox', require('./components/Lightbox.vue').default);
@@ -52985,7 +52993,8 @@ Vue.component('ava-upload', __webpack_require__(/*! ./components/AvatarUpload.vu
  */
 
 Vue.component('gallery', __webpack_require__(/*! ./components/gallery/index.vue */ "./resources/js/components/gallery/index.vue")["default"]);
-Vue.component('galleryshow', __webpack_require__(/*! ./components/gallery/show.vue */ "./resources/js/components/gallery/show.vue")["default"]);
+Vue.component('gallery-show', __webpack_require__(/*! ./components/gallery/show.vue */ "./resources/js/components/gallery/show.vue")["default"]); //Vue.component('infinite', 	require('vue-infinite-loading'));
+
 var app = new Vue({
   el: '#app'
 });
