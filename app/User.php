@@ -45,5 +45,12 @@ class User extends Authenticatable
     public function userprofile(){
         return $this->hasOne('App\Userprofile');
     }
+
+    public function gallery() {
+        return $this->hasMany(Gallery::class);
+    }
     
+    public function photos() {
+        return $this->hasMany(Photo::class);
+    }
 }

@@ -10,7 +10,7 @@
              <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
                       <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-            
+
                 <p class="pl-1  text-sm text-gray-600">Перетащите свои изображения сюда<br>
                     или
                 </p>
@@ -26,7 +26,11 @@
         </div>
 
         <div class=" mx-auto" v-show="images.length">
+                               <div class=" flex justify-center items-center my-4" v-if="loading">
+  <div class="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-purple-500"></div>
+</div>
             <div class="flex grid gap-8 row-gap-5 mb-8 sm:grid-cols-2 lg:grid-cols-4 sm:mx-auto">
+   
             <div class="" v-for="(image, index) in images" :key="index">
                <div> <img class="object-cover w-full h-44 rounded shadow-sm" :src="image" :alt ="`Image Uploader ${image}`">
                 <button @click="removeImage(index)">Удалить</button>
@@ -84,7 +88,7 @@ export default {
         images: [],
           selectedPhoto: {},
        photoFullVisible:false,
-    
+    loading:false
     }),
         mounted(){
             this.fetchGallery();
@@ -115,6 +119,7 @@ export default {
                 axios.get('getphoto/' + window.location.href.split("/").slice(-1)[0], {
                 })
                     .then(response => {
+                        console.log(response);
                         this.gallery = response.data;
                         this.photos = this.gallery.photos;
                     })
@@ -174,7 +179,7 @@ export default {
             this.files.forEach(file => {
                 formData.append('images[]', file, file.name);
           formData.append('gallery_id', this.gallery.id);
-          
+            this.loading = true;
             });
             axios.post('photo/upload', formData)
                 .then(response => {
@@ -182,6 +187,9 @@ export default {
                      this.files = [];                    
                     this.$toastr.s("Фотографии загружены");
                        this.fetchGallery();
+                })
+                .finally(()=>{
+                    this.loading = false;
                 })
         },
          deletePhoto(photo){

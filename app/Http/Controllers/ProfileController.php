@@ -1,8 +1,11 @@
 <?php
 namespace App\Http\Controllers;
 use Auth;
+use Image;
+use File;
 use App\User;
 use Illuminate\Http\Request;
+use App\Userprofile;
 
 class ProfileController extends Controller
 {
@@ -27,8 +30,6 @@ class ProfileController extends Controller
             'last_name' => 'alpha|max:50',
                    ]);
 
-
-
         Auth::user()->update([
             'first_name' => $request->input('first_name'),
             'last_name' => $request->input('last_name'),
@@ -37,5 +38,37 @@ class ProfileController extends Controller
         return redirect()
                ->route('profile.edit')
                ->with('info', 'Профиль успешно обновлен!');
+    }
+
+    public function avatar(Request $request)
+    {
+        $this->validate($request,[
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+        ]);
+        if(Auth::user()->userprofile){
+            $oldimage = Userprofile::where('user_id', Auth::user()->id)->firstOrFail();
+            File::delete([
+                public_path($oldimage->image),
+                public_path($oldimage->thumbnail),
+            ]);
+            $oldimage->delete();
+        }
+        
+        $image = request()->file('image');
+        $imageName = $image->getClientOriginalName();
+        $imageName = time().'_'.$imageName;
+        $thumbnail = $image->getClientOriginalName();
+        $thumbnail= time().'_thumbnail'.$thumbnail;
+
+        Image::make($image)
+        ->fit(100, 100)
+        ->save(public_path('/avatar/').$thumbnail);
+        $image->move(public_path('/avatar'), $imageName);
+
+        $img = new Userprofile;
+        $img->user_id = Auth::user()->id;
+        $img->image = 'avatar/'.$imageName;
+        $img->thumbnail = 'avatar/'.$thumbnail;
+        $img->save();
     }
 }

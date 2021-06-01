@@ -40,8 +40,9 @@ Vue.component('ava-upload', require('./components/AvatarUpload.vue').default);
 
  Vue.component('gallery', require('./components/gallery/index.vue').default);
  Vue.component('gallery-show', require('./components/gallery/show.vue').default);
- //Vue.component('infinite', 	require('vue-infinite-loading'));
+ Vue.component('gallery-profile', require('./components/profile/show.vue').default);
 
+ //Vue.component('infinite', 	require('vue-infinite-loading'));
 
 
 
@@ -49,4 +50,5 @@ Vue.component('ava-upload', require('./components/AvatarUpload.vue').default);
 
 const app = new Vue({
     el: '#app',
+ 
 });

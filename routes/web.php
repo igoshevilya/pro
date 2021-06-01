@@ -1,30 +1,20 @@
 <?php
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 Auth::routes();
 
 
+Route::get('user/gallery/{user}', 'GalleryController@getphotouser');
 
-//Галерея
+
+//Фотограф
 Route::group(['prefix' => 'ph'], function() {
+    //Галерея
     Route::group(['prefix' => 'gallery'], function() {
-        Route::get('/', 'GalleryController@index')->name('gallery.index');
+        Route::get('/', 'GalleryController@index')->name('gallery');
         Route::get('/getgallery', 'GalleryController@getgallery');
         Route::post('/', 'GalleryController@store');
         Route::get('{id}', 'GalleryController@show');
         Route::get('/getphoto/{id}', 'GalleryController@getphoto');
-        //Route::get('/getphoto', 'GalleryController@getphoto');
         Route::put('{id}', 'GalleryController@update');
-        Route::put('/status/{id}', 'GalleryController@status');
         Route::delete('{id}', 'GalleryController@destroy');
 
         //Фото
@@ -33,52 +23,37 @@ Route::group(['prefix' => 'ph'], function() {
             Route::put('/update', 'PhotoController@update');
             Route::put('/update-attr', 'PhotoController@updateAttr');
             Route::put('/order', 'PhotoController@order');
-            Route::put('/status/{id}', 'PhotoController@status');
             Route::delete('{id}', 'PhotoController@destroy');
         });
     });
+
+    //Редактирование профиля
+        //Информация
+        Route::get('/info', 'PhotographController@info')->name('info');
+        Route::post('/avatar', 'ProfileController@avatar');
+
+    //Заказы
+        //Мои заказы
+        Route::group(['prefix' => 'myorder'], function() {
+            Route::get('/show/{id}', 'PhotographController@show')->name('myorder.show');
+            Route::get('/myresponses', 'PhotographController@myresponses')->name('myresponses.ph');
+            Route::get('/execution', 'PhotographController@execution')->name('execution.ph');
+            Route::get('/history', 'PhotographController@history')->name('history.ph');
+            Route::post('/review/{id}', 'ReviewController@storeclient')->name('clientreview');
+        });
+        //Заказы
+        Route::group(['prefix' => 'order'], function() {
+            Route::get('/', 'PhotographController@order')->name('order.order');
+            Route::get('/show/{id}', 'PhotographController@showorder')->name('ph.order.show');
+            Route::post('/response/{id}', 'ResponseController@store')->name('order.storeresponse');
+            Route::get('/response/del/{id}', 'ResponseController@destroy')->name('responses.destroy');
+        });
 });
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-Route::resource('/ph/myprofile/album', 'AlbumController')->only([
-    'index', 'show', 'store'
-]);
-
-Route::get('photo/download/{id}', 'PhotoController@download');
-//Route::post('/ph/myprofile/album/photo', 'PhotoController@store');
-Route::post('ph/myprofile/portfolio/upload', 'PhotoController@store');
-Route::get('ph/myprofile/portfolio/upload', 'PhotoController@store');
-//Route::get('ph/myorder', 'PhotographController@index')->name('myorder.ph');
-Route::get('ph/myorder/show/{id}', 'PhotographController@show')->name('myorder.show');
-Route::get('ph/order', 'PhotographController@order')->name('order.order');
-Route::get('ph/order/show/{id}', 'PhotographController@showorder')->name('ph.order.show');
-Route::post('ph/order/response/{id}', 'ResponseController@store')->name('order.storeresponse');
-Route::get('ph/order/response/del/{id}', 'ResponseController@destroy')->name('responses.destroy');
-Route::get('ph/myorder/myresponses', 'PhotographController@myresponses')->name('myresponses.ph');
-Route::get('ph/myorder/execution', 'PhotographController@execution')->name('execution.ph');
-Route::get('ph/myorder/history', 'PhotographController@history')->name('history.ph');
-Route::post('ph/myorder/review/{id}', 'ReviewController@storeclient')->name('clientreview');
-
-Route::get('ph/myprofile', 'PhotographController@myprofile')->name('myprofile');
-Route::get('ph/myprofile/portfolio', 'UpsController@index')->name('portfolio');
-//Route::post('ph/myprofile/portfolio/upload', 'UpsController@store');
-
-Route::resource('userprofile', 'UserprofileController');
 
 Route::resource('up','UpsController');
 

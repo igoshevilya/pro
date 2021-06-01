@@ -1,34 +1,9 @@
 @extends('templates.default')
 @include('photographer.cabinet.partials.nav')
 @section('content')
+@include('photographer.cabinet.myprofile.partials.nav')
 
 
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-    <div class=" px-4 my-1 sm:px-6 lg:px-8 py-4 bg-white shadow sm:rounded-md">
-        <div class="max-w-7xl mx-auto">
-          
-      <div>
-      
-        <div class="">
-          <nav class="flex space-x-4  place-content-center" aria-label="Tabs">
-            <a href="#" class="text-gray-500 hover:text-gray-700 px-3 py-2 font-medium text-sm rounded-md">
-                Портфолио
-            </a>
-            <a href="#" class="text-gray-500 hover:text-gray-700 px-3 py-2 font-medium text-sm rounded-md">
-                Услуги
-            </a>
-            <!-- Current: "bg-indigo-100 text-indigo-700", Default: "text-gray-500 hover:text-gray-700" -->
-            <a href="#" class="bg-indigo-100 text-indigo-700 px-3 py-2 font-medium text-sm rounded-md" aria-current="page">
-                Информация
-            </a>
-        
-          </nav>
-        </div>
-      </div>
-    
-        </div>
-      </div>
-    </div>
 
     
     

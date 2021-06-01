@@ -9,6 +9,7 @@ use File;
 use Image;
 use App\Gallery;
 use App\Photo;
+use Illuminate\Support\Facades\Auth;
 
 class PhotoController extends Controller
 {
@@ -17,52 +18,42 @@ class PhotoController extends Controller
         if (count($request->images) > 0) {
             foreach ($request->images as $image) {
 
-        $gallery = Gallery::find($request->gallery_id);
-        $name=$image->getClientOriginalName();
-                $name = time().'_'.$name;
-                $info = Image::make($image)->save(public_path('/images/').$name);
-               
-                $thumbnail= 'thumbnail_'.$name;
+                $gallery = Gallery::find($request->gallery_id);
+                $name = $image->getClientOriginalName();
+                $name = time() . '_' . $name;
+                $info = Image::make($image)->save(public_path('/images/') . $name);
+
+                $thumbnail = 'thumbnail_' . $name;
                 Image::make($image)
-                ->fit(450, 300)
-                ->save(public_path('/thumbnail/').$thumbnail);
-                
+                    ->fit(450, 300)
+                    ->save(public_path('/thumbnail/') . $thumbnail);
 
-    $photo= new Photo();
-    $photo->gallery_id=$gallery->id;
 
-    $photo->url = 5;
-    $photo->file_name = $name;
- 
-    $photo->width =  $info->width();
-    $photo->height =$info->height();
-    $photo->size = $info->filesize();
-    $photo->save();
-}}
+                $photo = new Photo();
+                $photo->gallery_id = $gallery->id;
 
+                $photo->user_id = Auth::id();
+                $photo->file_name = $name;
+
+                $photo->width =  $info->width();
+                $photo->height = $info->height();
+                $photo->size = $info->filesize();
+                $photo->save();
+            }
+        }
         return $photo;
     }
 
-  
 
-  
 
-   
+
+
+
 
     public function destroy($id)
     {
-
         $photo = Photo::find($id);
-     /*    $filePath = storage_path('\app\public\\'.str_replace('/storage/', '', $photo->url));
-        $filePath = str_replace('/', '\\', $filePath);
-        try{
-            unlink($filePath);
-        }catch (\Exception $exception){
-            echo('File doesn\'t exist');
-        }
- */
         $photo->delete();
-
         return 'success';
     }
 }
