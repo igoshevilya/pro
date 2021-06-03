@@ -10,7 +10,8 @@ use App\Order;
 use App\Category;
 use App\Response;
 use App\OrderCabinet;
-
+use App\Service;
+use App\Gallery;
 class PhotographController extends Controller
 {
     public function index()
@@ -60,6 +61,48 @@ class PhotographController extends Controller
 
     public function info()
     {
-        return view('photographer.cabinet.myprofile.index');
+        return view('photographer.cabinet.myprofile.info.index');
     }
+    public function service()
+    {
+        return view('photographer.cabinet.myprofile.service.index');
+    }
+    public function storeservice(Request $request)
+    {
+
+        $request->validate([
+           
+            'description' => 'nullable|date',
+        ]);
+        $service = new Service();
+        $service->user_id = Auth::id();
+        $service->title = $request->service['title'];
+        if (!empty($request->service['description'])) {
+        $service->description = $request->service['description'];}
+        $service->price = $request->service['price'];
+        $service->photo = $request->service['photo'];
+        $service->save();
+    }
+    public function getservice()
+    {
+        $user = Auth::user();
+        $service = Service::where('user_id', $user->id)->get();
+        return $service;
+    }
+    public function updateservice(Request $request, $id)
+    {
+        $service = Service::find($id);
+        $service->title = $request->service['title'];
+        $service->description = $request->service['description'];
+        $service->price = $request->service['price'];
+        $service->photo = $request->service['photo'];
+        $service->save();
+        return $service;
+    }
+    public function destroyservice($id)
+    {
+        $service = Service::find($id);
+        $service->delete();
+    }
+    
 }

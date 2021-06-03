@@ -72,6 +72,7 @@
                         <div>Дни работы: любой день недели</div>
                         <div>Время работы: с 5:00 по 23:00</div>
                         <div>Стоимость работы: от 5 000 руб. за час</div>
+                        
                     </div>                              
                 </div>
             </div>
@@ -86,56 +87,8 @@
 
                 <!-- Projects -->
                 <div class="bg-white px-6 py-8 mb-4  rounded-lg row-span-2">
-                    <h2 class="text-2xl font-semibold mb-8">Портфолио</h2>
-                    <gallery-profile/>
-                    <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-                        <div class="text-center">
-                            <figure class="rounded-lg overflow-hidden">
-                                <img class="object-cover transition transform hover:scale-110" src="images/projects/1.jpg"
-                                    alt="Example">
-                            </figure>
-                            <span class="text-gray-400 text-sm">www.example.com</span>
-                        </div>
-                        <div class="text-center">
-                            <figure class="rounded-lg overflow-hidden">
-                                <img class="object-cover transition transform hover:scale-110" src="images/projects/2.jpg"
-                                    alt="Example">
-                            </figure>
-                            <span class="text-gray-400 text-sm">www.example.com</span>
-                        </div>
-                        <div class="text-center">
-                            <figure class="rounded-lg overflow-hidden">
-                                <img class="object-cover transition transform hover:scale-110" src="images/projects/3.jpg"
-                                    alt="Example">
-                            </figure>
-                            <span class="text-gray-400 text-sm">www.example.com</span>
-                        </div>
-                        <div class="text-center">
-                            <figure class="rounded-lg overflow-hidden">
-                                <img class="object-cover transition transform hover:scale-110" src="images/projects/4.jpg"
-                                    alt="Example">
-                            </figure>
-                            <span class="text-gray-400 text-sm">www.example.com</span>
-                        </div>
-                        <div class="text-center">
-                            <figure class="rounded-lg overflow-hidden">
-                                <img class="object-cover transition transform hover:scale-110" src="images/projects/5.jpg"
-                                    alt="Example">
-                            </figure>
-                            <span class="text-gray-400 text-sm">www.example.com</span>
-                        </div>
-                        <div class="text-center">
-                            <figure class="rounded-lg overflow-hidden">
-                                <img class="object-cover transition transform hover:scale-110" src="images/projects/6.jpg"
-                                    alt="Example">
-                            </figure>
-                            <span class="text-gray-400 text-sm">www.example.com</span>
-                        </div>
-                    </div>
-
-
-
-                </div>
+                    <div><profile/></div>                  
+                 </div>
             </div>
 
         </div>

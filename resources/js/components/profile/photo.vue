@@ -1,14 +1,13 @@
 <template>
 <div>  
-     <section class="mt-3 grid 2xl:grid-cols-4 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-10">
-               <article v-for="photo in photos" :key="photo.id" class="mx-auto group w-full shadow-sm  rounded-b-2xl transform duration-500 hover:-translate-y-1 ">
-                <section @click="showPhotoFull(photo)" class="cursor-pointer content bg-cover bg-center h-64 rounded-2xl" :style="{ backgroundImage: 'url(/thumbnail/thumbnail_' + photo.file_name + ')' }">
-                  
-                </section>
-                     
-                
-               </article>
-        </section>
+ 
+  <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">                    
+                            <figure v-for="photo in photos" :key="photo.id" class="rounded-lg overflow-hidden">
+                                <img @click="showPhotoFull(photo)" class="cursor-pointer object-cover transition transform hover:scale-110" :src="'/thumbnail/thumbnail_'+photo.file_name">
+                            </figure>                           
+                        
+  </div>
+
       <photo-full ref="photoFull" :photo="selectedPhoto" :photos="photos" :photoFullVisible="photoFullVisible"></photo-full>
 
 
@@ -27,9 +26,8 @@ export default {
         album:{},
         gallery: [],
         photos: [],
-        files: [],
         images: [],
-          selectedPhoto: {},
+       selectedPhoto: {},
        photoFullVisible:false,
     
     }),
@@ -43,8 +41,7 @@ export default {
          //Select photo
             selectPhoto(photo){
                 if(_.findIndex(this.photos, (item) => { return photo.id == item.id; }) >= 0){
-                    this.selectedPhoto = photo;
-                    this.editedPhoto = photo;
+                    this.selectedPhoto = photo;                    
                     this.$refs.photoFull.startEventListeners();
                 }
 
@@ -54,22 +51,15 @@ export default {
                 this.selectedPhoto = photo;
             },
 
-
-
-
-
         fetchGallery(){
-                axios.get('gallery/' + window.location.href.split("/").slice(-1)[0] )
+                axios.get('photo/' + window.location.href.split("/").slice(-1)[0] )
                     .then(response => {
-                     
-                         console.log(response);
                         this.photos = response.data;
-                       //this.photos =  response.data.photos;
-                          console.log(photos);
                     })
                     .catch(response => {
                         console.log(response);
                     });
+                    
             },
      
         

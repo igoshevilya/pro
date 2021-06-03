@@ -15,7 +15,7 @@
             <a href="{{route('order.order' )}}" class="{{request()->is('ph/order*') ? 'border-indigo-500 text-gray-900' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'}}    inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
               Поиск заказа
             </a>
-            <a href="{{route('gallery' )}}" class="{{request()->is('ph/gallery*') ? 'border-indigo-500 text-gray-900' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'}}    inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+            <a href="{{route('gallery' )}}" class="{{request()->is('ph/myprofile*') ? 'border-indigo-500 text-gray-900' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'}}    inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
               Мой профиль
             </a>
          

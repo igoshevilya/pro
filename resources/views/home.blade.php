@@ -1,5 +1,7 @@
 @extends('templates.default')
+@include('photographer.cabinet.partials.nav')
 @section('content')
+
     <p>This is my body content.</p>
     <!-- This example requires Tailwind CSS v2.0+ -->
 <div class="relative bg-white overflow-hidden">

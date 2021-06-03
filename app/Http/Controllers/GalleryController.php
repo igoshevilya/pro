@@ -17,7 +17,7 @@ class GalleryController extends Controller
         $user = Auth::user();
         $gallery = Gallery::where('user_id', $user->id)->get();
         
-        return view ('photographer.cabinet.gallery.index',[response()->json( $gallery)]);
+        return view ('photographer.cabinet.myprofile.gallery.index',[response()->json( $gallery)]);
 
     }
 
@@ -30,8 +30,7 @@ class GalleryController extends Controller
             $gallery->photos->map(function ($photo, $key) {
                 $photo->active = $photo->active?true:false;
                return $photo;
-            });
-           
+            });           
             return $gallery;
         });
     }
@@ -50,7 +49,7 @@ class GalleryController extends Controller
 
     public function show($id)
     {
-        return view ('photographer.cabinet.gallery.show');
+        return view ('photographer.cabinet.myprofile.gallery.show');
     }
 
     public function getphoto($id)
@@ -61,54 +60,6 @@ class GalleryController extends Controller
 
         return $gallery;
     }
-
-    public function getProfile($user)
-    {
-        $user = User::where('user',$user)->first();
-        if(!$user){
-            abort(404);
-        }
-       return view('profile.index', compact('user'));
-    }
-
-    public function getphotouser($user)
-    {
-     /*   
-        $gallery=$user->gallery->Gallery::all(); */
-        $user = User::where('user',$user)->first();
-        if(!$user){
-            abort(404);
-        }
-      /*   $gallery = Gallery::where('user_id',$user->id)->get(); */
-       // $gallery = Gallery::all()->photos();
-       // $gallery = Gallery::with('photos')->find(3);
-      
-      // $gallery = collapse($gallery);
-       //$gallery = Arr::pluck($gallery, 'photos');
-       //$gallery = Arr::collapse($gallery);
-       //$gallery = $gallery;
-   // dump($gallery, $photo);
-    // dump($user->id);
-       
-    
-    
-   // $gallery = Gallery::where('user_id', $user->id)->with('photos')->get(); return $gallery;
-
-
-
-   $photo = Photo::where('user_id', $user->id)->get();
-
-   return $photo;
-
-      // return PhotoResource::collection(Gallery::where('user_id', $user->id)->with('photos')->get());
-    }
-   /*  public function getphotouser()
-    {
-       
-        $gallery = Gallery::all()->photos();
-
-        return $gallery;
-    } */
 
     public function update(Request $request, $id)
     {
@@ -125,7 +76,5 @@ class GalleryController extends Controller
     {
         $gallery = Gallery::find($id);
         $gallery->delete();
-
-        return 'success';
     }
 }

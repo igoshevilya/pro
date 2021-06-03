@@ -4,6 +4,8 @@ use Auth;
 use Image;
 use File;
 use App\User;
+use App\Photo;
+use App\Gallery;
 use Illuminate\Http\Request;
 use App\Userprofile;
 
@@ -19,8 +21,7 @@ class ProfileController extends Controller
     }
 
     public function getEdit()
-    {
-       
+    {  
                 return view('profile.edit');
     }
     public function postEdit(Request $request)
@@ -71,4 +72,37 @@ class ProfileController extends Controller
         $img->thumbnail = 'avatar/'.$thumbnail;
         $img->save();
     }
+
+    public function getphotouser($user)
+    {     
+        $user = User::where('user',$user)->first();
+        if(!$user){
+            abort(404);
+        }
+        return Photo::where('user_id', $user->id)->get();  
+    }
+    public function getgalleryuser($user)
+    {     
+        $user = User::where('user',$user)->first();
+        if(!$user){
+            abort(404);
+        }
+        return Gallery::where('user_id', $user->id)->get()
+        ->map(function ($gallery, $key) {
+            $gallery->active = $gallery->active?true:false;
+            $gallery->photos->map(function ($photo, $key) {
+                $photo->active = $photo->active?true:false;
+               return $photo;
+            });           
+            return $gallery;
+        });
+    }
+    public function getgalleryphoto($id)
+    {     
+        
+
+        return Gallery::with('photos')->find($id);
+    }
+    
+
 }

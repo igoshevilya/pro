@@ -27,7 +27,7 @@ Vue.use(Toastr);
 //Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
 //Vue.component('image-upload', require('./components/ImagesUpload.vue').default);
-Vue.component('ava-upload', require('./components/AvatarUpload.vue').default);
+Vue.component('ava-upload', require('./components/profile/AvatarUpload.vue').default);
 //Vue.component('lightbox', require('./components/Lightbox.vue').default);
 //Vue.component('create-album', require('./components/AlbumCreate.vue').default);
 //Vue.component('album-index', require('./components/AlbumIndex.vue').default);
@@ -40,8 +40,11 @@ Vue.component('ava-upload', require('./components/AvatarUpload.vue').default);
 
  Vue.component('gallery', require('./components/gallery/index.vue').default);
  Vue.component('gallery-show', require('./components/gallery/show.vue').default);
- Vue.component('gallery-profile', require('./components/profile/show.vue').default);
+ Vue.component('service', require('./components/profile/service.vue').default);
 
+ Vue.component('profile', require('./components/profile/index.vue').default);
+ Vue.component('photo-profile', require('./components/profile/photo.vue').default);
+ Vue.component('album-profile', require('./components/profile/album.vue').default);
  //Vue.component('infinite', 	require('vue-infinite-loading'));
 
 

@@ -1,37 +1,39 @@
 <?php
 Auth::routes();
 
-
-Route::get('user/gallery/{user}', 'GalleryController@getphotouser');
-
-
 //Фотограф
 Route::group(['prefix' => 'ph'], function() {
-    //Галерея
-    Route::group(['prefix' => 'gallery'], function() {
-        Route::get('/', 'GalleryController@index')->name('gallery');
-        Route::get('/getgallery', 'GalleryController@getgallery');
-        Route::post('/', 'GalleryController@store');
-        Route::get('{id}', 'GalleryController@show');
-        Route::get('/getphoto/{id}', 'GalleryController@getphoto');
-        Route::put('{id}', 'GalleryController@update');
-        Route::delete('{id}', 'GalleryController@destroy');
-
-        //Фото
-        Route::group(['prefix' => 'photo'], function() {
-            Route::post('/upload', 'PhotoController@uploadPhotos');
-            Route::put('/update', 'PhotoController@update');
-            Route::put('/update-attr', 'PhotoController@updateAttr');
-            Route::put('/order', 'PhotoController@order');
-            Route::delete('{id}', 'PhotoController@destroy');
-        });
-    });
 
     //Редактирование профиля
-        //Информация
-        Route::get('/info', 'PhotographController@info')->name('info');
-        Route::post('/avatar', 'ProfileController@avatar');
-
+        Route::group(['prefix' => 'myprofile'], function() {
+            //Галерея
+            Route::group(['prefix' => 'gallery'], function() {
+                Route::get('/', 'GalleryController@index')->name('gallery');
+                Route::get('/getgallery', 'GalleryController@getgallery');
+                Route::post('/', 'GalleryController@store');
+                Route::get('{id}', 'GalleryController@show');
+                Route::get('/getphoto/{id}', 'GalleryController@getphoto');
+                Route::put('{id}', 'GalleryController@update');
+                Route::delete('{id}', 'GalleryController@destroy');
+                //Фото
+                Route::group(['prefix' => 'photo'], function() {
+                    Route::post('/upload', 'PhotoController@uploadPhotos');
+                    Route::put('/update', 'PhotoController@update');
+                    Route::put('/update-attr', 'PhotoController@updateAttr');
+                    Route::put('/order', 'PhotoController@order');
+                    Route::delete('{id}', 'PhotoController@destroy');
+                });
+            });
+            //Информация
+            Route::get('/info', 'PhotographController@info')->name('info');
+            Route::post('/avatar', 'ProfileController@avatar');
+            //Услуги
+            Route::get('/service', 'PhotographController@service')->name('service');
+            Route::post('/service', 'PhotographController@storeservice');
+            Route::get('/getservice', 'PhotographController@getservice');
+            Route::put('/service/{id}', 'PhotographController@updateservice');
+            Route::delete('/service/{id}', 'PhotographController@destroyservice');
+        });
     //Заказы
         //Мои заказы
         Route::group(['prefix' => 'myorder'], function() {
@@ -50,8 +52,10 @@ Route::group(['prefix' => 'ph'], function() {
         });
 });
 
-
-
+Route::get('user/{user}', 'ProfileController@getProfile')->name('profile.index');
+Route::get('user/gallery/{user}', 'ProfileController@getgalleryuser');
+Route::get('user/photo/{user}', 'ProfileController@getphotouser');
+Route::get('user/galleryphoto/{id}', 'ProfileController@getgalleryphoto');
 
 
 
@@ -72,7 +76,7 @@ Route::get('order/cabinet/done/{id}', 'OrderController@taskcompleted')->name('or
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/logout', 'Auth\LoginController@logout')->name('get-logout');
 Route::group(['middleware' => ['role:admin']], function () {});
-Route::get('user/{user}', 'ProfileController@getProfile')->name('profile.index');
+
 Route::get('profile/edit', 'ProfileController@getEdit')->name('profile.edit');
 Route::post('profile/edit', 'ProfileController@postEdit')->name('profile.edit');
 

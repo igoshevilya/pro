@@ -4,7 +4,7 @@
      <div class="inline-block mr-2 mt-2">
               <button @click="toggleCreateGallery" class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm">Создать альбом</button>
              </div>
-   
+
     <!-----------GALLERY--------->
     <div class=" py-6">
               <section class="grid 2xl:grid-cols-4 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-10">
@@ -26,7 +26,7 @@
 
 
                       <div class="w-3/4">
-                    <h2 class="mt-4 overflow-ellipsis overflow-hidden w-auto text-base font-medium text-indigo-700">{{ gallery.title }}</h2>
+                    <h2 class="mt-4 overflow-ellipsis overflow-hidden w-auto text-base font-medium text-Gray-700">{{ gallery.title }}</h2>
                     <p class="mt-2 overflow-ellipsis overflow-hidden text-sm text-gray-700"> {{ gallery.description }} </p>
                       </div>
 
@@ -141,7 +141,7 @@
             },
             //GET ALL GALLERIES
             getGalleries() {
-                axios.get('/ph/gallery/getgallery')
+                axios.get('gallery/getgallery')
                      .then(response => {
                         this.galleries = response.data;
                         _.map(this.galleries, (gallery) => {
@@ -182,18 +182,7 @@
                     });
             },
 
-            //ACTIVATE/DEACTIVATE GALLERY
-            toggleGalleryStatus(id){
-                axios.put('gallery/status/' + id, {
-                    })
-                    .then(response => {
-                        //console.log(response);
-                    })
-                    .catch(response => {
-                        console.log(response);
-                    });
-            },
-
+          
             //DELETE GALLERY
              toggleDeleteGallery(gallery) {
                 this.modalDelete.show = !this.modalDelete.show;

@@ -6,13 +6,13 @@
  
     
         <nav class="flex space-x-4  place-content-center" aria-label="Tabs">
-          <a href="{{route('gallery' )}}" class="{{request()->is('ph/gallery*') ? 'bg-indigo-100 text-indigo-700 px-3 py-2' : 'text-gray-500 hover:text-gray-700 px-3 py-2'}} font-medium text-sm rounded-md">
+          <a href="{{route('gallery' )}}" class="{{request()->is('ph/myprofile/gallery*') ? 'bg-indigo-100 text-indigo-700 px-3 py-2' : 'text-gray-500 hover:text-gray-700 px-3 py-2'}} font-medium text-sm rounded-md">
               Портфолио
           </a>
-          <a href="{{route('execution.ph' )}}" class="{{request()->is('ph/gallery*') ? 'bg-indigo-100 text-indigo-700 px-3 py-2' : 'text-gray-500 hover:text-gray-700 px-3 py-2'}} font-medium text-sm rounded-md">
+          <a href="{{route('service' )}}" class="{{request()->is('ph/myprofile/service*') ? 'bg-indigo-100 text-indigo-700 px-3 py-2' : 'text-gray-500 hover:text-gray-700 px-3 py-2'}} font-medium text-sm rounded-md">
               Услуги
           </a>
-          <a href="{{route('info' )}}" class="{{request()->is('ph/info*') ? 'bg-indigo-100 text-indigo-700 px-3 py-2' : 'text-gray-500 hover:text-gray-700 px-3 py-2'}} font-medium text-sm rounded-md">
+          <a href="{{route('info' )}}" class="{{request()->is('ph/myprofile/info*') ? 'bg-indigo-100 text-indigo-700 px-3 py-2' : 'text-gray-500 hover:text-gray-700 px-3 py-2'}} font-medium text-sm rounded-md">
               Информация
           </a>
       
