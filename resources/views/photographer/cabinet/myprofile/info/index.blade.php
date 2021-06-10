@@ -1,16 +1,6 @@
 @extends('templates.default')
-@include('photographer.cabinet.partials.nav')
 @section('content')
 @include('photographer.cabinet.myprofile.partials.nav')
-
-
-
-
-
-
-
-
-
 
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
       

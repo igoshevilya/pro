@@ -1,5 +1,4 @@
 @extends('templates.default')
-@include('photographer.cabinet.partials.nav')
 @section('content')
 @include('photographer.cabinet.myorders.partials.nav')
 

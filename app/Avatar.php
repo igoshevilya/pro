@@ -4,10 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Userprofile extends Model
+class Avatar extends Model
 {
     public function user(){
         return $this->belongsTo('App\User');
     }   
-   
 }

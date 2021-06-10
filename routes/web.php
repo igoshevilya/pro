@@ -27,6 +27,7 @@ Route::group(['prefix' => 'ph'], function() {
             //Информация
             Route::get('/info', 'PhotographController@info')->name('info');
             Route::post('/avatar', 'ProfileController@avatar');
+            
             //Услуги
             Route::get('/service', 'PhotographController@service')->name('service');
             Route::post('/service', 'PhotographController@storeservice');
@@ -56,6 +57,8 @@ Route::get('user/{user}', 'ProfileController@getProfile')->name('profile.index')
 Route::get('user/gallery/{user}', 'ProfileController@getgalleryuser');
 Route::get('user/photo/{user}', 'ProfileController@getphotouser');
 Route::get('user/galleryphoto/{id}', 'ProfileController@getgalleryphoto');
+Route::get('user/service/{user}', 'ProfileController@getservice');
+Route::get('user/review/{user}', 'ProfileController@getreview');
 
 
 

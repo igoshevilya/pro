@@ -29,7 +29,10 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-
+    public function username(){
+        return $this->first_name;
+    }
+    
     public function getName() 
     {
         if ($this->first_name && $this->last_name) 
@@ -45,12 +48,21 @@ class User extends Authenticatable
     public function userprofile(){
         return $this->hasOne('App\Userprofile');
     }
-
+    
+    public function avatar(){
+        return $this->hasOne(Avatar::class);
+    }
     public function gallery() {
         return $this->hasMany(Gallery::class);
     }
     
     public function photos() {
         return $this->hasMany(Photo::class);
+    }
+    public function service() {
+        return $this->hasMany(Service::class);
+    }
+    public function review() {
+        return $this->hasMany(ClientReview::class,'client_id','id');
     }
 }

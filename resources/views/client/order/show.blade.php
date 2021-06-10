@@ -1,5 +1,4 @@
 @extends('templates.default')
-@include('client.partials.nav')
 @section('content')
 
 

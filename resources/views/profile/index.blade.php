@@ -1,20 +1,32 @@
 @extends('templates.default')
-@include('photographer.cabinet.partials.nav')
 @section('content')
 
     <main class="max-w-7xl mx-auto sm:px-6 py-4 lg:px-8">
-        <!-- Card profile -->
+        <!-- Card profile --> 
         <div class="bg-white px-6 py-2 mb-4  rounded-lg md:p-0 overflow-hidden">
             <div class="mt-6 md:flex md:p-0 md:mt-0 ">
+                @if (!empty($user->avatar->image))
                 <img class="w-32 h-32  mx-auto rounded-full object-cover lg:mx-0 md:w-48 lg:w-1/4 md:h-auto md:rounded-none"
-                    src="{{ asset('/') . Auth::user()->userprofile->image }}" alt="">
+                src="{{ asset('/') . $user->avatar->image }}" alt="">
+            @else
+            <div class="py-4 px-10">
+                <svg class=" w-32 h-32 md:w-48 mx-auto md:h-auto text-indigo-700" xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px"
+                    y="0px" viewBox="0 0 45.532 45.532" xml:space="preserve">
+                    <path xmlns="http://www.w3.org/2000/svg" fill="#4f46e5" id="svg_2"
+                        d="m22.766,0.001c-12.572,0 -22.766,10.192 -22.766,22.765s10.193,22.765 22.766,22.765c12.574,0 22.766,-10.192 22.766,-22.765s-10.192,-22.765 -22.766,-22.765zm0,6.807c4.16,0 7.531,3.372 7.531,7.53c0,4.159 -3.371,7.53 -7.531,7.53c-4.158,0 -7.529,-3.371 -7.529,-7.53c0,-4.158 3.371,-7.53 7.529,-7.53zm-0.005,32.771c-4.149,0 -7.949,-1.511 -10.88,-4.012c-0.714,-0.609 -1.126,-1.502 -1.126,-2.439c0,-4.217 3.413,-7.592 7.631,-7.592l8.762,0c4.219,0 7.619,3.375 7.619,7.592c0,0.938 -0.41,1.829 -1.125,2.438c-2.93,2.502 -6.731,4.013 -10.881,4.013z" />
+                </svg>
+            </div>
+            @endif
+                
                 <div class="pt-6 text-center space-y-4 md:p-8 md:text-left lg:p-8 lg:pl-12">
                     <h1 class="text-3xl font-bold text-primary">{{ $user->getName() }}</h1>
-                    <span class="text-sm text-gray- 400 font-light">Frontend Developer at Silicon Valley Col</span>
-                    <p class="text-md text-gray-500 font-light">Developer and Designer with about +9 years creating and
-                        developing things for web and mobile devices</p>
-      
-        
+                    @if(!empty($user->userprofile->special))
+                    <span class="text-sm text-gray- 400 font-light">{{$user->userprofile->special}}</span>
+                    @endif
+                    @if(!empty($user->userprofile->description))
+                    <p class="text-md text-gray-500 font-light">{{$user->userprofile->description}}</p> 
+                    @endif  
                 </div>
             </div>
         </div>
@@ -26,22 +38,27 @@
 
 
                    <div class="grid lg:grid-cols-1 mt-2 grid-cols-2 gap-2 lg:place-items-center">
-                        <div class="items-center flex flex-grow-0">
+                    @if(!empty($user->userprofile->phone))
+                    <div class="items-center flex flex-grow-0">
                             
-                          <span class="font-medium px-4 py-2 flex  items-center rounded-full  bg-indigo-500 text-white border border-indigo-500 undefined ">
-                                <svg class="icon line" width="20" height="20" id="phone" xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 24 24">
-                                    <path
-                                        d="M21,15v3.93a2,2,0,0,1-2.29,2A18,18,0,0,1,3.14,5.29,2,2,0,0,1,5.13,3H9a1,1,0,0,1,1,.89,10.74,10.74,0,0,0,1,3.78,1,1,0,0,1-.42,1.26l-.86.49a1,1,0,0,0-.33,1.46,14.08,14.08,0,0,0,3.69,3.69,1,1,0,0,0,1.46-.33l.49-.86A1,1,0,0,1,16.33,13a10.74,10.74,0,0,0,3.78,1A1,1,0,0,1,21,15Z"
-                                        style="fill: none; stroke: #ffffff; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.5;">
-                                    </path>
-                                </svg>
-                                +7(978)-111-11-11
+                        <span class="font-medium px-4 py-2 flex  items-center rounded-full  bg-indigo-500 text-white border border-indigo-500 undefined ">
+                              <svg class="icon line" width="20" height="20" id="phone" xmlns="http://www.w3.org/2000/svg"
+                                  viewBox="0 0 24 24">
+                                  <path
+                                      d="M21,15v3.93a2,2,0,0,1-2.29,2A18,18,0,0,1,3.14,5.29,2,2,0,0,1,5.13,3H9a1,1,0,0,1,1,.89,10.74,10.74,0,0,0,1,3.78,1,1,0,0,1-.42,1.26l-.86.49a1,1,0,0,0-.33,1.46,14.08,14.08,0,0,0,3.69,3.69,1,1,0,0,0,1.46-.33l.49-.86A1,1,0,0,1,16.33,13a10.74,10.74,0,0,0,3.78,1A1,1,0,0,1,21,15Z"
+                                      style="fill: none; stroke: #ffffff; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.5;">
+                                  </path>
+                              </svg>
+                              {{$user->userprofile->phone}}                              
                             </span>
     
                             
                         </div>
-                       
+                  
+                    
+                          
+                        @endif
+                        @if($type == 2)
                         <div class="flex mt-2 text-white text-md sm:text-gray-500">
                                 <a href="#" class=" text-gray-400 hover:text-gray-500">
                                     <span class="sr-only">Vk</span>
@@ -65,15 +82,26 @@
                                 </a>
                         
                         </div>
+                        @endif
                    </div>
-                     
+                   
                     <div class="mt-2 grid grid-cols-2 gap-1 lg:grid-cols-1">
+                        @if($type == 2)
                         <div>Опыт: 4 года</div>
                         <div>Дни работы: любой день недели</div>
                         <div>Время работы: с 5:00 по 23:00</div>
-                        <div>Стоимость работы: от 5 000 руб. за час</div>
-                        
-                    </div>                              
+                        <div>Стоимость работы: от 5 000 руб. за час</div>                        
+                        @endif
+                        @if($type == 1)
+                        <div>Создано заданий: 10</div>
+                        <div>Город: Симферополь</div>
+                        <div>Возраст: 18 лет</div>                       
+                        @endif
+                       
+                       
+                       
+                       
+                    </div>  
                 </div>
             </div>
 
@@ -87,7 +115,24 @@
 
                 <!-- Projects -->
                 <div class="bg-white px-6 py-8 mb-4  rounded-lg row-span-2">
-                    <div><profile/></div>                  
+                    <div>
+                        @if($type == 2)
+                        <profile/>
+                        @endif
+                        @if($type == 1)
+                        @if($user->review->isEmpty())
+                        <h3 class="text-xl">Еще нет отзывов</h3>
+                        @else
+                        <h3 class="text-xl">Отзывы фотографов:</h3>
+                        <reviewclient-profile/>
+                        @endif
+                        @endif
+                        
+                   
+                      
+                       
+                      
+                    </div>                  
                  </div>
             </div>
 

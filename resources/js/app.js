@@ -45,10 +45,14 @@ Vue.component('ava-upload', require('./components/profile/AvatarUpload.vue').def
  Vue.component('profile', require('./components/profile/index.vue').default);
  Vue.component('photo-profile', require('./components/profile/photo.vue').default);
  Vue.component('album-profile', require('./components/profile/album.vue').default);
+ Vue.component('service-profile', require('./components/profile/serviceprofile.vue').default);
+ Vue.component('review-profile', require('./components/profile/review.vue').default);
+ Vue.component('reviewclient-profile', require('./components/profile/reviewclient.vue').default);
+
  //Vue.component('infinite', 	require('vue-infinite-loading'));
 
 
-
+ 
 
 
 const app = new Vue({

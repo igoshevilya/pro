@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div>    
     <tabs
       :tabs="tabs"
       :currentTab="currentTab"
@@ -17,13 +17,10 @@
        <album-profile/>
       </div>
       <div v-if="currentTab === 'tab3'">
-        At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium
-        voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint
-        occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt
-        mollitia animi, id est laborum et dolorum fuga.
+       <service-profile/>
       </div>
         <div v-if="currentTab === 'tab4'">
-       444
+       <review-profile/>
       </div>
     </div>
   </div>
@@ -107,4 +104,16 @@ export default {
   margin-top: 30px;
   font-size: 20px;
 }
+@media screen and (max-width: 650px) {
+.default-tabs {
+ 
+  &__item {
+  
+    margin: 0 0px;
+    
+    }
+  }
+ 
+}
+
 </style>

@@ -1,5 +1,4 @@
 @extends('templates.default')
-@include('client.partials.nav')
 @section('content')
 
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">

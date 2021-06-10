@@ -71,7 +71,6 @@ class PhotographController extends Controller
     {
 
         $request->validate([
-           
             'description' => 'nullable|date',
         ]);
         $service = new Service();

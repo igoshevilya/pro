@@ -6,7 +6,11 @@ use File;
 use App\User;
 use App\Photo;
 use App\Gallery;
+use App\Service;
+use App\Review;
+use App\ClientReview;
 use Illuminate\Http\Request;
+use App\Avatar;
 use App\Userprofile;
 
 class ProfileController extends Controller
@@ -17,7 +21,11 @@ class ProfileController extends Controller
         if(!$user){
             abort(404);
         }
-       return view('profile.index', compact('user'));
+        if($user->hasRole('user')){
+        $type = 1;}
+        if($user->hasRole('photographer')){
+            $type = 2;}
+       return view('profile.index', compact('user','type'));
     }
 
     public function getEdit()
@@ -46,8 +54,8 @@ class ProfileController extends Controller
         $this->validate($request,[
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
         ]);
-        if(Auth::user()->userprofile){
-            $oldimage = Userprofile::where('user_id', Auth::user()->id)->firstOrFail();
+        if(Auth::user()->avatar){
+            $oldimage = Avatar::where('user_id', Auth::user()->id)->firstOrFail();
             File::delete([
                 public_path($oldimage->image),
                 public_path($oldimage->thumbnail),
@@ -66,7 +74,7 @@ class ProfileController extends Controller
         ->save(public_path('/avatar/').$thumbnail);
         $image->move(public_path('/avatar'), $imageName);
 
-        $img = new Userprofile;
+        $img = new Avatar;
         $img->user_id = Auth::user()->id;
         $img->image = 'avatar/'.$imageName;
         $img->thumbnail = 'avatar/'.$thumbnail;
@@ -102,6 +110,36 @@ class ProfileController extends Controller
         
 
         return Gallery::with('photos')->find($id);
+    }
+    public function getservice($user)
+    {     
+        $user = User::where('user',$user)->first();
+        if(!$user){
+            abort(404);
+        }
+
+        return Service::where('user_id', $user->id)->get();
+    }
+
+    public function getreview($user)
+    {     
+        $user = User::where('user',$user)->first();
+        if(!$user){
+            abort(404);
+        }
+        if($user->hasRole('photographer'))
+        {$rev = Review::where('photograph_id', $user->id)->get();
+        $rev-> load('client');
+        $rev-> load('avatar');}
+
+        if($user->hasRole('user'))
+        {$rev = ClientReview::where('client_id', $user->id)->get();
+        $rev-> load('photograph');
+        $rev-> load('avatar');}
+       // dd($rev);
+ return $rev;
+
+        //return Review::where('photograph_id', $user->id)->get();
     }
     
 
