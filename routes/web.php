@@ -24,9 +24,7 @@ Route::group(['prefix' => 'ph'], function() {
                     Route::delete('{id}', 'PhotoController@destroy');
                 });
             });
-            //Информация
-            Route::get('/info', 'PhotographController@info')->name('info');
-            Route::post('/avatar', 'ProfileController@avatar');
+            
             
             //Услуги
             Route::get('/service', 'PhotographController@service')->name('service');
@@ -60,9 +58,27 @@ Route::get('user/galleryphoto/{id}', 'ProfileController@getgalleryphoto');
 Route::get('user/service/{user}', 'ProfileController@getservice');
 Route::get('user/review/{user}', 'ProfileController@getreview');
 
+//Информация
+Route::get('/setting', 'ProfileController@setting')->name('setting');
+Route::post('profile/edit', 'ProfileController@postEdit')->name('profile.edit');
+Route::post('setting/avatar', 'ProfileController@avatar');
 
 
-Route::resource('up','UpsController');
+
+
+
+
+Route::get('profile/edit', 'ProfileController@getEdit')->name('profile.edit');
+
+
+
+
+
+
+
+
+
+
 
 //Route::resource('/order', 'OrderController');
 Route::get('myorder', 'OrderController@index')->name('myorder.client');
@@ -80,8 +96,8 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('/logout', 'Auth\LoginController@logout')->name('get-logout');
 Route::group(['middleware' => ['role:admin']], function () {});
 
-Route::get('profile/edit', 'ProfileController@getEdit')->name('profile.edit');
-Route::post('profile/edit', 'ProfileController@postEdit')->name('profile.edit');
+
+
 
 
 
@@ -95,3 +111,7 @@ Route::resource('cabinet.reviews', 'ReviewController');
 
 Route::resource('/category', 'CategoryController');
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

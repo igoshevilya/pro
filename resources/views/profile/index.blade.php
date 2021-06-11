@@ -86,6 +86,8 @@
                    </div>
                    
                     <div class="mt-2 grid grid-cols-2 gap-1 lg:grid-cols-1">
+                        @if(!empty($user->city))  <div>Город: <span class="font-medium text-gray-900">{{$user->city}}</span></div>
+                        @endif
                         @if($type == 2)
                         <div>Опыт: 4 года</div>
                         <div>Дни работы: любой день недели</div>
@@ -94,7 +96,6 @@
                         @endif
                         @if($type == 1)
                         <div>Создано заданий: 10</div>
-                        <div>Город: Симферополь</div>
                         <div>Возраст: 18 лет</div>                       
                         @endif
                        

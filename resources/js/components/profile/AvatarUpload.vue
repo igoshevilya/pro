@@ -64,7 +64,7 @@ export default {
         profileUpload(){
             let data = new FormData;
             data.append('image', this.image);
-            axios.post('./avatar', data)
+            axios.post('setting/avatar', data)
             .then(()=>{
                  console.log("good");
             }).catch(()=>{

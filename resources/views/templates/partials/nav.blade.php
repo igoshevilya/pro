@@ -88,7 +88,7 @@
                                     role="menu" aria-orientation="vertical" aria-labelledby="user-menu"
                                     style="display: none;">
 
-                                    <a href="{{ route('order.order') }}"
+                                    <a href="{{ route('setting') }}"
                                         class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                                         role="menuitem">Настройки</a>
                                     <a href="{{ route('get-logout') }}"

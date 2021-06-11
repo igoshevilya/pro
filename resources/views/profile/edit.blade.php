@@ -1,90 +1,129 @@
 @extends('templates.default')
 @section('content')
-   
+
+
+      <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+      
+        <div class="max-w-7xl mx-auto bg-white py-12 px-4 sm:px-6 lg:px-8">
+          <div class="max-w-3xl mx-auto">
+            
+      
+        <div class="space-y-8 divide-y divide-gray-200">
+          <div>
+            <div>
+              <h3 class="text-lg leading-6 font-medium text-gray-900">
+                Профиль
+              </h3>
+              <p class="mt-1 text-sm text-gray-500">
+                @if($type == 2)
+                Расскажите подробно о себе, добавьте ссылки на профили в соц. сетях и мессенджерах, чтобы клиенты смогли получше вас узнать
+                @endif
+            </p>
+            </div>
     
-   <div class="container">
-   <h3>Редактирование профиля</h3>  
-<div class="row gutters">
-<div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
-<div class="card h-100">
-	<div class="card-body">
-		<div class="account-settings">
-			<div class="user-profile">
-				<div class="user-avatar">
-					 <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
-				</div>
-				<h5 class="user-name">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</h5>
-				<h6 class="user-email">yuki@Maxwell.com</h6>
-			</div>
-			<div class="about">
-				<h5>About</h5>
-				<p>I'm Yuki. Full Stack Designer I enjoy creating user-centric, delightful and human experiences.</p>
-			</div>
-		</div>
-	</div>
-</div>
-</div>
-<div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
-<div class="card h-100">
+            <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+              <div class="sm:col-span-6">
+               
+                <label for="photo" class="block text-sm font-medium text-gray-700">
+                  Фото профиля
 
+                  <ava-upload></ava-upload>
 
-
-	 <form class="form-horizontal" method="POST" action="{{ route('profile.edit') }}">
-      {{ csrf_field() }}
-    <div class="card-body">
- <div class="form-group{{ $errors->has('user') ? ' has-error' : '' }}">
- 			<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-				<h6 class="mb-2 text-primary">Персональные данные</h6>
-			</div>
-                            
-
-                        <div class="form-group{{ $errors->has('first_name') ? ' has-error' : '' }}">
-                            <label for="first_name" class="col-md-8 control-label">Имя</label>
-
-                            <div class="col-md-8">
-                                <input id="first_name" type="text" class="form-control" name="first_name" value="{{ Request::old('first_name')?:Auth::user()->first_name }}" required>
-
-                                @if ($errors->has('first_name'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('first_name') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        
-                        <div class="form-group{{ $errors->has('last_name') ? ' has-error' : '' }}">
-                            <label for="last_name" class="col-md-8 control-label">Фамилия</label>
-
-                            <div class="col-md-8">
-                                <input id="last_name" type="text" class="form-control" name="last_name" value="{{ Request::old('last_name')?:Auth::user()->last_name }}" required>
-
-                                @if ($errors->has('last_name'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('last_name') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-
-
-                                                 
-
-		<div class="row gutters mt-3">
-			<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-				<div class="text-right">
-                  <button type="submit" class="btn btn-primary">Обновить</button>
-					<button type="button" id="submit" name="submit" class="btn btn-secondary">Назад</button>
-				
-				</div>
-			</div>
-		</div>
-	</div>
-     </form>
-</div>
-</div>
-</div>
-</div>
+                </label>
+                
+              </div>
+              
+              <div class="sm:col-span-6">
+          
+                
+                  
+                <label for="about" class="block text-sm font-medium text-gray-700">
+                  О себе
+                </label>
+                @if($type == 2)
+                <p class="mt-2 text-sm text-gray-500">Напишите коротко о ваших сильных сторонах, важных качествах, какие инструменты и технологии используете.</p>
+                @endif
+                <div class="mt-1">
+                  <textarea id="about" name="about" rows="3" class="w-full px-3 py-2 text-gray-700 border border-indigo-300 focus:border-indigo-500 rounded-lg focus:outline-none"></textarea>
+                </div>
+               
+              </div>
+    
+           
+    
    
+            </div>
+          </div>
+          <form class="form-horizontal" method="POST" action="{{ route('profile.edit') }}">
+            {{ csrf_field() }}
+          <div class="pt-8">
+            <div>
+              <h3 class="text-lg leading-6 font-medium text-gray-900">
+                Личная информация
+              </h3>
+             
+            </div>
+            <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+              <div class="sm:col-span-3">
+                <label for="first_name" class="block text-sm font-medium text-gray-700">
+                  Имя
+                </label>
+                <div class="mt-1">
+                  <input id="first_name" type="text" class="border  py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md focus:outline-none" name="first_name" value="{{old('first_name', Auth::user()->first_name ?? '') }}" required>
+                
+                </div>
+              </div>
+             
+              <div class="sm:col-span-3">
+                <label for="last_name" class="block text-sm font-medium text-gray-700">
+                  Фамилия
+                </label>
+                <div class="mt-1">
+                  <input id="last_name" type="text" class="border  py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md focus:outline-none" name="last_name" value="{{old('last_name', Auth::user()->last_name ?? '') }}" required>
+                
+                </div>
+              </div>
+    
+              <div class="sm:col-span-3">
+                <label for="email" class="block text-sm font-medium text-gray-700">
+                  Email 
+                </label>
+                <div class="mt-1">
+                  <input id="email" type="email" class="border  py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md focus:outline-none" name="email" value="{{old('email', Auth::user()->email ?? '') }}" required>                
+                </div>
+              </div>
+    
+              <div class="sm:col-span-3">
+                <label for="city" class="block text-sm font-medium text-gray-700">
+                  Город
+                </label>
+                <div class="mt-1">
+                  <input id="city" type="text" class="border  py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md focus:outline-none" name="city" value="{{ old('city', Auth::user()->city ?? '')  }}" >                
+                 
+                </div>
+              </div>
+    
+             
+            </div>
+            <div class="pt-5">
+              <div class="flex justify-end">
+                <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                  Сохранить
+                </button>
+         
+              
+              </div>
+            </div>
+          </form>
+          </div>
+    
+     
+        </div>
+    
+      
+    
+          </div>
+        </div>
+      
+          </div>
 @endsection

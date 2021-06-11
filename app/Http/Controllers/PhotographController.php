@@ -59,11 +59,7 @@ class PhotographController extends Controller
         return view('photographer.cabinet.myorders.history', compact('orders'));
     }
 
-    public function info()
-    {
-        return view('photographer.cabinet.myprofile.info.index');
-    }
-    public function service()
+      public function service()
     {
         return view('photographer.cabinet.myprofile.service.index');
     }

@@ -28,24 +28,27 @@ class ProfileController extends Controller
        return view('profile.index', compact('user','type'));
     }
 
-    public function getEdit()
-    {  
-                return view('profile.edit');
+   
+    public function setting()
+    {
+        if(Auth::user()->hasRole('user')){
+            $type = 1;}
+            if(Auth::user()->hasRole('photographer')){
+                $type = 2;}
+        return view('profile.edit',compact('type'));
     }
     public function postEdit(Request $request)
-    {
-        $this->validate($request, [
-            'first_name' => 'alpha|max:50',
-            'last_name' => 'alpha|max:50',
-                   ]);
-
+    {   
         Auth::user()->update([
             'first_name' => $request->input('first_name'),
             'last_name' => $request->input('last_name'),
+            'email' => $request->input('email'),
+            'city' => $request->input('city'),
+
             ]);
 
         return redirect()
-               ->route('profile.edit')
+               ->route('setting')
                ->with('info', 'Профиль успешно обновлен!');
     }
 
