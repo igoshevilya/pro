@@ -36,12 +36,6 @@
  */
 
 /*!
- * vue-infinite-loading v2.4.5
- * (c) 2016-2020 PeachScript
- * MIT License
- */
-
-/*!
  * vue-toastr v2.1.2 
  * (c) 2019 s4l1h
  * Released under the MIT License.
