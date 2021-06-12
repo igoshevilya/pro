@@ -87,7 +87,9 @@
                                     class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
                                     role="menu" aria-orientation="vertical" aria-labelledby="user-menu"
                                     style="display: none;">
-
+                                    <a href="{{ route('profile.index',Auth::user()->user) }}"
+                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                    role="menuitem">{{Auth::user()->getName()}}</a>
                                     <a href="{{ route('setting') }}"
                                         class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                                         role="menuitem">Настройки</a>

@@ -27,8 +27,8 @@ class ProfileController extends Controller
             $type = 2;}
        return view('profile.index', compact('user','type'));
     }
-
-   
+ 
+    
     public function setting()
     {
         if(Auth::user()->hasRole('user')){

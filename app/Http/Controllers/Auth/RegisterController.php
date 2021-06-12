@@ -57,13 +57,7 @@ class RegisterController extends Controller
             'password' => ['required', 'string', 'min:4', 'confirmed'],
         ]);
     }
-    public function messages()
-    {
-        return [
-            'validation.required' => ':attribute - обязательно',
-            'validation.unique' => ':attribute должно быть уникальным',
-        ];
-    }
+    
     /**
      * Create a new user instance after a valid registration.
      *

@@ -23,11 +23,21 @@ class Order extends Model
     {
         return $this->belongsTo(User::class);
     }
+
     public function getUserOrder()
     {
         return $this->user->getName();
     }
     
+    public function client()
+    {
+        return $this->belongsTo(User::class,'user_id', 'id');
+            }
+
+    public function avatar()
+    {
+        return $this->belongsTo(Avatar::class,'user_id', 'user_id');
+    }
 
     public function responses()
     {

@@ -32,6 +32,9 @@
 
         <div class="space-y-6 lg:col-start-1 lg:col-span-2">
             <!-- Description list-->
+            <order-list/>
+
+            
             @foreach ($orders as $order)
                 <section aria-labelledby="applicant-information-title">
                     <div class="bg-white shadow overflow-hidden sm:rounded-lg">

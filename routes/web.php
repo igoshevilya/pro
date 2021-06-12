@@ -20,7 +20,7 @@ Route::group(['prefix' => 'ph'], function() {
                     Route::post('/upload', 'PhotoController@uploadPhotos');
                     Route::put('/update', 'PhotoController@update');
                     Route::put('/update-attr', 'PhotoController@updateAttr');
-                    Route::put('/order', 'PhotoController@order');
+                   // Route::put('/order', 'PhotoController@order');
                     Route::delete('{id}', 'PhotoController@destroy');
                 });
             });
@@ -45,6 +45,7 @@ Route::group(['prefix' => 'ph'], function() {
         //Заказы
         Route::group(['prefix' => 'order'], function() {
             Route::get('/', 'PhotographController@order')->name('order.order');
+            Route::get('/orderlist', 'PhotographController@orderlist');
             Route::get('/show/{id}', 'PhotographController@showorder')->name('ph.order.show');
             Route::post('/response/{id}', 'ResponseController@store')->name('order.storeresponse');
             Route::get('/response/del/{id}', 'ResponseController@destroy')->name('responses.destroy');
@@ -62,12 +63,6 @@ Route::get('user/review/{user}', 'ProfileController@getreview');
 Route::get('/setting', 'ProfileController@setting')->name('setting');
 Route::post('profile/edit', 'ProfileController@postEdit')->name('profile.edit');
 Route::post('setting/avatar', 'ProfileController@avatar');
-
-
-
-
-
-
 Route::get('profile/edit', 'ProfileController@getEdit')->name('profile.edit');
 
 
