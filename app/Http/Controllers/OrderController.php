@@ -19,21 +19,19 @@ class OrderController extends Controller
      */
     public function index()
     {
-            $orders = Auth::user()->orders()->where('status', '=', null)->paginate(10);
+            $orders = Auth::user()->orders()->where('status', '=', null)->orderBy('id', 'desc')->paginate(10);
         return view('client.order.index', compact('orders'));
     }
 
     public function execution()
     {
-        $ordercabinets = Auth::user()->ordercabinet()->where('status', '=', 1)->paginate(10);
-        //dd($ordercabinets);
+        $ordercabinets = Auth::user()->ordercabinet()->where('status', '=', 1)->orderBy('id', 'desc')->paginate(10);
         return view('client.order.execution', compact('ordercabinets'));
     }
     public function history()
     {
-        $orders = Auth::user()->orders()->where('status', '=', 2)->paginate(10);
-       
-        return view('client.order.history', compact('orders'));
+        $ordercabinets = Auth::user()->ordercabinet()->where('status', '=', 2)->orderBy('id', 'desc')->paginate(10);
+        return view('client.order.history', compact('ordercabinets'));
     }
     /**
      * Show the form for creating a new resource.
@@ -72,7 +70,7 @@ class OrderController extends Controller
 
         $order->save();
 
-        return redirect('myorder')->with('success', 'Задание успешно создано!');
+        return redirect()->route('myorder.client')->with('success', 'Задание успешно создано!');
     }
 
     /**
@@ -158,14 +156,17 @@ class OrderController extends Controller
       
     }
 
-    public function taskcompleted($id, $orderId)
+    public function taskcompleted($id)
     {
-        $order = Order::find($orderId);
+        
+        $ordercabinet = OrderCabinet::find($id);     
+        $order = Order::find($ordercabinet->order->id);
+
         $order->status = 2;
         $order->save();
-     
-
-        $ordercabinet = OrderCabinet::find($id);
+        $response = Response::find($ordercabinet->order->responses->id);
+        $response->status = 2;
+        $response->save();
         $ordercabinet->status = 2;
         $ordercabinet->save();
         

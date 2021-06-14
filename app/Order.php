@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Resources\Json\Resource;
 
 class Order extends Model
 {
@@ -24,7 +25,7 @@ class Order extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function getUserOrder()
+       public function getUserOrder()
     {
         return $this->user->getName();
     }

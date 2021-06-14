@@ -17,10 +17,28 @@ class PhotographController extends Controller
 {
     public function index()
     {
-        $orders = Order::orderBy('id', 'desc')->paginate('3');
+        $orders = Order::orderBy('id', 'desc')->paginate(10);
         return view('photographer.cabinet.myorders.index', compact('orders'));
     }
 
+    public function myresponses()
+    {
+        $orders = Response::where('user_id', '=', Auth::id())->where('status', '=', Null)->orderBy('id', 'desc')->paginate(10);
+        return view('photographer.cabinet.myorders.myresponses', compact('orders'));
+    }
+
+    public function execution()
+    {
+        $orders = Response::where('user_id', '=', Auth::id())->where('status', '=', 1)->orderBy('id', 'desc')->paginate(10);
+        return view('photographer.cabinet.myorders.execution', compact('orders'));
+    }
+
+    public function history()
+    {
+        $orders = Response::where('user_id', '=', Auth::id())->where('status', '=', 2)->orderBy('id', 'desc')->paginate(10);
+        return view('photographer.cabinet.myorders.history', compact('orders'));
+    }
+    
     public function show($id)
     {
         $order = Order::find($id);
@@ -30,18 +48,8 @@ class PhotographController extends Controller
 
     public function order()
     {
-        $orders = Order::orderBy('id', 'desc')->paginate('3');
+        $orders = Order::orderBy('id', 'desc')->paginate(10);
         return view('photographer.cabinet.order.index', compact('orders'));
-    }
-
-    public function orderlist( OrderFilter $filters)
-    {
-        $order = Order::with('client')->where('status', '=', null)->filter($filters)->latest()->paginate(10);
-        $order->load('avatar');
-        $order->load('category');
-        //return  $order;
-        //return response()->json($order->toArray());
-        return response()->json($order);
     }
 
     public function showorder($id)
@@ -51,24 +59,15 @@ class PhotographController extends Controller
         return view('photographer.cabinet.order.show', compact('order', 'responses') );
     }
    
-    public function myresponses()
+    public function orderlist( OrderFilter $filters)
     {
-        $orders = Response::where('user_id', '=', Auth::id())->where('status', '=', Null)->orderBy('id', 'desc')->paginate(3);
-        return view('photographer.cabinet.myorders.myresponses', compact('orders'));
-    }
-
-    public function execution()
-    {
-        $orders = Response::where('user_id', '=', Auth::id())->where('status', '=', 1)->orderBy('id', 'desc')->paginate(3);
-        return view('photographer.cabinet.myorders.execution', compact('orders'));
+        $order = Order::with('client')->where('status', '=', null)->filter($filters)->latest()->paginate(10);
+        $order->load('avatar');
+        $order->load('category');
+        return response()->json($order);
     }
 
 
-    public function history()
-    {
-        $orders = Response::where('user_id', '=', Auth::id())->where('status', '=', 2)->orderBy('id', 'desc')->paginate(3);
-        return view('photographer.cabinet.myorders.history', compact('orders'));
-    }
 
       public function service()
     {

@@ -49,7 +49,7 @@ Vue.component('ava-upload', require('./components/profile/AvatarUpload.vue').def
  Vue.component('service-profile', require('./components/profile/serviceprofile.vue').default);
  Vue.component('review-profile', require('./components/profile/review.vue').default);
  Vue.component('reviewclient-profile', require('./components/profile/reviewclient.vue').default);
- Vue.component('order-list', require('./components/order/orderlist.vue').default);
+
  Vue.component('order-listfiltr', require('./components/order/orderlistfiltr.vue').default);
 
  Vue.component('infinite-loading', require('vue-infinite-loading').default);

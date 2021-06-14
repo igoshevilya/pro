@@ -49,15 +49,13 @@ $client = $review-> client->getName();
     {
         $ordercabinet = OrderCabinet::find($id);
         $review = new Review;
-        $review ->order_id = $ordercabinet-> id;
+        $review ->order_id = $ordercabinet->order-> id;
         $review -> photograph_id = $ordercabinet-> photograph_id;
         $review -> client_id = $ordercabinet-> client_id;
         $review -> text = $request->input('text');
         $review -> star = $request->input('rating');
-        $review->save();
-        $ordercabinet->status = 3;
-        $ordercabinet->save();
-        return redirect()->back()->with('success', 'Отзыв оставлен!');
+        $review->save();  
+        return redirect()->back()->with('success', 'Отзыв оставлен.');
 
         //dd($review);
                 
@@ -76,7 +74,7 @@ $client = $review-> client->getName();
 
        // $ordercabinet->status = 3;
        // $ordercabinet->save();
-        return redirect()->back()->with('info', 'Отзыв оставлен!');
+        return redirect()->back()->with('success', 'Отзыв оставлен.');
 
         //dd($review);
                 
