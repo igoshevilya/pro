@@ -58,95 +58,59 @@
 
 
         <div class="space-y-6 lg:col-start-1 lg:col-span-2">
-
-<section v-for="order in orders" :key="order.id" aria-labelledby="applicant-information-title" class="mb-4">
-      
-
-                    <div class="bg-white shadow overflow-hidden sm:rounded-lg">
-                        <div class="px-4 py-5 sm:px-6">
-                            <h3 class="text-lg leading-6 font-medium text-gray-900">
-                              {{ order.title }}
-                            </h3>
-                            <p class="mt-1 max-w-2xl text-sm text-gray-500">
-                             {{ order.category.title }}
-                            </p>
-                        </div>
-
-                        <div class="border-t border-gray-200 px-4 py-5 sm:px-6">
-
-                            <dl class="grid grid-cols-1 gap-x-4 gap-y-2 sm:grid-cols-4">
-                      <div class="sm:col-span-1">        
-                  <div class="flex items-center">
-                <div class="flex-shrink-0">
-                  <a :href=" '../user/'+order.client.user">
-                    <span class="sr-only">{{ order.client.first_name }} {{ order.client.last_name }}</span>
-                   
-                    <img class="h-10 w-10 rounded-full" :src="'../'+(order.avatar ? order.avatar.thumbnail : 'image/noava.svg')"> 
+<div v-for="user in users" :key="user.id" class="shadow rounded-2xl p-4 bg-white dark:bg-gray-800">
+    <div class="flex flex-row items-start gap-4">
+      <a :href="'../user/'+user.user">
+        <img :src="'../'+(user.avatar ? user.avatar.thumbnail : 'image/noava.svg')" class="w-28 h-28 rounded-lg"/>
+        
+                    <span class="sr-only">{{ user.first_name }} {{ user.last_name }}</span>
                    
                   </a>
+        <div class="h-28 w-full flex flex-col justify-between">
+            <div><a :href="'../user/'+user.user">
+                <p class="text-gray-800 dark:text-white text-xl font-medium">
+                    {{ user.first_name }} {{ user.last_name }}
+                           
+                </p> </a>
+                <p v-if="user.userprofile" class="text-gray-400 text-xs">
+                    {{ user.userprofile.special }} 
+                </p>
+            </div>
+            <div class="rounded-lg bg-blue-100 dark:bg-white p-2 w-full">
+                <div class="flex items-center justify-between text-xs text-gray-400 dark:text-black">
+                    <p  class="flex flex-col">
+                        Город
+                        <span class="text-black dark:text-indigo-500 font-bold">
+                            {{ user.city ? user.city : 'Не указан' }}
+                        </span>
+                    </p>
+                    <p class="flex flex-col">
+                        Выполнено заданий
+                        <span class="text-black dark:text-indigo-500 font-bold">
+                            455
+                        </span>
+                    </p>
+                    <p class="flex flex-col">
+                        Рейтинг
+                        <span class="text-black dark:text-indigo-500 font-bold">
+                            9.3
+                        </span>
+                    </p>
                 </div>
-                <div class="ml-3">
-                  <p class="text-sm font-medium text-gray-900">
-                    <a :href="'../user/'+order.client.user" class="hover:underline">
-                      {{ order.client.first_name }} {{ order.client.last_name }}
-                    </a>
-                  </p>
-                  <div class="flex space-x-1 text-sm text-gray-500">
-                    <time datetime="2020-03-16">
-                      {{ order.created_at }}
-                    </time>
-                  
-                  </div>
-                </div>
-              </div>
-              </div>
-                                <div class="sm:col-span-1">
-                                    <dt class="text-sm font-medium text-gray-500">
-                                        Дата съёмки
-                                    </dt>
-                                    <dd class="mt-1 text-sm text-gray-900">
-                                      {{ order.date }}
-                                    </dd>
-                                </div>
-                                <div class="sm:col-span-1">
-                                    <dt class="text-sm font-medium text-gray-500">
-                                        Локация
-                                    </dt>
-                                    <dd class="mt-1 text-sm text-gray-900">
-                                      {{ order.location }}
-                                    </dd>
-                                </div>
-                                <div class="sm:col-span-1">
-                                    <dt class="text-sm font-medium text-gray-500">
-                                        Стоимость съёмки
-                                    </dt>
-                                    <dd class="mt-1 text-sm text-gray-900">
-                                      {{ order.price }} ₽
-                                    </dd>
-                                </div>
-                                <div class="sm:col-span-3">
-                                    <dt class="text-sm font-medium text-gray-500">
-                                        Описание
-                                    </dt>
-                                    <dd class="mt-1 text-sm text-gray-900 truncate ">
-                                      {{ order.description }}
-                                    </dd>
-                                </div>
-                                <div class="mt-4 flex justify-end sm:col-span-1">
-                                  <a :href="`order/show/${order.id}/`"><button type="button"
-                                      class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm">
-                                      Подробнее
-                                  </button></a>
-                              </div>
-                            </dl>
-                         
-                        </div>
+            </div>
+        </div>
+    </div>
+    <div class="flex items-center justify-between gap-4 mt-6">
+        <button type="button" class="w-1/2 px-4 py-2 text-base border rounded-lg text-grey-500 bg-white hover:bg-gray-200 ">
+            Chat
+        </button>
+        <button type="button" class="w-1/2 px-4 py-2 text-base border rounded-lg text-white bg-indigo-500 hover:bg-indigo-700 ">
+            Add friend
+        </button>
+    </div>
+</div>
 
-
-
-                    </div>
-                </section>
-<infinite-loading spinner="spiral" :identifier="infiniteId" @infinite="infiniteHandler"><span slot="no-more">Заданий больше нет</span></infinite-loading>
+<infinite-loading spinner="spiral" :identifier="infiniteId" @infinite="infiniteHandler"><span slot="no-more">Фотографов больше нет</span></infinite-loading>
 
 
            </div>
@@ -167,25 +131,24 @@ export default {
       pricemax: null,
       location: null,  
       date: null,  
-      orders: [],
+      users: [],
       infiniteId: +new Date(),
     };
   },
   components: {TheMask, InfiniteLoading},
   methods: {
       reset() {
-                
                 this.title = null;
                 this.pricemin = null;
                 this.pricemax = null;
                 this.location = null;
-                this.date = null;                
+                this.date = null;
                 this.changeType();
             },
     //GET ALL services
     infiniteHandler($state) {
       axios
-        .get("order/orderlist", {
+        .get("photograph", {
           params: {
             page: this.page,
             title: this.title,
@@ -201,7 +164,7 @@ export default {
 
 if (data.data.length) {
           this.page += 1;
-          this.orders.push(...data.data);
+          this.users.push(...data.data);
           $state.loaded();
             
         }

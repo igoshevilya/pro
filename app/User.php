@@ -74,4 +74,5 @@ class User extends Authenticatable
     public function review() {
         return $this->hasMany(ClientReview::class,'client_id','id');
     }
+  
 }

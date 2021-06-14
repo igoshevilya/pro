@@ -17,11 +17,8 @@ Route::group(['prefix' => 'ph'], function() {
                 Route::delete('{id}', 'GalleryController@destroy');
                 //Фото
                 Route::group(['prefix' => 'photo'], function() {
-                    Route::post('/upload', 'PhotoController@uploadPhotos');
-                    Route::put('/update', 'PhotoController@update');
-                    Route::put('/update-attr', 'PhotoController@updateAttr');
-                   // Route::put('/order', 'PhotoController@order');
-                    Route::delete('{id}', 'PhotoController@destroy');
+                    Route::post('/upload', 'GalleryController@uploadPhotos');
+                     Route::delete('{id}', 'GalleryController@destroyphoto');
                 });
             });
             
@@ -79,8 +76,9 @@ Route::post('order/store', 'OrderController@store')->name('order.store');
 Route::get('order/assigned/{orderId}={responseId}', 'OrderController@assigned')->name('order.assigned');
 Route::get('order/cabinet/{id}', 'OrderController@cabinet')->name('client.order.cabinet');
 Route::get('order/cabinet/done/{id}', 'OrderController@taskcompleted')->name('order.done');
-
-
+//Каталог фотографов
+Route::get('/catalog', 'HomeController@catalog')->name('catalog');
+Route::get('/photograph', 'HomeController@PhotographList');
 
 
 Route::get('/', 'HomeController@index')->name('home');
@@ -94,15 +92,11 @@ Route::group(['middleware' => ['role:admin']], function () {});
 
 
 Route::resource('/response', 'ResponseController');
-
 Route::resource('/reviews', 'ReviewController');
-Route::resource('cabinet.reviews', 'ReviewController');
+
 //Route::post('order/{orderId}/response', 'OrderController@addResponse')->name('order.addresponse');
 
 
 Route::resource('/category', 'CategoryController');
 
 
-
-
-Route::get('/home', 'HomeController@index')->name('home');

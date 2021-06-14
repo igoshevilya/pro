@@ -33,7 +33,7 @@
                             <a href="{{route('myorder.client')}}" class="{{ request()->is('myorder/published*') ? 'border-indigo-500 text-gray-900' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700' }}    inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
                               Мои задания
                             </a>
-                            <a href="{{route('order.create')}}" class="{{ request()->is('myorder/published*') ? 'border-indigo-500 text-gray-900' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700' }}    inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                            <a href="{{route('catalog')}}" class="{{ request()->is('catalog*') ? 'border-indigo-500 text-gray-900' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700' }}    inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
                               Каталог фотографов
                             </a>
                             @endrole 
