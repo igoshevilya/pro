@@ -1,4 +1,4 @@
-<header class="mb-5">
+<header class="mb-4">
     <nav x-data="{ open: false }" class="bg-white shadow">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
@@ -27,13 +27,13 @@
                             </a>                            
                             @endrole 
                             @role('user')
-                            <a href="{{route('order.create')}}" class="border-indigo-500 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                            <a href="{{route('order.create')}}" class="{{ request()->is('order/create*') ? 'border-indigo-500 text-gray-900' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700' }}    inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
                               Создать задание
                             </a> 
-                            <a href="{{route('myorder.client')}}" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                            <a href="{{route('myorder.client')}}" class="{{ request()->is('myorder/published*') ? 'border-indigo-500 text-gray-900' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700' }}    inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
                               Мои задания
                             </a>
-                            <a href="{{route('order.create')}}" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                            <a href="{{route('order.create')}}" class="{{ request()->is('myorder/published*') ? 'border-indigo-500 text-gray-900' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700' }}    inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
                               Каталог фотографов
                             </a>
                             @endrole 
@@ -192,7 +192,7 @@ Heroicon name: outline/x" x-state:on="Menu open" x-state:off="Menu closed" class
                         <div class="flex-shrink-0">
                             @if (Auth::user()->userprofile)
                                 <img class="h-8 w-8 rounded-full"
-                                    src="{{ asset('/') . Auth::user()->userprofile->thumbnail }}" alt="">
+                                    src="{{ asset('/') . Auth::user()->avatar->thumbnail }}" alt="">
                             @else
 
                                 <svg class="h-8 w-8 text-indigo-700" xmlns="http://www.w3.org/2000/svg"

@@ -64,9 +64,7 @@ class ResponseController extends Controller
     */
     public function edit($id)
     { 
-        /**
-        return view('responses.edit',['response'=>$response,]);
-         */
+      
     }
 
     /**
@@ -78,7 +76,13 @@ class ResponseController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $data = Response::find($id);
+        $data->description=request('description');
+        $data->save();
+        return redirect()->back()->with('success', 'Отклик отредактирован');
+   
+        
     }
 
     /**

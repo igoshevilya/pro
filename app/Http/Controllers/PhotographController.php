@@ -12,6 +12,7 @@ use App\Response;
 use App\OrderCabinet;
 use App\Service;
 use App\Gallery;
+use App\OrderFilter;
 class PhotographController extends Controller
 {
     public function index()
@@ -32,20 +33,22 @@ class PhotographController extends Controller
         $orders = Order::orderBy('id', 'desc')->paginate('3');
         return view('photographer.cabinet.order.index', compact('orders'));
     }
-    public function orderlist()
+
+    public function orderlist( OrderFilter $filters)
     {
-        //return Order::orderBy('id', 'desc')->paginate('3');  
-        $order = Order::all();
-        $order->load('client');
+        $order = Order::with('client')->where('status', '=', null)->filter($filters)->latest()->paginate(10);
         $order->load('avatar');
-        return $order;          
+        $order->load('category');
+        //return  $order;
+        //return response()->json($order->toArray());
+        return response()->json($order);
     }
 
     public function showorder($id)
     {
         $order = Order::find($id);
-        $responses = $order->responses()->where('user_id', '=', Auth::id())->get();
-        return view('photographer.cabinet.order.show', ['order' => $order]);
+        $responses = $order->responses()->where('user_id', '=', Auth::id())->first();
+        return view('photographer.cabinet.order.show', compact('order', 'responses') );
     }
    
     public function myresponses()

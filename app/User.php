@@ -62,6 +62,15 @@ class User extends Authenticatable
     public function service() {
         return $this->hasMany(Service::class);
     }
+    public function orders() {
+        return $this->hasMany(Order::class);
+    }
+    public function ordercabinet() {
+        return $this->hasMany(Ordercabinet::class,'client_id', 'id');
+    }
+       public function response() {
+        return $this->hasMany(Response::class, 'user_id', 'id');
+    }
     public function review() {
         return $this->hasMany(ClientReview::class,'client_id','id');
     }

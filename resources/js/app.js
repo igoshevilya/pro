@@ -21,7 +21,8 @@ window.Vue = require('vue');
 import Toastr from "vue-toastr";
 Vue.use(Toastr);
 
-
+import VueTheMask from 'vue-the-mask'
+Vue.use(VueTheMask)
 
 //Vue.component('infinite', 	require('vue-infinite-loading'));
 //Vue.component('example-component', require('./components/ExampleComponent.vue').default);
@@ -49,9 +50,9 @@ Vue.component('ava-upload', require('./components/profile/AvatarUpload.vue').def
  Vue.component('review-profile', require('./components/profile/review.vue').default);
  Vue.component('reviewclient-profile', require('./components/profile/reviewclient.vue').default);
  Vue.component('order-list', require('./components/order/orderlist.vue').default);
+ Vue.component('order-listfiltr', require('./components/order/orderlistfiltr.vue').default);
 
-
-
+ Vue.component('infinite-loading', require('vue-infinite-loading').default);
 
 
 

@@ -3,12 +3,14 @@
 
 
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-      
-        <div class="max-w-7xl mx-auto bg-white py-12 px-4 sm:px-6 lg:px-8">
+        <p class="my-2 text-2xl leading-8 font-bold tracking-tight text-gray-900 sm:text-3xl">
+          Редактирование профиля
+      </p>
+        <div class="max-w-7xl mt-6 rounded-lg mx-auto bg-white py-12 px-4 sm:px-6 lg:px-8">
           <div class="max-w-3xl mx-auto">
             
       
-        <div class="space-y-8 divide-y divide-gray-200">
+        <div class="space-y-8  divide-y divide-gray-200">
           <div>
             <div>
               <h3 class="text-lg leading-6 font-medium text-gray-900">

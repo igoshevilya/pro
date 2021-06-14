@@ -19,14 +19,22 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
-        $orders = Order::orderBy('id', 'desc')->paginate('3');
- 
-        $responses = Response::all();
-       
-        return view('client.order.index', compact('categories','orders','responses'));
+            $orders = Auth::user()->orders()->where('status', '=', null)->paginate(10);
+        return view('client.order.index', compact('orders'));
     }
 
+    public function execution()
+    {
+        $ordercabinets = Auth::user()->ordercabinet()->where('status', '=', 1)->paginate(10);
+        //dd($ordercabinets);
+        return view('client.order.execution', compact('ordercabinets'));
+    }
+    public function history()
+    {
+        $orders = Auth::user()->orders()->where('status', '=', 2)->paginate(10);
+       
+        return view('client.order.history', compact('orders'));
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -150,9 +158,13 @@ class OrderController extends Controller
       
     }
 
-    public function taskcompleted($id)
+    public function taskcompleted($id, $orderId)
     {
+        $order = Order::find($orderId);
+        $order->status = 2;
+        $order->save();
      
+
         $ordercabinet = OrderCabinet::find($id);
         $ordercabinet->status = 2;
         $ordercabinet->save();

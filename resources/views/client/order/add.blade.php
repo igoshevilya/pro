@@ -10,15 +10,6 @@
     <form class="form-horizontal" method="POST" action="{{ route('order.store') }}">
         {{ csrf_field() }}
 
-
-
-
-
-
-
-
-
-        
         <div class="">
         <div class="mb-1 col-md-9">
             <label for="title" class="block text-sm font-medium text-gray-700">Название задания</label>
@@ -64,8 +55,6 @@
                 <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                     Создать задание
                   </button>
-             
-
             </div>
         </div>
     </form>

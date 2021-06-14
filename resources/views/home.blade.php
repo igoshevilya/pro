@@ -4,7 +4,7 @@
 
 
 
-<div class="pt-10  sm:pt-16 lg:pt-8 lg:pb-14 lg:overflow-hidden">
+<div class="pt-10 mt-20  sm:pt-16 lg:pt-8 lg:pb-14 ">
   <div class="mx-auto max-w-7xl lg:px-8">
     <div class="lg:grid lg:grid-cols-2 lg:gap-8">
       <div class="mt-20">

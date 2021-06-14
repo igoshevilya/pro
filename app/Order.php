@@ -57,5 +57,8 @@ class Order extends Model
         
     }
     
-
+    public function scopeFilter($builder, $filters)
+    {
+        return $filters->apply($builder);
+    }
 }

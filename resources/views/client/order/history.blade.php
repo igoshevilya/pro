@@ -32,7 +32,7 @@
         <ul class="divide-y divide-gray-200">
           @foreach ($orders as $order)
             <li>
-              <a href="{{route('order.show', $order->id )}}" class="block hover:bg-gray-50">
+              <a href="{{route('client.order.cabinet', $order->id )}}" class="block hover:bg-gray-50">
                 <div class="px-4 py-4 sm:px-6">
                   <div class="flex items-center justify-between">
                     <p class="text-sm font-medium text-indigo-600 truncate">
@@ -54,7 +54,7 @@
                                          
                                             Дата съёмки:
                                             <!-- space -->
-                                            <time>&nbsp{{ $order->date }}</time>
+                                            <time>&nbsp{{ $order->getCategoryOrder() }}</time>
                                           </p>
                                        
                       <p class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 sm:ml-6">

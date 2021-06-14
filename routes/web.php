@@ -48,6 +48,7 @@ Route::group(['prefix' => 'ph'], function() {
             Route::get('/orderlist', 'PhotographController@orderlist');
             Route::get('/show/{id}', 'PhotographController@showorder')->name('ph.order.show');
             Route::post('/response/{id}', 'ResponseController@store')->name('order.storeresponse');
+            Route::post('/response/update/{id}', 'ResponseController@update')->name('order.updateresponse');
             Route::get('/response/del/{id}', 'ResponseController@destroy')->name('responses.destroy');
         });
 });
@@ -68,15 +69,10 @@ Route::get('profile/edit', 'ProfileController@getEdit')->name('profile.edit');
 
 
 
-
-
-
-
-
-
-
-//Route::resource('/order', 'OrderController');
-Route::get('myorder', 'OrderController@index')->name('myorder.client');
+//Клиент
+Route::get('myorder/published', 'OrderController@index')->name('myorder.client');
+Route::get('myorder/execution', 'OrderController@execution')->name('myorder.execution.client');
+Route::get('myorder/history', 'OrderController@history')->name('myorder.history.client');
 Route::get('myorder/show/{id}', 'OrderController@show')->name('order.show');
 Route::get('order/create', 'OrderController@create')->name('order.create');
 Route::post('order/store', 'OrderController@store')->name('order.store');
@@ -107,6 +103,6 @@ Route::resource('cabinet.reviews', 'ReviewController');
 Route::resource('/category', 'CategoryController');
 
 
-Auth::routes();
+
 
 Route::get('/home', 'HomeController@index')->name('home');
