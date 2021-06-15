@@ -199,10 +199,6 @@
                            this.modalDelete.show = false;
                             this.getGalleries();                 
                         
-                       
-                       
-                        
-                       /*  this.toggleCreateGallery(); */
                     })
                        
             },

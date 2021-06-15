@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'user', 'email','first_name', 'last_name','city', 'password',
+        'user', 'email','first_name', 'last_name','city', 'password','dr', 'phone',
     ];
 
     /**
@@ -73,6 +73,29 @@ class User extends Authenticatable
     }
     public function review() {
         return $this->hasMany(ClientReview::class,'client_id','id');
+        
+    }
+    public function reviews() {
+        return $this->hasMany(Review::class,'photograph_id','id');
+        
+    }
+    protected $appends = ['rating_count','count_order','phone_user'];
+
+    public function getRatingCountAttribute()
+    {
+        return $this->reviews->avg('star');
+     
     }
   
+    public function getCountOrderAttribute()
+    {
+       return $this->response->where("status", "=", 2)->count();
+    }
+
+    public function getPhoneUserAttribute()
+    
+    {
+       // return $this->response->where("status", "=", 2)->count();
+       return $this->userprofile;
+    }
 }

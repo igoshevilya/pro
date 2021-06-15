@@ -137,27 +137,25 @@
                         {{ csrf_field() }}
                       <div class="mt-2">
                        <textarea class="w-full px-3 py-2 text-gray-700 border border-indigo-300 focus:border-indigo-500 rounded-lg focus:outline-none" rows="4"  name="text" value="{{ old('text') }}" placeholder="Напишите отзыв" required></textarea>
-                    <div class="mt-2 flex justify-end">
-                        <div class="rating_block">
-                            <input name="rating" value="5" id="rating_5" type="radio" />
-                            <label for="rating_5" class="label_rating"></label>
-
-                            <input name="rating" value="4" id="rating_4" type="radio" />
-                            <label for="rating_4" class="label_rating"></label>
-
-                            <input name="rating" value="3" id="rating_3" type="radio" />
-                            <label for="rating_3" class="label_rating"></label>
-
-                            <input name="rating" value="2" id="rating_2" type="radio" />
-                            <label for="rating_2" class="label_rating"></label>
-
-                            <input name="rating" value="1" id="rating_1" type="radio" />
-                            <label for="rating_1" class="label_rating"></label>
-                        </div>
-                        <button type="submit" class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm">
+                    <div class="mt-2 flex mr-auto">
+                       
+                        <button type="submit" class=" place-self-end inline-flex items-center px-4 py-2 border border-transparent shadow-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm">
                             Отправить
                           </button>
-                    </div>
+                       
+                        <div class="rating-area">
+                            <input type="radio" id="star-5" name="rating" value="5">
+                            <label for="star-5" title="Оценка «5»"></label>	
+                            <input type="radio" id="star-4" name="rating" value="4">
+                            <label for="star-4" title="Оценка «4»"></label>    
+                            <input type="radio" id="star-3" name="rating" value="3">
+                            <label for="star-3" title="Оценка «3»"></label>  
+                            <input type="radio" id="star-2" name="rating" value="2">
+                            <label for="star-2" title="Оценка «2»"></label>    
+                            <input type="radio" id="star-1" name="rating" value="1">
+                            <label for="star-1" title="Оценка «1»"></label>
+                        </div>
+                       </div>
                   </div></form>
                 </div>
                 @endif
@@ -170,3 +168,44 @@
        
 
     @endsection
+    <style>
+        .rating-area {
+overflow: hidden;
+margin: 0.4rem 0 0 0.5rem ;
+}
+.rating-area:not(:checked) > input {
+display: none;
+}
+.rating-area:not(:checked) > label {
+float: right;
+width: 24px;
+padding: 0;
+cursor: pointer;
+font-size: 24px;
+line-height: 24px;
+color: lightgrey;
+
+}
+.rating-area:not(:checked) > label:before {
+content: '★';
+}
+.rating-area > input:checked ~ label {
+color: gold;
+
+}
+.rating-area:not(:checked) > label:hover,
+.rating-area:not(:checked) > label:hover ~ label {
+color: gold;
+}
+.rating-area > input:checked + label:hover,
+.rating-area > input:checked + label:hover ~ label,
+.rating-area > input:checked ~ label:hover,
+.rating-area > input:checked ~ label:hover ~ label,
+.rating-area > label:hover ~ input:checked ~ label {
+color: gold;
+text-shadow: 1px 1px goldenrod;
+}
+.rate-area > label:active {
+position: relative;
+}
+        </style>

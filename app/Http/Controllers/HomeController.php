@@ -40,6 +40,8 @@ class HomeController extends Controller
    $user = User::role('photographer')->paginate(3);
    $user->load('avatar');
    $user->load('userprofile');
-        return response()->json($user);
+   $user->load('photos');
+   $user->load('reviews');
+           return response()->json($user);
     }
 }

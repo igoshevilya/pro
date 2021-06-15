@@ -12,9 +12,11 @@ use App\ClientReview;
 use Illuminate\Http\Request;
 use App\Avatar;
 use App\Userprofile;
-
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 class ProfileController extends Controller
 {
+   
     public function getProfile($user)
     {
         $user = User::where('user',$user)->first();
@@ -38,18 +40,29 @@ class ProfileController extends Controller
         return view('profile.edit',compact('type'));
     }
     public function postEdit(Request $request)
-    {   
+    {   $user =Auth::id();
+        $validatedData = $request->validate([ 
+            'first_name' => ['required','string','min:2', 'max:20'],
+            'last_name' => ['required', 'string', 'min:2', 'max:20'],
+            'email' => 'required|email|unique:users,email,'.$user, 
+            'phone' => ['min:16','max:16',],
+            'city' => ['string', 'min:3', ],
+            'dr' => ['min:10','max:10',],
+        ]);
+
+
         Auth::user()->update([
             'first_name' => $request->input('first_name'),
             'last_name' => $request->input('last_name'),
             'email' => $request->input('email'),
             'city' => $request->input('city'),
-
+            'dr' => $request->input('dr'),
+            'phone' => $request->input('phone'),
             ]);
 
         return redirect()
                ->route('setting')
-               ->with('info', 'Профиль успешно обновлен!');
+               ->with('success', 'Профиль успешно обновлен!');
     }
 
     public function avatar(Request $request)

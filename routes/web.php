@@ -93,7 +93,7 @@ Route::group(['middleware' => ['role:admin']], function () {});
 
 Route::resource('/response', 'ResponseController');
 Route::resource('/reviews', 'ReviewController');
-
+Route::resource('cabinet.reviews', 'ReviewController');
 //Route::post('order/{orderId}/response', 'OrderController@addResponse')->name('order.addresponse');
 
 

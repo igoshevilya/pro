@@ -38,7 +38,7 @@
 
 
                    <div class="grid lg:grid-cols-1 mt-2 grid-cols-2 gap-2 lg:place-items-center">
-                    @if(!empty($user->userprofile->phone))
+                    @if(!empty($user->phone))
                     <div class="items-center flex flex-grow-0">
                             
                         <span class="font-medium px-4 py-2 flex  items-center rounded-full  bg-indigo-500 text-white border border-indigo-500 undefined ">
@@ -49,7 +49,7 @@
                                       style="fill: none; stroke: #ffffff; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.5;">
                                   </path>
                               </svg>
-                              {{$user->userprofile->phone}}                              
+                              {{$user->phone}}                              
                             </span>
     
                             

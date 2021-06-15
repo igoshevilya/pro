@@ -62,12 +62,6 @@ class OrderController extends Controller
         $order->location = $request->input('location');
         $order->price = $request->input('price');
         $order->date = $request->input('date');
-       /**  $order->status = $request->input('status');
-          */
-
-
-
-
         $order->save();
 
         return redirect()->route('myorder.client')->with('success', 'Задание успешно создано!');
@@ -141,7 +135,7 @@ class OrderController extends Controller
         $ordercabinet->status = 1;
         $ordercabinet->save();
     
-        return redirect()->route('client.order.cabinet', ['id' => $ordercabinet->id])->with('success', 'Исполнитель выбран!');
+        return redirect()->route('client.order.cabinet', ['id' => $ordercabinet->id])->with('success', 'Исполнитель выбран');
     }
 
     public function cabinet($id)
@@ -170,7 +164,7 @@ class OrderController extends Controller
         $ordercabinet->status = 2;
         $ordercabinet->save();
         
-        return back()->with('success', 'Задание подтверждено!');
+        return redirect()->route('client.order.cabinet', ['id' => $ordercabinet->id])->with('success', 'Задание завершено, можете оставить отзыв');
       
     }
     

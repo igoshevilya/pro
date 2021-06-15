@@ -156,6 +156,7 @@
 </template>
 
 <script>
+
 import InfiniteLoading from 'vue-infinite-loading';
 import {TheMask} from 'vue-the-mask'
 export default {  
@@ -225,3 +226,6 @@ else {
   },
 };
 </script>
+<style>
+
+</style>
