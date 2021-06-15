@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\OrderFilter;
+
 use App\Order;
 use App\User;
+use App\UserFilter;
 class HomeController extends Controller
 {
     /**
@@ -33,15 +34,18 @@ class HomeController extends Controller
         return view('client.catalog.index');
     }
 
-    public function PhotographList( OrderFilter $filters)
+    public function PhotographList(UserFilter $filters)
     {
 
         //$user = User::whereHas('roles', 'photographer')->paginate(3);
-   $user = User::role('photographer')->paginate(3);
+        $user = User::role('photographer')->filter($filters)->paginate(3);
+   //$user = User::all()->filter($filters)->paginate(3);
    $user->load('avatar');
    $user->load('userprofile');
    $user->load('photos');
    $user->load('reviews');
-           return response()->json($user);
+    return response()->json($user);
     }
+
+
 }

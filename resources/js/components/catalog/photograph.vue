@@ -13,35 +13,19 @@
               <form class="mt-4">
                     <div class="">
                       <label class="text-sm  text-gray-700 tracking-wide">
-					Название
+					Имя
 				</label>
-                        <input  v-model="title" type="text" class="border  py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md focus:outline-none" placeholder="Название">
+                        <input  v-model="name" type="text" class="border  py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md focus:outline-none" placeholder="Название">
                     </div>
 
                     <div class="mt-3">
                       <label class="text-sm  text-gray-700 tracking-wide">
-					Стоимость
-          
+					Город
 				</label>
-
-        <div class="md:flex flex-row md:space-x-2 w-full text-xs ">
-                        <span class="self-end text-sm  text-gray-700">от</span><input v-model="pricemin" type="number" class="border py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md focus:outline-none" placeholder="1000">
-                         <span class="self-end text-sm  text-gray-700">до</span><input  v-model="pricemax" type="number" class="border py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md focus:outline-none" placeholder="1000">
-                    </div></div>
-
-                    <div class="mt-3">
-                      <label class="text-sm  text-gray-700 tracking-wide">
-					Локация
-				</label>
-                        <input v-model="location" type="text" class="border  py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md focus:outline-none" placeholder="Симферополь">
+                        <input v-model="city" type="text" class="border  py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md focus:outline-none" placeholder="Симферополь">
                     </div>
 
-                <div class="mt-3">
-                      <label class="text-sm  text-gray-700 tracking-wide">
-					Дата съёмки
-				</label>
-                        <input v-model="date" v-mask="'####-##-##'" type="text" class="border  py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md focus:outline-none" placeholder="2021-05-04">
-                    </div>
+               
                     <div class="mt-3 flex justify-between">
                         <button type="submit"  @click.prevent="changeType" class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none sm:text-sm">
                             
@@ -170,11 +154,8 @@ export default {
   data() {
     return {  
       page: 1,  
-      title: null,
-      pricemin: null,
-      pricemax: null,
-      location: null,  
-      date: null,  
+      name: null,
+      city: null,
       users: [],
       photos: [],
       infiniteId: +new Date(),
@@ -209,11 +190,9 @@ export default {
             },
        
       reset() {
-                this.title = null;
-                this.pricemin = null;
-                this.pricemax = null;
-                this.location = null;
-                this.date = null;
+                this.name = null;
+                this.city = null;
+       
                 this.changeType();
             },
     //GET ALL services
@@ -222,11 +201,9 @@ export default {
         .get("photograph", {
           params: {
             page: this.page,
-            title: this.title,
-            pricemin: this.pricemin,
-            pricemax: this.pricemax,
-            location: this.location,
-            date: this.date,
+            name: this.name,
+            city: this.city,
+        
             
            
           },
@@ -249,7 +226,7 @@ else {
     },
     changeType() {
       this.page = 1;
-      this.orders = [];
+      this.users = [];
       this.infiniteId += 1;
     },
   },

@@ -1,7 +1,7 @@
 <?php
 
 namespace App;
-
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
@@ -95,7 +95,10 @@ class User extends Authenticatable
     public function getPhoneUserAttribute()
     
     {
-       // return $this->response->where("status", "=", 2)->count();
-       return $this->userprofile;
+           return $this->userprofile;
+    }
+    public function scopeFilter($builder, $filters)
+    {
+        return $filters->apply($builder);
     }
 }

@@ -2073,22 +2073,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -2097,11 +2081,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
   data: function data() {
     return {
       page: 1,
-      title: null,
-      pricemin: null,
-      pricemax: null,
-      location: null,
-      date: null,
+      name: null,
+      city: null,
       users: [],
       photos: [],
       infiniteId: +new Date(),
@@ -2140,11 +2121,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       this.selectedPhoto = photo;
     },
     reset: function reset() {
-      this.title = null;
-      this.pricemin = null;
-      this.pricemax = null;
-      this.location = null;
-      this.date = null;
+      this.name = null;
+      this.city = null;
       this.changeType();
     },
     //GET ALL services
@@ -2154,11 +2132,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       axios.get("photograph", {
         params: {
           page: this.page,
-          title: this.title,
-          pricemin: this.pricemin,
-          pricemax: this.pricemax,
-          location: this.location,
-          date: this.date
+          name: this.name,
+          city: this.city
         }
       }).then(function (_ref) {
         var data = _ref.data;
@@ -2180,7 +2155,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     },
     changeType: function changeType() {
       this.page = 1;
-      this.orders = [];
+      this.users = [];
       this.infiniteId += 1;
     }
   },
@@ -41850,7 +41825,7 @@ var render = function() {
                           {
                             staticClass: "text-sm  text-gray-700 tracking-wide"
                           },
-                          [_vm._v("\n\t\t\t\t\tНазвание\n\t\t\t\t")]
+                          [_vm._v("\n\t\t\t\t\tИмя\n\t\t\t\t")]
                         ),
                         _vm._v(" "),
                         _c("input", {
@@ -41858,20 +41833,20 @@ var render = function() {
                             {
                               name: "model",
                               rawName: "v-model",
-                              value: _vm.title,
-                              expression: "title"
+                              value: _vm.name,
+                              expression: "name"
                             }
                           ],
                           staticClass:
                             "border  py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md focus:outline-none",
                           attrs: { type: "text", placeholder: "Название" },
-                          domProps: { value: _vm.title },
+                          domProps: { value: _vm.name },
                           on: {
                             input: function($event) {
                               if ($event.target.composing) {
                                 return
                               }
-                              _vm.title = $event.target.value
+                              _vm.name = $event.target.value
                             }
                           }
                         })
@@ -41883,90 +41858,7 @@ var render = function() {
                           {
                             staticClass: "text-sm  text-gray-700 tracking-wide"
                           },
-                          [
-                            _vm._v(
-                              "\n\t\t\t\t\tСтоимость\n          \n\t\t\t\t"
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          {
-                            staticClass:
-                              "md:flex flex-row md:space-x-2 w-full text-xs "
-                          },
-                          [
-                            _c(
-                              "span",
-                              {
-                                staticClass: "self-end text-sm  text-gray-700"
-                              },
-                              [_vm._v("от")]
-                            ),
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.pricemin,
-                                  expression: "pricemin"
-                                }
-                              ],
-                              staticClass:
-                                "border py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md focus:outline-none",
-                              attrs: { type: "number", placeholder: "1000" },
-                              domProps: { value: _vm.pricemin },
-                              on: {
-                                input: function($event) {
-                                  if ($event.target.composing) {
-                                    return
-                                  }
-                                  _vm.pricemin = $event.target.value
-                                }
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c(
-                              "span",
-                              {
-                                staticClass: "self-end text-sm  text-gray-700"
-                              },
-                              [_vm._v("до")]
-                            ),
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.pricemax,
-                                  expression: "pricemax"
-                                }
-                              ],
-                              staticClass:
-                                "border py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md focus:outline-none",
-                              attrs: { type: "number", placeholder: "1000" },
-                              domProps: { value: _vm.pricemax },
-                              on: {
-                                input: function($event) {
-                                  if ($event.target.composing) {
-                                    return
-                                  }
-                                  _vm.pricemax = $event.target.value
-                                }
-                              }
-                            })
-                          ]
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "mt-3" }, [
-                        _c(
-                          "label",
-                          {
-                            staticClass: "text-sm  text-gray-700 tracking-wide"
-                          },
-                          [_vm._v("\n\t\t\t\t\tЛокация\n\t\t\t\t")]
+                          [_vm._v("\n\t\t\t\t\tГород\n\t\t\t\t")]
                         ),
                         _vm._v(" "),
                         _c("input", {
@@ -41974,59 +41866,20 @@ var render = function() {
                             {
                               name: "model",
                               rawName: "v-model",
-                              value: _vm.location,
-                              expression: "location"
+                              value: _vm.city,
+                              expression: "city"
                             }
                           ],
                           staticClass:
                             "border  py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md focus:outline-none",
                           attrs: { type: "text", placeholder: "Симферополь" },
-                          domProps: { value: _vm.location },
+                          domProps: { value: _vm.city },
                           on: {
                             input: function($event) {
                               if ($event.target.composing) {
                                 return
                               }
-                              _vm.location = $event.target.value
-                            }
-                          }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "mt-3" }, [
-                        _c(
-                          "label",
-                          {
-                            staticClass: "text-sm  text-gray-700 tracking-wide"
-                          },
-                          [_vm._v("\n\t\t\t\t\tДата съёмки\n\t\t\t\t")]
-                        ),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.date,
-                              expression: "date"
-                            },
-                            {
-                              name: "mask",
-                              rawName: "v-mask",
-                              value: "####-##-##",
-                              expression: "'####-##-##'"
-                            }
-                          ],
-                          staticClass:
-                            "border  py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md focus:outline-none",
-                          attrs: { type: "text", placeholder: "2021-05-04" },
-                          domProps: { value: _vm.date },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.date = $event.target.value
+                              _vm.city = $event.target.value
                             }
                           }
                         })
