@@ -190,7 +190,7 @@ Heroicon name: outline/x" x-state:on="Menu open" x-state:off="Menu closed" class
                     <div class="flex items-center px-4">
 
                         <div class="flex-shrink-0">
-                            @if (Auth::user()->userprofile)
+                            @if (Auth::user()->avatar)
                                 <img class="h-8 w-8 rounded-full"
                                     src="{{ asset('/') . Auth::user()->avatar->thumbnail }}" alt="">
                             @else

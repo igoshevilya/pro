@@ -17,12 +17,12 @@
           </p>
         </div>
         <form action="#" class="mt-12 sm:max-w-lg sm:w-full sm:flex">
-          <div class="min-w-0 flex-1">
+        {{--   <div class="min-w-0 flex-1">
             <label for="hero_email" class="sr-only">Email address</label>
             <input id="hero_email" type="email" class="block w-full border border-gray-300 rounded-md px-5 py-3 text-base text-gray-900 placeholder-gray-500 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" placeholder="Enter your email">
-          </div>
+          </div> --}}
           <div class="mt-4 sm:mt-0 sm:ml-3">
-            <button type="submit" class="block w-full rounded-md border border-transparent px-5 py-3 bg-indigo-600 text-base font-medium text-white shadow hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:px-10">Notify me</button>
+            <button type="submit" class="block w-full rounded-md border border-transparent px-5 py-3 bg-indigo-600 text-base font-medium text-white shadow hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:px-10">Создать задание</button>
           </div>
         </form>
         <div class="mt-6">
