@@ -6,8 +6,9 @@
         <div class="bg-white px-6 py-2 mb-4  rounded-lg md:p-0 overflow-hidden">
             <div class="mt-6 md:flex md:p-0 md:mt-0 ">
                 @if (!empty($user->avatar->image))
-                <img class="w-32 h-32  mx-auto rounded-full object-cover lg:mx-0 md:w-48 lg:w-1/4 md:h-auto md:rounded-none"
+                <img class="w-32 h-32  mx-auto rounded-full object-cover md:mx-0 md:w-48 lg:w-1/4 md:h-auto md:rounded-none"
                 src="{{ asset('/') . $user->avatar->image }}" alt="">
+                
             @else
             <div class="py-4 px-10">
                 <svg class=" w-32 h-32 md:w-48 mx-auto md:h-auto text-indigo-700" xmlns="http://www.w3.org/2000/svg"
@@ -18,15 +19,35 @@
                 </svg>
             </div>
             @endif
-                
+            
                 <div class="pt-6 text-center space-y-4 md:p-8 md:text-left lg:p-8 lg:pl-12">
                     <h1 class="text-3xl font-bold text-primary">{{ $user->getName() }}</h1>
                     @if(!empty($user->photographer->spec))
                     <span class="text-sm text-gray- 400 font-light">{{$user->photographer->spec}}</span>
                     @endif
                     @if(!empty($user->userprofile->description))
+                    <div>
+                    <span class=" text-gray-600">Обо мне:</span>
                     <p class="text-md text-gray-500 font-light">{{$user->userprofile->description}}</p> 
-                    @endif  
+                    </div>
+                    @endif 
+                    
+                    
+                    @if(!empty($user->photographer->dopspec))
+                                        <div>
+                        <span class=" text-gray-600">Специализация:</span>
+                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-x-2">
+                    @foreach ($specs as $spec)<span class="inline-flex mt-1  items-center px-3 py-2 rounded-full text-sm  bg-gray-50 text-gray-600">
+                        <svg class="-ml-1 mr-1.5 h-2 w-2 text-indigo-400" fill="currentColor" viewBox="0 0 8 8">
+                          <circle cx="4" cy="4" r="3"></circle>
+                        </svg>
+                        {{ $spec }}
+                      </span>
+                   
+                    @endforeach
+                    </div>
+                    @endif 
+                </div>
                 </div>
             </div>
         </div>
@@ -37,10 +58,11 @@
                 <div class="bg-white rounded-lg lg:space-y-4 px-6 py-8">
 
 
-                   <div class="grid lg:grid-cols-1 mt-2 grid-cols-2 gap-2 lg:place-items-center">
+                   <div class="grid mt-2 grid-cols-1   gap-2 place-items-center">
                     @if(!empty($user->phone))
+                    
+                    
                     <div class="items-center flex flex-grow-0">
-                            
                         <span class="font-medium px-4 py-2 flex  items-center rounded-full  bg-indigo-500 text-white border border-indigo-500 undefined ">
                               <svg class="icon line" width="20" height="20" id="phone" xmlns="http://www.w3.org/2000/svg"
                                   viewBox="0 0 24 24">
@@ -51,8 +73,6 @@
                               </svg>
                               {{$user->phone}}                              
                             </span>
-    
-                            
                         </div>
                   
                     
@@ -78,6 +98,7 @@
                                     </svg>
                                 </a>
                                 @endif 
+                                
                                 @if(!empty($user->photographer->fb))
                                 <a href="https://www.facebook.com/{{$user->photographer->fb}}" class="ml-3 text-gray-400 hover:text-gray-500">
                                     <span class="sr-only">Facebook</span>
@@ -90,7 +111,7 @@
                         @endif
                    </div>
                    
-                    <div class="mt-2 grid grid-cols-2 gap-1 lg:grid-cols-1">
+                    <div class="grid  mt-2 grid-cols-1 gap-2 place-items-center sm:place-items-start">
                         @if(!empty($user->city))  <div>Город: <span class="font-medium text-gray-900">{{$user->city}}</span></div>
                         @endif
                         @if($type == 2)

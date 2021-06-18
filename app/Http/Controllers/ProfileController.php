@@ -31,7 +31,10 @@ class ProfileController extends Controller
         $type = 1;}
         if($user->hasRole('photographer')){
             $type = 2;}
-       return view('profile.index', compact('user','type'));
+         $specs = explode(',', $user->photographer->dopspec); 
+         
+        // dd($spec); 
+       return view('profile.index', compact('user','type','specs'));
     }
  
     

@@ -52,7 +52,7 @@
                                 </path>
                             </svg>
                         </button>
-                       
+                        
                         <!-- Profile dropdown -->
                         <div x-data="{ open: false }" @keydown.escape.stop="open = false" @click.away="open = false"
                             class="ml-3 relative ">
