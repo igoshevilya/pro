@@ -2,7 +2,7 @@
 @section('content')
 
 
-      <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+      <div id="app" class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <p class="my-2 text-2xl leading-8 font-bold tracking-tight text-gray-900 sm:text-3xl">
           Редактирование профиля
       </p>
@@ -28,8 +28,10 @@
                
                 <label for="photo" class="block text-sm font-medium text-gray-700">
                   Фото профиля
-
-                  <ava-upload></ava-upload>
+                  <div id="app"> 
+                    <ava-upload></ava-upload>
+                </div>
+                  
 
                 </label>
                 

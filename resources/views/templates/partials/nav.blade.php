@@ -1,12 +1,12 @@
-<header class="mb-4">
+<header class="">
     <nav x-data="{ open: false }" class="bg-white shadow">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
                 <div class="flex">
                     <div class="flex-shrink-0 flex items-center">
                         <a href="/">
-                            <img class="block lg:hidden h-8 w-auto" src="{{ asset('/image/logo.svg') }}" alt="Disigo">
-                            <img class="hidden lg:block h-8 w-auto" src="{{ asset('/image/logo-text.svg') }}"
+                            <img class="block lg:hidden h-12 w-auto" src="{{ asset('/image/logo.svg') }}" alt="Disigo">
+                            <img class="hidden lg:block h-12 w-auto" src="{{ asset('/image/logo-text.svg') }}"
                                 alt="Disigo">
                         </a>
                     </div>
@@ -39,7 +39,7 @@
                             @endrole 
                         </div>
                     </div>
-                    <div class="hidden sm:ml-6 sm:flex sm:items-center">
+                    <div class="hidden sm:ml-6 sm:flex sm:items-center z-50">
                        @auth
                         <button
                             class="bg-white p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
@@ -55,7 +55,7 @@
                        
                         <!-- Profile dropdown -->
                         <div x-data="{ open: false }" @keydown.escape.stop="open = false" @click.away="open = false"
-                            class="ml-3 relative">
+                            class="ml-3 relative ">
                             <div>
                                 <button type="button"
                                     class="bg-white rounded-full flex text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
@@ -102,13 +102,13 @@
                         </div>
                     @endauth
                     @guest
-                        <div class="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
+                        <div class="hidden md:flex items-center justify-end md:flex-1 lg:w-0 z-50">
                             <a href="{{ route('login') }}"
-                                class="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900">
+                                class="whitespace-nowrap text-sm  text-gray-500 hover:text-gray-900">
                                 Войти
                             </a>
                             <a href="{{ route('register') }}"
-                                class="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700">
+                                class="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-3 border border-transparent rounded-full shadow-sm text-sm text-white bg-indigo-600 hover:bg-indigo-700">
                                 Зарегистрироваться
                             </a>
                         </div>
@@ -250,7 +250,7 @@ Heroicon name: outline/x" x-state:on="Menu open" x-state:off="Menu closed" class
     </nav>
 
 
-    @include('alert.alert')
+   
 
 
 </header>

@@ -13,6 +13,10 @@ use Illuminate\Support\Arr;
 use App\Http\Resources\PhotoResource;
 class GalleryController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         $user = Auth::user();

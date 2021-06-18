@@ -54,7 +54,6 @@ Vue.component('ava-upload', require('./components/profile/AvatarUpload.vue').def
  Vue.component('order-listfiltr', require('./components/order/orderlistfiltr.vue').default);
 
  Vue.component('photograph-list', require('./components/catalog/photograph.vue').default);
- Vue.component('slider-list', require('./components/catalog/slider.vue').default);
  Vue.component('infinite-loading', require('vue-infinite-loading').default);
  
 

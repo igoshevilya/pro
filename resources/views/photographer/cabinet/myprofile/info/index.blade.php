@@ -25,8 +25,10 @@
                
                 <label for="photo" class="block text-sm font-medium text-gray-700">
                   Фото профиля
-
-                  <ava-upload></ava-upload>
+                  <div id="app"> 
+                    <ava-upload></ava-upload>
+                </div>
+                  
 
                 </label>
                 

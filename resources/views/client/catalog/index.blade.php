@@ -5,5 +5,8 @@
             Фотографы
         </p>
     </div>
-    <photograph-list/>
+    <div id="app"> 
+        <photograph-list/>
+    </div>
+    
   @endsection

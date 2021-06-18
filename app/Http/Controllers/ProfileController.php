@@ -9,14 +9,18 @@ use App\Gallery;
 use App\Service;
 use App\Review;
 use App\ClientReview;
+use App\Category;
 use Illuminate\Http\Request;
 use App\Avatar;
-use App\Userprofile;
+use App\Photographer;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 class ProfileController extends Controller
 {
-   
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function getProfile($user)
     {
         $user = User::where('user',$user)->first();
@@ -123,10 +127,9 @@ class ProfileController extends Controller
     }
     public function getgalleryphoto($id)
     {     
-        
-
-        return Gallery::with('photos')->find($id);
+              return Gallery::with('photos')->find($id);
     }
+
     public function getservice($user)
     {     
         $user = User::where('user',$user)->first();
@@ -152,11 +155,57 @@ class ProfileController extends Controller
         {$rev = ClientReview::where('client_id', $user->id)->get();
         $rev-> load('photograph');
         $rev-> load('avatar');}
-       // dd($rev);
- return $rev;
+        return $rev;
 
-        //return Review::where('photograph_id', $user->id)->get();
+        
     }
-    
+    public function applicationform()
+    {  
+
+            
+        return view('profile.applicationform', ['categories' => Category::all()]); 
+    }
+
+    public function postform(Request $request)
+    {     
+        $validatedData = $request->validate([    
+            'phone' => ['min:16','max:16',],
+         
+        ]);
+        $photographer = new Photographer;
+        $photographer->user_id = Auth::id();
+        
+        $photographer->spec = $request->input('spec');
+        if($request->input('category')){
+        $arrayTostring = implode(',',$request->input('category'));
+        $photographer->dopspec =  $arrayTostring;}
+        $photographer->price = $request->input('price');
+        if($request->input('gender')){
+            $photographer->gender = $request->input('gender');  
+        }else{
+            $photographer->gender = 'Male';  
+        }
+        
+        $photographer->experience = $request->input('experience');
+        $photographer->portfolio = $request->input('portfolio');
+        //телефон
+        $photographer->about = $request->input('about');
+        $photographer->vk = $request->input('vk');
+        $photographer->inst = $request->input('inst');
+        $photographer->fb = $request->input('fb'); 
+        $photographer->status = 1;            
+        $photographer->save();
+
+        Auth::user()->update([          
+            'phone' => $request->input('phone'),
+            ]);
+
+
+
+        return redirect()
+        ->route('application.form')
+        ->with('success', 'Спасибо!');
+        
+    }
 
 }

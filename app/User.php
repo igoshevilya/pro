@@ -44,7 +44,10 @@ class User extends Authenticatable
     
         return null;
     }
-
+    public function photographer(){
+        return $this->hasOne(Photographer::class, 'user_id', 'id');
+    }
+    
     public function userprofile(){
         return $this->hasOne(Userprofile::class);
     }
@@ -101,4 +104,29 @@ class User extends Authenticatable
     {
         return $filters->apply($builder);
     }
+
+    
+    public function ExperienceUser()
+    {
+        if(!empty($this->photographer->experience)){
+        $number = (date ( 'Y' ) - $this->photographer->experience);
+        function declension($number, array $data)
+            {
+            $rest = array($number % 10, $number % 100);
+            
+            if($rest[1] > 10 && $rest[1] < 20) {
+            return $data[2];
+            } elseif ($rest[0] > 1 && $rest[0] < 5) {
+            return $data[1];
+            } else if ($rest[0] == 1) {
+            return $data[0];
+            }
+            
+            return $data[2];
+            }
+          
+            $experiences = declension($number, array('год', 'года', 'лет'));   
+            return  $number . ' ' . $experiences;}
+    }
+    
 }

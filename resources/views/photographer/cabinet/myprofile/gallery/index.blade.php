@@ -22,7 +22,10 @@
             
 
               </div>
-              <gallery/>
+              <div id="app"> 
+                <gallery/>
+            </div>
+             
               
         </div></div>
             

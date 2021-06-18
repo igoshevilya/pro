@@ -5,7 +5,7 @@
 
     <div class=" py-6">
       
-              <section class="grid  gap-10">
+              <section class="grid  gap-2">
               
                <article v-for="review in reviews" :key="review.id"  class="mx-auto group w-full   rounded-2xl shadow transform duration-500 border-t px-6 py-4">
                 <div class="">

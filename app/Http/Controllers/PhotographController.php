@@ -15,7 +15,12 @@ use App\Gallery;
 use App\OrderFilter;
 class PhotographController extends Controller
 {
-    public function index()
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+     public function index()
     {
         $orders = Order::orderBy('id', 'desc')->paginate(10);
         return view('photographer.cabinet.myorders.index', compact('orders'));
@@ -66,8 +71,6 @@ class PhotographController extends Controller
         $order->load('category');
         return response()->json($order);
     }
-
-
 
       public function service()
     {

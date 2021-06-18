@@ -1,17 +1,15 @@
 
 <div id="alert-box">  
-  <div class="max-w-7xl mt-3 mx-auto sm:px-6 lg:px-8">
+  <div class="max-w-7xl  mx-auto sm:px-6 lg:px-8">
     
     @if(session()->has('info'))
-        <div class="alert alert-info fade show" role="alert">
+        <div class="alert mt-3 alert-info fade show" role="alert">
             {{ session()->get('info') }}
         </div>
-    @elseif(session()->has('success'))
 
-   
-     
-          
-    <div class="rounded-md bg-green-50 p-4">
+
+    @elseif(session()->has('success'))  
+    <div class="rounded-md mt-3 bg-green-50 p-4">
       <div class="flex">
         <div class="flex-shrink-0">
           <svg class="h-5 w-5 text-green-400" x-description="Heroicon name: solid/check-circle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -43,6 +41,5 @@
         </div>
     @endif
 
-</div>
 </div>
 </div>

@@ -5,5 +5,8 @@
             Заказы
         </p>
     </div>
-    <order-listfiltr/>
+    <div id="app"> 
+        <order-listfiltr/>
+     </div>
+    
 @endsection

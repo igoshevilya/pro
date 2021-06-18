@@ -62,8 +62,8 @@ Route::get('/setting', 'ProfileController@setting')->name('setting');
 Route::post('profile/edit', 'ProfileController@postEdit')->name('profile.edit');
 Route::post('setting/avatar', 'ProfileController@avatar');
 Route::get('profile/edit', 'ProfileController@getEdit')->name('profile.edit');
-
-
+Route::get('/applicationform', 'ProfileController@applicationform')->name('application.form');
+Route::post('/applicationform', 'ProfileController@postform')->name('postform');
 
 
 //Клиент
@@ -84,6 +84,7 @@ Route::get('/photograph', 'HomeController@PhotographList');
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/logout', 'Auth\LoginController@logout')->name('get-logout');
 Route::group(['middleware' => ['role:admin']], function () {});
+
 
 
 

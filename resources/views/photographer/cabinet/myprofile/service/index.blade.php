@@ -22,7 +22,10 @@
       
 
         </div>
-        <service/>
+        <div id="app"> 
+          <service/>
+       </div>
+       
         
   </div></div>
 
