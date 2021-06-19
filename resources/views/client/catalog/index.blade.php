@@ -6,7 +6,7 @@
         </p>
     </div>
     <div id="app"> 
-        <photograph-list/>
+        <photograph-list :category="{{$category}}"/>
     </div>
     
   @endsection

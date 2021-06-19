@@ -2073,6 +2073,51 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2080,9 +2125,12 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      selectedCat: [],
       page: 1,
       name: null,
       city: null,
+      pricemin: null,
+      pricemax: null,
       users: [],
       photos: [],
       infiniteId: +new Date(),
@@ -2123,6 +2171,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     reset: function reset() {
       this.name = null;
       this.city = null;
+      this.pricemin = null;
+      this.pricemax = null;
+      this.selectedCat = [];
       this.changeType();
     },
     //GET ALL services
@@ -2133,7 +2184,10 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         params: {
           page: this.page,
           name: this.name,
-          city: this.city
+          city: this.city,
+          selectedCat: this.selectedCat.toString(),
+          pricemin: this.pricemin,
+          pricemax: this.pricemax
         }
       }).then(function (_ref) {
         var data = _ref.data;
@@ -41766,7 +41820,7 @@ var render = function() {
                         })
                       ]),
                       _vm._v(" "),
-                      _c("div", { staticClass: "mt-3" }, [
+                      _c("div", { staticClass: "my-3" }, [
                         _c(
                           "label",
                           {
@@ -41797,6 +41851,171 @@ var render = function() {
                             }
                           }
                         })
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass:
+                            "text-sm my-2 text-gray-700 tracking-wide"
+                        },
+                        [_vm._v("\n\t\t\t\t\tКатегории фотографов\n\t\t\t\t")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: " grid  grid-cols-2" },
+                        _vm._l(_vm.$attrs.category, function(category) {
+                          return _c(
+                            "label",
+                            { key: category.id, staticClass: "items-center" },
+                            [
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    " text-sm xl:px-2  rounded-lg m-1 p-1  bg-indigo-50 text-gray-600"
+                                },
+                                [
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.selectedCat,
+                                        expression: "selectedCat"
+                                      }
+                                    ],
+                                    attrs: { type: "checkbox" },
+                                    domProps: {
+                                      value: category.title,
+                                      checked: Array.isArray(_vm.selectedCat)
+                                        ? _vm._i(
+                                            _vm.selectedCat,
+                                            category.title
+                                          ) > -1
+                                        : _vm.selectedCat
+                                    },
+                                    on: {
+                                      change: function($event) {
+                                        var $$a = _vm.selectedCat,
+                                          $$el = $event.target,
+                                          $$c = $$el.checked ? true : false
+                                        if (Array.isArray($$a)) {
+                                          var $$v = category.title,
+                                            $$i = _vm._i($$a, $$v)
+                                          if ($$el.checked) {
+                                            $$i < 0 &&
+                                              (_vm.selectedCat = $$a.concat([
+                                                $$v
+                                              ]))
+                                          } else {
+                                            $$i > -1 &&
+                                              (_vm.selectedCat = $$a
+                                                .slice(0, $$i)
+                                                .concat($$a.slice($$i + 1)))
+                                          }
+                                        } else {
+                                          _vm.selectedCat = $$c
+                                        }
+                                      }
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "span",
+                                    { staticClass: "ml-2 text-gray-700" },
+                                    [_vm._v(_vm._s(category.title))]
+                                  )
+                                ]
+                              )
+                            ]
+                          )
+                        }),
+                        0
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "mt-3" }, [
+                        _c(
+                          "label",
+                          {
+                            staticClass: "text-sm  text-gray-700 tracking-wide"
+                          },
+                          [
+                            _vm._v(
+                              "\n\t\t\t\t\tСтоимость за час\n          \n\t\t\t\t"
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "md:flex flex-row md:space-x-2 w-full text-xs "
+                          },
+                          [
+                            _c(
+                              "span",
+                              {
+                                staticClass: "self-end text-sm  text-gray-700"
+                              },
+                              [_vm._v("от")]
+                            ),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.pricemin,
+                                  expression: "pricemin"
+                                }
+                              ],
+                              staticClass:
+                                "border py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md focus:outline-none",
+                              attrs: { type: "number", placeholder: "1000" },
+                              domProps: { value: _vm.pricemin },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.pricemin = $event.target.value
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "span",
+                              {
+                                staticClass: "self-end text-sm  text-gray-700"
+                              },
+                              [_vm._v("до")]
+                            ),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.pricemax,
+                                  expression: "pricemax"
+                                }
+                              ],
+                              staticClass:
+                                "border py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md focus:outline-none",
+                              attrs: { type: "number", placeholder: "1000" },
+                              domProps: { value: _vm.pricemax },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.pricemax = $event.target.value
+                                }
+                              }
+                            })
+                          ]
+                        )
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "mt-3 flex justify-between" }, [
@@ -41865,7 +42084,7 @@ var render = function() {
                         [
                           _c("a", { attrs: { href: "../user/" + user.user } }, [
                             _c("img", {
-                              staticClass: "w-28 h-28 rounded-lg",
+                              staticClass: "w-28 h-28 object-cover rounded-lg",
                               attrs: {
                                 src:
                                   "../" +
@@ -41891,117 +42110,59 @@ var render = function() {
                                 "h-28 w-full flex flex-col justify-between"
                             },
                             [
-                              _c("div", [
-                                _c(
-                                  "a",
-                                  { attrs: { href: "../user/" + user.user } },
-                                  [
-                                    _c(
-                                      "p",
-                                      {
-                                        staticClass:
-                                          "text-gray-800 dark:text-white text-xl font-medium"
-                                      },
-                                      [
-                                        _vm._v(
-                                          "\n                    " +
-                                            _vm._s(user.first_name) +
-                                            " " +
-                                            _vm._s(user.last_name) +
-                                            "\n                           \n                "
-                                        )
-                                      ]
-                                    )
-                                  ]
-                                ),
-                                _vm._v(" "),
-                                user.userprofile
-                                  ? _c(
-                                      "p",
-                                      { staticClass: "text-gray-400 text-xs" },
-                                      [
-                                        _vm._v(
-                                          "\n                    " +
-                                            _vm._s(user.userprofile.special) +
-                                            " \n                "
-                                        )
-                                      ]
-                                    )
-                                  : _vm._e()
-                              ]),
-                              _vm._v(" "),
                               _c(
                                 "div",
-                                {
-                                  staticClass:
-                                    "rounded-lg bg-blue-100 dark:bg-white p-2 w-full"
-                                },
+                                { staticClass: "flex justify-between" },
                                 [
+                                  _c("div", [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "../user/" + user.user }
+                                      },
+                                      [
+                                        _c(
+                                          "p",
+                                          {
+                                            staticClass:
+                                              "text-gray-800 dark:text-white text-xl font-medium"
+                                          },
+                                          [
+                                            _vm._v(
+                                              "\n                    " +
+                                                _vm._s(user.first_name) +
+                                                " " +
+                                                _vm._s(user.last_name) +
+                                                "\n                           \n                "
+                                            )
+                                          ]
+                                        )
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    user.info_user
+                                      ? _c(
+                                          "p",
+                                          {
+                                            staticClass: "text-gray-400 text-xs"
+                                          },
+                                          [
+                                            _vm._v(
+                                              "\n                   " +
+                                                _vm._s(user.info_user.spec) +
+                                                "  \n                "
+                                            )
+                                          ]
+                                        )
+                                      : _vm._e()
+                                  ]),
+                                  _vm._v(" "),
                                   _c(
                                     "div",
                                     {
-                                      staticClass:
-                                        "flex items-center justify-between text-xs text-gray-400 dark:text-black"
+                                      staticClass: "text-xs mt-1 text-gray-400"
                                     },
                                     [
-                                      _c(
-                                        "p",
-                                        { staticClass: "flex flex-col" },
-                                        [
-                                          _vm._v(
-                                            "\n                        Город\n                        "
-                                          ),
-                                          _c(
-                                            "span",
-                                            {
-                                              staticClass:
-                                                "text-black dark:text-indigo-500 text-sm font-medium"
-                                            },
-                                            [
-                                              _vm._v(
-                                                "\n                            " +
-                                                  _vm._s(
-                                                    user.city
-                                                      ? user.city
-                                                      : "Не указан"
-                                                  ) +
-                                                  "\n                        "
-                                              )
-                                            ]
-                                          )
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _vm._m(0, true),
-                                      _vm._v(" "),
-                                      _c(
-                                        "p",
-                                        { staticClass: "flex flex-col" },
-                                        [
-                                          _vm._v(
-                                            "\n                        Выполненых заданий\n                        "
-                                          ),
-                                          _c(
-                                            "span",
-                                            {
-                                              staticClass:
-                                                "text-black dark:text-indigo-500 text-sm font-medium"
-                                            },
-                                            [
-                                              _vm._v(
-                                                "\n                            " +
-                                                  _vm._s(
-                                                    user.count_order
-                                                      ? user.count_order
-                                                      : "Еще нет"
-                                                  ) +
-                                                  " \n                        "
-                                              )
-                                            ]
-                                          )
-                                        ]
-                                      ),
-                                      _vm._v(" "),
                                       _c(
                                         "p",
                                         { staticClass: "flex flex-col" },
@@ -42057,6 +42218,108 @@ var render = function() {
                                     ]
                                   )
                                 ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "rounded-lg  bg-gray-50 dark:bg-white p-2 mt-2 w-full"
+                                },
+                                [
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass:
+                                        "flex flex-wrap items-center justify-between text-xs text-gray-400 dark:text-black"
+                                    },
+                                    [
+                                      _c(
+                                        "p",
+                                        { staticClass: "flex flex-col" },
+                                        [
+                                          _vm._v(
+                                            "\n                        Город\n                        "
+                                          ),
+                                          _c(
+                                            "span",
+                                            {
+                                              staticClass:
+                                                "text-black dark:text-indigo-500 text-sm font-medium"
+                                            },
+                                            [
+                                              _vm._v(
+                                                "\n                            " +
+                                                  _vm._s(
+                                                    user.city
+                                                      ? user.city
+                                                      : "Не указан"
+                                                  ) +
+                                                  "\n                        "
+                                              )
+                                            ]
+                                          )
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "p",
+                                        { staticClass: "flex flex-col" },
+                                        [
+                                          _vm._v(
+                                            "\n                        Стоимость за час\n                        "
+                                          ),
+                                          _c(
+                                            "span",
+                                            {
+                                              staticClass:
+                                                "text-black dark:text-indigo-500 text-sm font-medium"
+                                            },
+                                            [
+                                              _vm._v(
+                                                "\n                            " +
+                                                  _vm._s(
+                                                    user.info_user
+                                                      ? user.info_user.price +
+                                                          " ₽"
+                                                      : "Не указана"
+                                                  ) +
+                                                  " \n                        "
+                                              )
+                                            ]
+                                          )
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "p",
+                                        { staticClass: "flex flex-col" },
+                                        [
+                                          _vm._v(
+                                            "\n                        Выполненых заданий\n                        "
+                                          ),
+                                          _c(
+                                            "span",
+                                            {
+                                              staticClass:
+                                                "text-black dark:text-indigo-500 text-sm font-medium"
+                                            },
+                                            [
+                                              _vm._v(
+                                                "\n                            " +
+                                                  _vm._s(
+                                                    user.count_order
+                                                      ? user.count_order
+                                                      : "Еще нет"
+                                                  )
+                                              )
+                                            ]
+                                          )
+                                        ]
+                                      )
+                                    ]
+                                  )
+                                ]
                               )
                             ]
                           )
@@ -42065,11 +42328,11 @@ var render = function() {
                       _vm._v(" "),
                       _c(
                         "div",
-                        { staticClass: "rounded-lg   dark:bg-white  w-full" },
+                        { staticClass: "  dark:bg-white  w-full" },
                         [
                           _c(
                             "hooper",
-                            { attrs: { itemsToShow: 5, infiniteScroll: true } },
+                            { attrs: { itemsToShow: 4, infiniteScroll: true } },
                             _vm._l(user.photos, function(photo) {
                               return _c("slide", { key: photo.id }, [
                                 _c("section", {
@@ -42099,27 +42362,59 @@ var render = function() {
                         "div",
                         {
                           staticClass:
-                            "flex items-center justify-end gap-4 mt-6"
+                            "flex flex-row justify-between items-end md:items-start mt-4"
                         },
                         [
                           _c(
-                            "button",
-                            {
-                              staticClass:
-                                "inline-flex items-center px-4 py-2 border border-transparent shadow-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none sm:text-sm",
-                              attrs: { type: "button" },
-                              on: {
-                                click: function($event) {
-                                  return _vm.togglePhone(user)
-                                }
-                              }
-                            },
-                            [
-                              _vm._v(
-                                "\n           Связаться с фотографом\n        "
+                            "div",
+                            { staticClass: "flex flex-wrap  w-9/12" },
+                            _vm._l(user.info_user.dopspec.split(","), function(
+                              sp
+                            ) {
+                              return _c(
+                                "div",
+                                { key: sp.id, staticClass: "flex flex-wrap" },
+                                [
+                                  _c(
+                                    "span",
+                                    {
+                                      staticClass:
+                                        " inline-flex mt-1 mx-1 items-center px-3 py-2 rounded-full text-sm  bg-gray-50 text-gray-600"
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                       \n                         " +
+                                          _vm._s(sp) +
+                                          "\n       "
+                                      )
+                                    ]
+                                  )
+                                ]
                               )
-                            ]
-                          )
+                            }),
+                            0
+                          ),
+                          _vm._v(" "),
+                          _c("div", { staticClass: " self-end relative" }, [
+                            _c(
+                              "button",
+                              {
+                                staticClass:
+                                  "inline-flex items-center px-4 py-2 border border-transparent shadow-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none text-sm",
+                                attrs: { type: "button" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.togglePhone(user)
+                                  }
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  "\n            Показать контакты \n        "
+                                )
+                              ]
+                            )
+                          ])
                         ]
                       )
                     ]
@@ -42223,27 +42518,7 @@ var render = function() {
     1
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("p", { staticClass: "flex flex-col" }, [
-      _vm._v(
-        "\n                        Стоимость за час\n                        "
-      ),
-      _c(
-        "span",
-        { staticClass: "text-black dark:text-indigo-500 text-sm font-medium" },
-        [
-          _vm._v(
-            "\n                            4000 ₽\n                        "
-          )
-        ]
-      )
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

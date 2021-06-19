@@ -18,14 +18,38 @@
                         <input  v-model="name" type="text" class="border  py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md focus:outline-none" placeholder="Название">
                     </div>
 
-                    <div class="mt-3">
+                    <div class="my-3">
                       <label class="text-sm  text-gray-700 tracking-wide">
 					Город
 				</label>
                         <input v-model="city" type="text" class="border  py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md focus:outline-none" placeholder="Симферополь">
                     </div>
+  <label class="text-sm my-2 text-gray-700 tracking-wide">
+					Категории фотографов
+				</label>
+<div class=" grid  grid-cols-2">
+ 
+                        <label  v-for="category in $attrs.category" :key="category.id"  class="items-center">
+                             <div class=" text-sm xl:px-2  rounded-lg m-1 p-1  bg-indigo-50 text-gray-600">               
+                            <input type="checkbox" :value="category.title" v-model="selectedCat">
+                            <span class="ml-2 text-gray-700">{{ category.title }}</span>       
+                             </div>        
+                        </label>  
+</div> 
 
-               
+<div class="mt-3">
+                      <label class="text-sm  text-gray-700 tracking-wide">
+					Стоимость за час
+          
+				</label>
+
+        <div class="md:flex flex-row md:space-x-2 w-full text-xs ">
+                        <span class="self-end text-sm  text-gray-700">от</span><input v-model="pricemin" type="number" class="border py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md focus:outline-none" placeholder="1000">
+                         <span class="self-end text-sm  text-gray-700">до</span><input  v-model="pricemax" type="number" class="border py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md focus:outline-none" placeholder="1000">
+                    </div></div>
+     
+					
+
                     <div class="mt-3 flex justify-between">
                         <button type="submit"  @click.prevent="changeType" class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none sm:text-sm">
                             
@@ -42,46 +66,32 @@
 
 
         <div class="space-y-6 lg:col-start-1 lg:col-span-2">
+
+
+
 <div v-for="user in users" :key="user.id" class="shadow rounded-2xl p-4 bg-white dark:bg-gray-800">
     <div class="flex flex-row items-start gap-4">
       <a :href="'../user/'+user.user">
-        <img :src="'../'+(user.avatar ? user.avatar.thumbnail : 'image/noava.svg')" class="w-28 h-28 rounded-lg"/>
+        <img :src="'../'+(user.avatar ? user.avatar.thumbnail : 'image/noava.svg')" class="w-28 h-28 object-cover rounded-lg"/>
         
                     <span class="sr-only">{{ user.first_name }} {{ user.last_name }}</span>
                    
                   </a>
         <div class="h-28 w-full flex flex-col justify-between">
-            <div>
+            <div class="flex justify-between">
+              <div>
               <a :href="'../user/'+user.user">
                 <p class="text-gray-800 dark:text-white text-xl font-medium">
                     {{ user.first_name }} {{ user.last_name }}
                            
                 </p> </a>
-                <p v-if="user.userprofile" class="text-gray-400 text-xs">
-                    {{ user.userprofile.special }} 
+                <p v-if="user.info_user" class="text-gray-400 text-xs">
+                   {{ user.info_user.spec }}  
                 </p>
             </div>
-            <div class="rounded-lg bg-blue-100 dark:bg-white p-2 w-full">
-                <div class="flex items-center justify-between text-xs text-gray-400 dark:text-black">
-                    <p  class="flex flex-col">
-                        Город
-                        <span class="text-black dark:text-indigo-500 text-sm font-medium">
-                            {{ user.city ? user.city : 'Не указан' }}
-                        </span>
-                    </p>
-                    <p class="flex flex-col">
-                        Стоимость за час
-                        <span class="text-black dark:text-indigo-500 text-sm font-medium">
-                            4000 ₽
-                        </span>
-                    </p>
-                    <p class="flex flex-col">
-                        Выполненых заданий
-                        <span class="text-black dark:text-indigo-500 text-sm font-medium">
-                            {{ user.count_order ? user.count_order : 'Еще нет' }} 
-                        </span>
-                    </p>
-                    <p class="flex flex-col">
+
+                <div class="text-xs mt-1 text-gray-400">
+                <p class="flex flex-col">
                         Средний рейтинг
                         
                         <span  class="flex text-black dark:text-indigo-500 text-sm font-medium">
@@ -92,30 +102,64 @@
                                              
                             {{ user.rating_count ?  user.rating_count.toFixed(1) : 'Отсуствует' }} 
                         </span>
+                    </p></div>
+            </div>
+            <div class="rounded-lg  bg-gray-50 dark:bg-white p-2 mt-2 w-full">
+                <div class="flex flex-wrap items-center justify-between text-xs text-gray-400 dark:text-black">
+                    <p  class="flex flex-col">
+                        Город
+                        <span class="text-black dark:text-indigo-500 text-sm font-medium">
+                            {{ user.city ? user.city : 'Не указан' }}
+                        </span>
                     </p>
+                    <p  class="flex flex-col">
+                        Стоимость за час
+                        <span class="text-black dark:text-indigo-500 text-sm font-medium">
+                            {{ user.info_user ? user.info_user.price+' ₽' : 'Не указана' }} 
+                        </span> 
+                        
+                    </p>
+                    <p class="flex flex-col">
+                        Выполненых заданий
+                        <span class="text-black dark:text-indigo-500 text-sm font-medium">
+                            {{ user.count_order ? user.count_order : 'Еще нет' }}</span>
+                    </p>
+                    
                 </div>
             </div>
         </div>
     </div>
    
-    <div class="rounded-lg   dark:bg-white  w-full">
-                     <hooper :itemsToShow="5" :infiniteScroll="true">
-      <slide v-for="photo in user.photos" :key="photo.id">
-         <section @click="showPhotoFull(photo)" class="cursor-pointer mx-2 content bg-cover bg-center h-36 rounded-2xl" :style="{ backgroundImage: 'url(/thumbnail/thumbnail_' + photo.file_name + ')' }">
-         </section>
-                           </slide>
-      
-    </hooper>
-      
-      
 
-         
-            </div>
-    <div class="flex items-center justify-end gap-4 mt-6">
+    <div class="  dark:bg-white  w-full">
+    <hooper :itemsToShow="4" :infiniteScroll="true">
+    <slide v-for="photo in user.photos" :key="photo.id">
+    <section @click="showPhotoFull(photo)" class="cursor-pointer mx-2 content bg-cover bg-center h-36 rounded-2xl" :style="{ backgroundImage: 'url(/thumbnail/thumbnail_' + photo.file_name + ')' }">
+    </section>
+    </slide>
+    </hooper>
+    </div>
+
+
+
+
+    <div class="flex flex-row justify-between items-end md:items-start mt-4">
+      <div class="flex flex-wrap  w-9/12">
+      <div class="flex flex-wrap" v-for="sp in user.info_user.dopspec.split(',')" :key="sp.id">
+      <span class=" inline-flex mt-1 mx-1 items-center px-3 py-2 rounded-full text-sm  bg-gray-50 text-gray-600">
+                       
+                         {{sp}}
+       </span>
+       
+         </div>
+           </div>               
       
-        <button @click="togglePhone(user)" type="button" class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none sm:text-sm">
-           Связаться с фотографом
+        
+      <div class=" self-end relative">
+        <button @click="togglePhone(user)" type="button" class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none text-sm">
+            Показать контакты 
         </button>
+      </div>
     </div>
 </div>
 
@@ -124,6 +168,7 @@
     
 
            </div>
+           
                   </div>
     </div>  
     <photo-full ref="photoFull" :photo="selectedPhoto" :photos="photos" :photoFullVisible="photoFullVisible"></photo-full>   
@@ -153,9 +198,12 @@ import {TheMask} from 'vue-the-mask'
 export default {  
   data() {
     return {  
+      selectedCat :[],      
       page: 1,  
       name: null,
       city: null,
+       pricemin: null,
+      pricemax: null,  
       users: [],
       photos: [],
       infiniteId: +new Date(),
@@ -192,7 +240,10 @@ export default {
       reset() {
                 this.name = null;
                 this.city = null;
-       
+                this.pricemin = null;
+                this.pricemax = null;
+               
+                this.selectedCat = [];
                 this.changeType();
             },
     //GET ALL services
@@ -203,8 +254,9 @@ export default {
             page: this.page,
             name: this.name,
             city: this.city,
-        
-            
+            selectedCat: this.selectedCat.toString(),
+            pricemin: this.pricemin,
+            pricemax: this.pricemax,
            
           },
         })
@@ -212,7 +264,7 @@ export default {
 
 if (data.data.length) {
           this.page += 1;
-          this.users.push(...data.data);
+          this.users.push(...data.data);          
           $state.loaded();
             
         }
@@ -230,7 +282,7 @@ else {
       this.infiniteId += 1;
     },
   },
-
+ 
   mounted() {
   // this.InfiniteLoading(); 
   },

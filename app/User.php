@@ -82,7 +82,7 @@ class User extends Authenticatable
         return $this->hasMany(Review::class,'photograph_id','id');
         
     }
-    protected $appends = ['rating_count','count_order','phone_user'];
+    protected $appends = ['rating_count','count_order','phone_user','info_user'];
 
     public function getRatingCountAttribute()
     {
@@ -100,12 +100,21 @@ class User extends Authenticatable
     {
            return $this->userprofile;
     }
+
+    public function getInfoUserAttribute()
+    
+    {
+           return $this->photographer;
+    }
+
+
     public function scopeFilter($builder, $filters)
     {
         return $filters->apply($builder);
     }
-
-    
+  
+   
+ 
     public function ExperienceUser()
     {
         if(!empty($this->photographer->experience)){
