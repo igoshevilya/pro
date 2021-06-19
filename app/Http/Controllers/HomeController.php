@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Сategory;
 use App\User;
 use App\UserFilter;
+use Mail;
 class HomeController extends Controller
 {
     /**
@@ -45,8 +46,8 @@ class HomeController extends Controller
    $user->load('reviews');   
     return response()->json($user);
     }
-  
-     
+
+    
     
 
 }

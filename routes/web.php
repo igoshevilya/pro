@@ -85,7 +85,7 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('/logout', 'Auth\LoginController@logout')->name('get-logout');
 Route::group(['middleware' => ['role:admin']], function () {});
 
-
+Route::get('/send', 'HomeController@send');
 
 
 
