@@ -7,6 +7,7 @@ class OrderFilter extends QueryFilter
     
     public function title($value)
     {
+        if (! $value) return;
         $this->builder->where('title', 'like', "%$value%");
     }
 
@@ -34,6 +35,14 @@ class OrderFilter extends QueryFilter
         if (!$value) return;
         $this->builder->where('date', '=',  $value);       
       
+    }
+
+    public function selectedCat($value)
+    {    
+        if (! $value) return;        
+        $this->builder->whereHas('category', function ($query) use ($value) {
+            $query->whereIn('id',  $value);
+        });
     }
 
 }

@@ -53,8 +53,9 @@ class PhotographController extends Controller
 
     public function order()
     {
+        $category = Category::all();
         $orders = Order::orderBy('id', 'desc')->paginate(10);
-        return view('photographer.cabinet.order.index', compact('orders'));
+        return view('photographer.cabinet.order.index', compact('orders','category'));
     }
 
     public function showorder($id)

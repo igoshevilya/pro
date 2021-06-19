@@ -6,7 +6,7 @@
         </p>
     </div>
     <div id="app"> 
-        <order-listfiltr/>
+        <order-listfiltr :category="{{$category}}" />
      </div>
     
 @endsection

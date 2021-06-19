@@ -2994,12 +2994,24 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       page: 1,
+      selectedCat: [],
       title: null,
       pricemin: null,
       pricemax: null,
@@ -3020,6 +3032,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       this.pricemax = null;
       this.location = null;
       this.date = null;
+      this.selectedCat = [];
       this.changeType();
     },
     //GET ALL services
@@ -3033,7 +3046,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
           pricemin: this.pricemin,
           pricemax: this.pricemax,
           location: this.location,
-          date: this.date
+          date: this.date,
+          selectedCat: this.selectedCat
         }
       }).then(function (_ref) {
         var data = _ref.data;
@@ -43514,7 +43528,7 @@ var render = function() {
                   ),
                   _vm._v(" "),
                   _c("form", { staticClass: "mt-4" }, [
-                    _c("div", {}, [
+                    _c("div", { staticClass: "mb-3" }, [
                       _c(
                         "label",
                         { staticClass: "text-sm  text-gray-700 tracking-wide" },
@@ -43544,6 +43558,85 @@ var render = function() {
                         }
                       })
                     ]),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      {
+                        staticClass: "text-sm my-2  text-gray-700 tracking-wide"
+                      },
+                      [_vm._v("\n\t\t\t\t\tКатегории заказов\n\t\t\t\t")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: " grid  grid-cols-2" },
+                      _vm._l(_vm.$attrs.category, function(category) {
+                        return _c(
+                          "label",
+                          { key: category.id, staticClass: "items-center" },
+                          [
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  " text-sm xl:px-2  rounded-lg m-1 p-1  bg-indigo-50 text-gray-600"
+                              },
+                              [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.selectedCat,
+                                      expression: "selectedCat"
+                                    }
+                                  ],
+                                  attrs: { type: "checkbox" },
+                                  domProps: {
+                                    value: category.id,
+                                    checked: Array.isArray(_vm.selectedCat)
+                                      ? _vm._i(_vm.selectedCat, category.id) >
+                                        -1
+                                      : _vm.selectedCat
+                                  },
+                                  on: {
+                                    change: function($event) {
+                                      var $$a = _vm.selectedCat,
+                                        $$el = $event.target,
+                                        $$c = $$el.checked ? true : false
+                                      if (Array.isArray($$a)) {
+                                        var $$v = category.id,
+                                          $$i = _vm._i($$a, $$v)
+                                        if ($$el.checked) {
+                                          $$i < 0 &&
+                                            (_vm.selectedCat = $$a.concat([
+                                              $$v
+                                            ]))
+                                        } else {
+                                          $$i > -1 &&
+                                            (_vm.selectedCat = $$a
+                                              .slice(0, $$i)
+                                              .concat($$a.slice($$i + 1)))
+                                        }
+                                      } else {
+                                        _vm.selectedCat = $$c
+                                      }
+                                    }
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c(
+                                  "span",
+                                  { staticClass: "ml-2 text-gray-700" },
+                                  [_vm._v(_vm._s(category.title))]
+                                )
+                              ]
+                            )
+                          ]
+                        )
+                      }),
+                      0
+                    ),
                     _vm._v(" "),
                     _c("div", { staticClass: "mt-3" }, [
                       _c(

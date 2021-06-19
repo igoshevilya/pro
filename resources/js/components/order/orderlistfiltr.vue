@@ -11,13 +11,24 @@
                 <h2 id="timeline-title" class="text-lg font-medium text-gray-900">Фильтр</h2>
 
               <form class="mt-4">
-                    <div class="">
+                    <div class="mb-3">
                       <label class="text-sm  text-gray-700 tracking-wide">
 					Название
 				</label>
                         <input  v-model="title" type="text" class="border  py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md focus:outline-none" placeholder="Название">
                     </div>
-
+<label class="text-sm my-2  text-gray-700 tracking-wide">
+					Категории заказов
+				</label>
+<div class=" grid  grid-cols-2">
+ 
+                        <label  v-for="category in $attrs.category" :key="category.id"  class="items-center">
+                             <div class=" text-sm xl:px-2  rounded-lg m-1 p-1  bg-indigo-50 text-gray-600">               
+                            <input type="checkbox" :value="category.id" v-model="selectedCat">
+                            <span class="ml-2 text-gray-700">{{ category.title }}</span>       
+                             </div>        
+                        </label>  
+</div> 
                     <div class="mt-3">
                       <label class="text-sm  text-gray-700 tracking-wide">
 					Стоимость
@@ -163,6 +174,7 @@ export default {
   data() {
     return {  
       page: 1,  
+      selectedCat :[],  
       title: null,
       pricemin: null,
       pricemax: null,
@@ -180,7 +192,8 @@ export default {
                 this.pricemin = null;
                 this.pricemax = null;
                 this.location = null;
-                this.date = null;                
+                this.date = null;  
+                this.selectedCat = [];              
                 this.changeType();
             },
     //GET ALL services
@@ -194,7 +207,7 @@ export default {
             pricemax: this.pricemax,
             location: this.location,
             date: this.date,
-            
+              selectedCat: this.selectedCat,
            
           },
         })
