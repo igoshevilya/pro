@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Notifications;
-
+use App\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -16,9 +16,9 @@ class AssignedUser extends Notification
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(User $user)
     {
-        //
+        $this->response = $user;
     }
 
     /**
@@ -29,7 +29,7 @@ class AssignedUser extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['database'];
     }
 
     /**
@@ -38,13 +38,21 @@ class AssignedUser extends Notification
      * @param  mixed  $notifiable
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
-    public function toMail($notifiable)
+
+    public function toDatabase($notifiable)
+    {
+        return [
+            'message' => 'Вас утвердили испольнителм задания',
+            'user_id' => $this->response->user_id,
+        ];
+    }
+    /* public function toMail($notifiable)
     {
         return (new MailMessage)
                     ->line('The introduction to the notification.')
                     ->action('Notification Action', url('/'))
                     ->line('Thank you for using our application!');
-    }
+    } */
 
     /**
      * Get the array representation of the notification.

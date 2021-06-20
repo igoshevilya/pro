@@ -29,6 +29,10 @@ Route::group(['prefix' => 'ph'], function() {
             Route::get('/getservice', 'PhotographController@getservice');
             Route::put('/service/{id}', 'PhotographController@updateservice');
             Route::delete('/service/{id}', 'PhotographController@destroyservice');
+
+             //Инфо фотографа
+             Route::get('/info', 'PhotographController@info')->name('info');
+          
         });
     //Заказы
         //Мои заказы
@@ -88,7 +92,10 @@ Route::group(['middleware' => ['role:admin']], function () {});
 Route::get('/send', 'HomeController@send');
 
 
-
+Route::group([ 'middleware' => 'auth' ], function () {
+    // ...
+    Route::get('/notifications', 'OrderController@notifications');
+});
 
 
 

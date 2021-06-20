@@ -28,13 +28,16 @@ class ProfileController extends Controller
             abort(404);
         }
         if($user->hasRole('user')){
-        $type = 1;}
+        $type = 1;
+        return view('profile.index', compact('user','type'));}
         if($user->hasRole('photographer')){
-            $type = 2;}
-         $specs = explode(',', $user->photographer->dopspec); 
+            $specs = explode(',', $user->photographer->dopspec); 
+            $type = 2;
+            return view('profile.index', compact('user','type', 'specs'));}
+           
          
         // dd($spec); 
-       return view('profile.index', compact('user','type','specs'));
+       
     }
  
     

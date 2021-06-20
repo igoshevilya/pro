@@ -10,6 +10,9 @@ use App\Response;
 use App\OrderCabinet;
 use Illuminate\Http\Request;
 use Mail;
+use App\Notifications\AssignedUser;
+use Notification;
+use Illuminate\Notifications\Notifiable;
 class OrderController extends Controller
 {
     public function __construct()
@@ -140,16 +143,33 @@ class OrderController extends Controller
         $ordercabinet->photograph_id = $response->user_id;
         //$ordercabinet->status = 1;
         $ordercabinet->status = null;
-        $ordercabinet->save();   
+        $ordercabinet->save();  
+        $user = Auth::user();
+        
+   //$user = $response->user();
 
-        Mail::send(['text'=>'mail.mailassigned'],['name','1'], function($message){
+   //dd($user);
+        $user->notify(new AssignedUser($user));
+
+
+        //Notification::send($user, new AssignedUser($message));
+        //dd(User::Auth()->email);
+        //$user->notify( new AssignedUser);
+        //Notification::send($user, new App\Notifications\AssignedUser);
+        //$user->notify(new App\Notifications\AssignedUser);
+        /* Mail::send(['text'=>'mail.mailassigned'],['name','1'], function($message){
             
             $message->to('warik10@mail.ru', '2')->subject('Тема');
             $message->from('igoshevilya@gmail.com', 'Уведомление');
         }
-    );
+    ); */
 
         return redirect()->route('client.order.cabinet', ['id' => $ordercabinet->id])->with('success', 'Исполнитель выбран');
+    }
+
+    public function notifications()
+    {
+        return auth()->user()->unreadNotifications()->limit(5)->get()->toArray();
     }
 
     public function cabinet($id)

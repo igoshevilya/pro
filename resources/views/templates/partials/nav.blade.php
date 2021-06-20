@@ -52,7 +52,10 @@
                                 </path>
                             </svg>
                         </button>
-                        
+                        @foreach (Auth::user()->notifications as $notification) 
+                           {{$notification->message}} 
+                                                
+                       @endforeach
                         <!-- Profile dropdown -->
                         <div x-data="{ open: false }" @keydown.escape.stop="open = false" @click.away="open = false"
                             class="ml-3 relative ">

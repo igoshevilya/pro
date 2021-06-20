@@ -5,6 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
+use Carbon\Carbon;
 class User extends Authenticatable
 {
     
@@ -29,6 +30,7 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    
     public function username(){
         return $this->first_name;
     }
@@ -137,5 +139,31 @@ class User extends Authenticatable
             $experiences = declension($number, array('год', 'года', 'лет'));   
             return  $number . ' ' . $experiences;}
     }
+
+    public function AgeUser()
+    {
+        $age = Carbon::parse($this->dr)->diffInYears();
+    
+        function declension2($age, array $dat)
+        {
+        $rest = array($age % 10, $age % 100);
+        
+        if($rest[1] > 10 && $rest[1] < 20) {
+        return $dat[2];
+        } elseif ($rest[0] > 1 && $rest[0] < 5) {
+        return $dat[1];
+        } else if ($rest[0] == 1) {
+        return $dat[0];
+        }
+        
+        return $dat[2];
+        }
+      
+        $exp = declension2($age, array('год', 'года', 'лет'));   
+        return  $age . ' ' . $exp;}
+    
+        
+
+      
     
 }

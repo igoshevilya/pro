@@ -77,6 +77,12 @@ class PhotographController extends Controller
     {
         return view('photographer.cabinet.myprofile.service.index');
     }
+
+    public function info()
+    {
+        $categories = Category::all();
+        return view('photographer.cabinet.myprofile.info.index', compact('categories'));
+    }
     public function storeservice(Request $request)
     {
 

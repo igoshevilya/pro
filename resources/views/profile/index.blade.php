@@ -32,7 +32,7 @@
                     </div>
                     @endif 
                     
-                    
+                    @if($type == 2)
                     @if(!empty($user->photographer->dopspec))
                                         <div>
                         <span class=" text-gray-600">Специализация:</span>
@@ -46,6 +46,7 @@
                    
                     @endforeach
                     </div>
+                    @endif 
                     @endif 
                 </div>
                 </div>
@@ -120,11 +121,17 @@
                             <div>Стоимость работы: <span class="font-medium text-gray-900">{{$user->photographer->price}} ₽/час</span></div>                        
                             @endif 
                         @endif
+
+
+
                         @if($type == 1)
-                        <div>Создано заданий: 10</div>
-                        <div>Возраст: 18 лет</div>                       
+                        @if(!empty($user->orders())) 
+                        <div>Создано заданий:<span class="font-medium text-gray-900"> {{$user->orders()->count()}}</span></div>
+                        @endif 
                         @endif
-                       
+                        @if(!empty($user->dr)) 
+                        <div>Возраст: <span class="font-medium text-gray-900">{{ $user->AgeUser() }}</span></div>  
+                        @endif 
                        
                        
                        

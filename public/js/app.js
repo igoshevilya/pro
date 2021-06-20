@@ -44718,7 +44718,7 @@ var render = function() {
     _c("div", { staticClass: " py-6" }, [
       _c(
         "section",
-        { staticClass: "grid  gap-10" },
+        { staticClass: "grid  gap-2" },
         _vm._l(_vm.reviews, function(review) {
           return _c(
             "article",

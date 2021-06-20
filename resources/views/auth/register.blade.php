@@ -29,8 +29,8 @@
                                             <input id="user" type="text" class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500" name="user" value="{{ old('user') }}" required autofocus>
             
                                             @if ($errors->has('user'))
-                                                <span class="help-block">
-                                                    <strong>{{ $errors->first('user') }}</strong>
+                                                <span class="text-red-700">
+                                                   {{ $errors->first('user') }}
                                                 </span>
                                             @endif
                                         </div>
@@ -42,8 +42,8 @@
                                         <div class="col-md-8">
                                             <input id="first_name" type="text" class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500" name="first_name" value="{{ old('first_name') }}" required>
                                             @if ($errors->has('first_name'))
-                                                <span class="help-block">
-                                                    <strong>{{ $errors->first('first_name') }}</strong>
+                                            <span class="text-red-700">
+                                                    {{ $errors->first('first_name') }}
                                                 </span>
                                             @endif
                                         </div>
@@ -57,8 +57,8 @@
                                             <input id="last_name" type="text" class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500" name="last_name" value="{{ old('last_name') }}" required>
             
                                             @if ($errors->has('last_name'))
-                                                <span class="help-block">
-                                                    <strong>{{ $errors->first('last_name') }}</strong>
+                                                <<span class="text-red-700">
+                                                    {{ $errors->first('last_name') }}
                                                 </span>
                                             @endif
                                         </div>
@@ -73,8 +73,8 @@
                                             <input id="email" type="email" class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500" name="email" value="{{ old('email') }}" required>
             
                                             @if ($errors->has('email'))
-                                                <span class="help-block">
-                                                    <strong>{{ $errors->first('email') }}</strong>
+                                            <span class="text-red-700">
+                                                   {{ $errors->first('email') }}
                                                 </span>
                                             @endif
                                         </div>
@@ -87,9 +87,8 @@
                                             <input id="password" type="password" class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500" name="password" required>
             
                                             @if ($errors->has('password'))
-                                                <span class="help-block">
-                                                    <strong>{{ $errors->first('password') }}</strong>
-                                                </span>
+                                            <span class="text-red-700">
+                                                   {{ $errors->first('password') }}
                                             @endif
                                         </div>
                                     </div>
