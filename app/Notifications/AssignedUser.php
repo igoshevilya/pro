@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 use App\User;
+use App\Order;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -16,9 +17,9 @@ class AssignedUser extends Notification
      *
      * @return void
      */
-    public function __construct(User $user)
+    public function __construct(Order $order)
     {
-        $this->response = $user;
+        $this->order = $order;
     }
 
     /**
@@ -42,12 +43,13 @@ class AssignedUser extends Notification
     public function toDatabase($notifiable)
     {
         return [
-            'message' => 'Вас утвердили испольнителм задания',
-            'user_id' => $this->response->user_id,
+            'message' => 'Вы назначены на задание: '.$this->order->title,
+            'user' => $this->order->user->getName(),
+            //'user_id' => $this->response->user_id,
         ];
     }
     /* public function toMail($notifiable)
-    {
+    {   'message' => 'Вас утвердили испольнителем задания',
         return (new MailMessage)
                     ->line('The introduction to the notification.')
                     ->action('Notification Action', url('/'))

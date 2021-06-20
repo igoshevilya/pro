@@ -88,8 +88,7 @@ Route::get('/photograph', 'HomeController@PhotographList');
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/logout', 'Auth\LoginController@logout')->name('get-logout');
 Route::group(['middleware' => ['role:admin']], function () {});
-
-Route::get('/send', 'HomeController@send');
+Route::get('/clear', 'HomeController@clear')->name('clear');;
 
 
 Route::group([ 'middleware' => 'auth' ], function () {

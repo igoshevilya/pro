@@ -129,40 +129,27 @@ class OrderController extends Controller
     public function assigned($orderId, $responseId)
     {
         $order = Order::find($orderId);
-        //$order->status = 1;
-        $order->status = null;
+        $order->status = 1;
+     
         $order->save();
         $response = Response::find($responseId);
-        //$response->status = 1;
-        $response->status = null;
+        $response->status = 1;
+       
         $response->save();
 
         $ordercabinet = new OrderCabinet;
         $ordercabinet->order_id = $orderId;
         $ordercabinet->client_id =  $order->user_id;
         $ordercabinet->photograph_id = $response->user_id;
-        //$ordercabinet->status = 1;
-        $ordercabinet->status = null;
-        $ordercabinet->save();  
-        $user = Auth::user();
+        $ordercabinet->status = 1;
         
-   //$user = $response->user();
+        $ordercabinet->save();  
+        $user = $response->user;
+        
+   
+        $user->notify(new AssignedUser($order));
 
-   //dd($user);
-        $user->notify(new AssignedUser($user));
 
-
-        //Notification::send($user, new AssignedUser($message));
-        //dd(User::Auth()->email);
-        //$user->notify( new AssignedUser);
-        //Notification::send($user, new App\Notifications\AssignedUser);
-        //$user->notify(new App\Notifications\AssignedUser);
-        /* Mail::send(['text'=>'mail.mailassigned'],['name','1'], function($message){
-            
-            $message->to('warik10@mail.ru', '2')->subject('Тема');
-            $message->from('igoshevilya@gmail.com', 'Уведомление');
-        }
-    ); */
 
         return redirect()->route('client.order.cabinet', ['id' => $ordercabinet->id])->with('success', 'Исполнитель выбран');
     }

@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Auth;
 use App\Category;
 use Illuminate\Http\Request;
-
+use Notification;
+use Illuminate\Notifications\Notifiable;
 use App\Сategory;
 use App\User;
 use App\UserFilter;
@@ -32,6 +33,12 @@ class HomeController extends Controller
     {
         $category = Category::all();
         return view('client.catalog.index', compact('category'));
+    }
+
+    public function clear()
+    {
+        Auth::user()->unreadNotifications->markAsRead();
+        return redirect()->back();
     }
 
     public function PhotographList(UserFilter $filters)

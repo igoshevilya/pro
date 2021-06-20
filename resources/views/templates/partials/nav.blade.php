@@ -41,21 +41,43 @@
                     </div>
                     <div class="hidden sm:ml-6 sm:flex sm:items-center z-50">
                        @auth
-                        <button
-                            class="bg-white p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                            <span class="sr-only">Просмотр уведомления</span>
-                            <svg class="h-6 w-6" x-description="Heroicon name: outline/bell"
+                      
+
+                        <div class="flex ">
+                            <div x-data="{ dropdownOpen: false }" class="relative my-32">
+                                <button @click="dropdownOpen = !dropdownOpen" class="text-gray-400 relative z-10 block rounded-md bg-white p-2 focus:outline-none">
+                                    <svg class="h-6 w-6" x-description="Heroicon name: outline/bell"
                                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
                                 aria-hidden="true">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9">
                                 </path>
                             </svg>
-                        </button>
-                        @foreach (Auth::user()->notifications as $notification) 
-                           {{$notification->message}} 
-                                                
-                       @endforeach
+                                </button>
+                        
+                                <div x-show="dropdownOpen" @click="dropdownOpen = false" class="fixed inset-0 h-full w-full z-10"></div>
+                        
+                                <div x-show="dropdownOpen" class="absolute right-0 mt-2 bg-white rounded-md shadow-lg overflow-hidden z-20" style="width:20rem;">
+                                    <div class="py-2">
+                                        @foreach (Auth::user()->unreadNotifications  as $notification) 
+                                        <div class="flex items-center mt-3 hover:bg-gray-100 rounded-lg px-1 py-1">
+                                            
+                                            <div class="ml-3">
+                                                <span class="font-medium text-sm">{{$notification->data['user']}}</span>
+                                                <p class="text-sm">{{$notification->data['message']}}</p>
+                                                <span class="text-sm text-indigo-400 font-semibold">{{ $notification->created_at->diffForHumans() }}</span>
+                                            </div> 
+                                                                                 
+                                        </div>
+
+                                        
+                                        @endforeach                                       
+                                    </div>
+                                    <a href="{{route('clear')}}" class="block bg-gray-800 text-white text-center font-medium py-2">Пометить все прочитанными</a>
+                                </div>
+                            </div>
+                        </div>
+                      
                         <!-- Profile dropdown -->
                         <div x-data="{ open: false }" @keydown.escape.stop="open = false" @click.away="open = false"
                             class="ml-3 relative ">
@@ -212,19 +234,56 @@ Heroicon name: outline/x" x-state:on="Menu open" x-state:off="Menu closed" class
                             <div class="text-base font-medium text-gray-800">{{ Auth::user()->getName() }}</div>
 
                         </div>
-                        <button
-                            class="ml-auto flex-shrink-0 bg-white p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                            <span class="sr-only">Просмотр уведомления</span>
-                            <svg class="h-6 w-6" x-description="Heroicon name: outline/bell"
+                        <button>
+                           
+                        </button>
+                        <div class=" ">
+                            <div x-data="{ dropdownOpen: false }" class="">
+                                <button @click="dropdownOpen = !dropdownOpen" class="text-gray-400 relative z-10 block rounded-md bg-white p-2 focus:outline-none">
+                                    <svg class="h-6 w-6" x-description="Heroicon name: outline/bell"
                                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
                                 aria-hidden="true">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9">
                                 </path>
                             </svg>
-                        </button>
+                                </button>
+                        
+                                <div x-show="dropdownOpen" @click="dropdownOpen = false" class="fixed inset-0 h-full w-full z-10"></div>
+                        
+                                <div x-show="dropdownOpen" class="absolute right-0 mt-2 bg-white rounded-md shadow-lg overflow-hidden z-20" style="width:20rem;">
+                                    <div class="py-2">
+                                        <a href="#" class="flex items-center px-4 py-3 border-b hover:bg-gray-100 -mx-2">
+                                            <img class="h-8 w-8 rounded-full object-cover mx-1" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80" alt="avatar">
+                                            <p class="text-gray-600 text-sm mx-2">
+                                                <span class="font-bold" href="#">Sara Salah</span> replied on the <span class="font-bold text-blue-500" href="#">Upload Image</span> artical . 2m
+                                            </p>
+                                        </a>
+                                        <a href="#" class="flex items-center px-4 py-3 border-b hover:bg-gray-100 -mx-2">
+                                            <img class="h-8 w-8 rounded-full object-cover mx-1" src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80" alt="avatar">
+                                            <p class="text-gray-600 text-sm mx-2">
+                                                <span class="font-bold" href="#">Slick Net</span> start following you . 45m
+                                            </p>
+                                        </a>
+                                        <a href="#" class="flex items-center px-4 py-3 border-b hover:bg-gray-100 -mx-2">
+                                            <img class="h-8 w-8 rounded-full object-cover mx-1" src="https://images.unsplash.com/photo-1450297350677-623de575f31c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80" alt="avatar">
+                                            <p class="text-gray-600 text-sm mx-2">
+                                                <span class="font-bold" href="#">Jane Doe</span> Like Your reply on <span class="font-bold text-blue-500" href="#">Test with TDD</span> artical . 1h
+                                            </p>
+                                        </a>
+                                        <a href="#" class="flex items-center px-4 py-3 hover:bg-gray-100 -mx-2">
+                                            <img class="h-8 w-8 rounded-full object-cover mx-1" src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=398&q=80" alt="avatar">
+                                            <p class="text-gray-600 text-sm mx-2">
+                                                <span class="font-bold" href="#">Abigail Bennett</span> start following you . 3h
+                                            </p>
+                                        </a>
+                                    </div>
+                                    <a href="#" class="block bg-gray-800 text-white text-center font-bold py-2">See all notifications</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                
+    
 
                 <div class="mt-3 space-y-1">
 
@@ -252,8 +311,8 @@ Heroicon name: outline/x" x-state:on="Menu open" x-state:off="Menu closed" class
         
     </nav>
 
-
-   
+ 
+    
 
 
 </header>
